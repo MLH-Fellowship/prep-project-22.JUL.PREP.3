@@ -1,9 +1,11 @@
 body {
-  /*background-image: url('./assets/default.jpg'); 
-  background-repeat: no-repeat;
-  background-size: cover;*/
     color: white;
     text-align: center;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
 }
 
 .logo {

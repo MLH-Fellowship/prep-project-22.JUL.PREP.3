@@ -87,6 +87,7 @@ function App() {
                 setBackground(`${defaultBg}`);
                 break;
         }
+        setWeatherIcon(icon);
     };
     useEffect(() => {
         fetch(
