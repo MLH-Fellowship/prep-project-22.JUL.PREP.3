@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Forecast from "./API/forecast_api/Forecast";
 import './App.css';
-import logo from './mlh-prep.png'
+import logo from './mlh-prep.png';
+import Forecast from "./Components/Forecast/Forecast"
 
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [city, setCity] = useState("New York City")
+  const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
 
   useEffect(() => {
