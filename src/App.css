@@ -1,5 +1,7 @@
 body {
-    background-color: #133667;
+  /*background-image: url('./assets/default.jpg'); 
+  background-repeat: no-repeat;
+  background-size: cover;*/
     color: white;
     text-align: center;
 }
