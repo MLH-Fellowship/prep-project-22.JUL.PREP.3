@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import './App.css';
-import logo from './mlh-prep.png'
+import logo from './mlh-prep.png';
+import Forecast from "./Components/Forecast/Forecast"
 
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [city, setCity] = useState("New York City")
+  const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=7817e68c00a90c5a142287a9f7d664c3")
       .then(res => res.json())
       .then(
         (result) => {
@@ -47,6 +48,7 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
+        <Forecast />
       </div>
     </>
   }
