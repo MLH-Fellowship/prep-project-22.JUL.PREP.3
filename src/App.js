@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Forecast from "./API/forecast_api/Forecast";
 import './App.css';
 import logo from './mlh-prep.png'
 
@@ -47,6 +48,7 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
+        <Forecast />
       </div>
     </>
   }
