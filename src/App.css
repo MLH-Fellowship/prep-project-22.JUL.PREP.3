@@ -3,7 +3,9 @@ body {
     color: white;
     text-align: center;
 }
-
+ul{
+  list-style: none;
+}
 .logo {
   display: block;
   margin-left: auto;
