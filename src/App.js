@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import './App.css';
-import logo from './mlh-prep.png'
+import logo from './mlh-prep.png';
+import MapSelection from "./Components/MapSelection";
 
 function App() {
-  const [error, setError] = useState(null);
+ /* const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
@@ -49,7 +50,8 @@ function App() {
         </div>
       </div>
     </>
-  }
+  }*/
+ return (<MapSelection/>);
 }
 
 export default App;
