@@ -16,7 +16,8 @@ input {
   padding: 10px;
   border-radius: 4px;
   border: 10px;
-  width: 200px
+  width: 200px;
+  margin-bottom: 0.83em;
 }
 
 .Results {
@@ -30,3 +31,8 @@ input {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.link:hover {
+  color: rgb(208, 137, 5);
+  text-decoration-line: underline;
+  cursor: pointer;
+}

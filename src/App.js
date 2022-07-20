@@ -5,9 +5,9 @@ import logo from "./mlh-prep.png";
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [city, setCity] = useState("");
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [city, setCity] = useState("New York");
+  const [latitude, setLatitude] = useState(40.7143);
+  const [longitude, setLongitude] = useState(-74.006);
   const [results, setResults] = useState(null);
 
   const getResults = (result) => {
@@ -24,20 +24,25 @@ function App() {
     setError(error);
   };
 
-  useEffect(() => {
-    setError(null);
+  const getCurrentPosition = () => {
     const userAllowPositionAccess = (position) => {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
+      console.log('lat change')
     };
+
+    const userDenyPositionAccess = (error) => {
+      alert(error.message)
+    }
 
     window.navigator.geolocation.getCurrentPosition(
       userAllowPositionAccess,
-      getError
+      userDenyPositionAccess
     );
-  }, []);
+  };
 
   const getWeatherOnCurrentPosition = () => {
+    console.log(latitude)
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?lat=" +
         latitude +
@@ -49,9 +54,6 @@ function App() {
       .then((res) => res.json())
       .then(getResults, getError);
   };
-
-  // if (!city || city.length <= 0) getWeatherOnCurrentPosition()
-  useEffect(getWeatherOnCurrentPosition,[latitude, longitude])
 
   useEffect(() => {
     fetch(
@@ -75,8 +77,14 @@ function App() {
           <input
             type="text"
             value={city}
-            onChange={(event) => setCity(event.target.value)}
+            onChange={(event) => {
+              setCity(event.target.value);
+            }}
           />
+          <br />
+          <i onClick={getCurrentPosition} className="link">
+            Use current location
+          </i>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
             {console.log(results)}
