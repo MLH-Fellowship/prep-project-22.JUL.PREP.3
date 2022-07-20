@@ -16,64 +16,66 @@ import tornado from '../assets/tornado.jpg';
 const changeBackground = (result, setBackground, setWeatherIcon) => {
     const weather = result.weather[0].main.toLowerCase();
     const icon = result.weather[0].icon;
-    setBackground(`/assets/${weather}.jpg`);
+    const weatherMetaData = {}
     switch (weather) {
         case 'clear':
-            setBackground(`${clear}`);
+            weatherMetaData.backgroundImg=clear
             break;
 
         case 'ash':
-            setBackground(`${ash}`);
+            weatherMetaData.backgroundImg=ash
             break;
 
         case 'clouds':
-            setBackground(`${clouds}`);
+            weatherMetaData.backgroundImg=clouds
             break;
 
         case 'dust':
-            setBackground(`${dust}`);
+            weatherMetaData.backgroundImg=dust
             break;
 
         case 'fog':
-            setBackground(`${fog}`);
+            weatherMetaData.backgroundImg=fog
             break;
 
         case 'haze':
-            setBackground(`${haze}`);
+            weatherMetaData.backgroundImg=haze
             break;
 
         case 'mist':
-            setBackground(`${mist}`);
+            weatherMetaData.backgroundImg=mist
             break;
 
         case 'rain':
-            setBackground(`${rain}`);
+            weatherMetaData.backgroundImg=rain
             break;
 
         case 'sand':
-            setBackground(`${sand}`);
+            weatherMetaData.backgroundImg=sand
             break;
 
         case 'smoke':
-            setBackground(`${smoke}`);
+            weatherMetaData.backgroundImg=smoke
             break;
 
         case 'squall':
-            setBackground(`${squall}`);
+            weatherMetaData.backgroundImg=squall
             break;
 
         case 'thunderstorm':
-            setBackground(`${thunderstorm}`);
+            weatherMetaData.backgroundImg=thunderstorm
             break;
 
         case 'tornado':
-            setBackground(`${tornado}`);
+            weatherMetaData.backgroundImg=tornado
             break;
 
         default:
-            setBackground(`${defaultBg}`);
+            weatherMetaData.backgroundImg=defaultBg
             break;
     }
-    setWeatherIcon(icon);
+    weatherMetaData.weatherIcon=icon
+
+    return weatherMetaData;
 };
 export default changeBackground;

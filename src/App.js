@@ -30,7 +30,9 @@ function App() {
                         setResults(result);
                         //Inside this function we can make a switch case on results, and change the background picture
                         //to different sources based on the temperature provided
-                        changeBackground(result,setBackground,setWeatherIcon);
+                        let weatherMetaData = changeBackground(result);
+                        setBackground(weatherMetaData.backgroundImg);
+                        setWeatherIcon(weatherMetaData.weatherIcon);
                     }
                 },
                 (error) => {
