@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import './App.css';
-import logo from './mlh-prep.png'
+import logo from './img/mlh-prep.png'
+import umbrella from './img/umbrella.png'
+import hat from './img/pamela-hat.png'
+import coat from './img/coat.png'
+import sunscreen from './img/sunscreen.png'
+import scarf from './img/scarf.png'
+import boots from './img/boots.png'
+import sunglasses from './img/sunglasses.png'
+import ItemCard from './ItemCard'
 
 function App() {
   const [error, setError] = useState(null);
@@ -47,6 +55,15 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
+      </div>
+      <div className="cards">
+        <div class ="card"> <ItemCard name="umbrella" image={umbrella}/> </div>
+        <div class ="card"> <ItemCard name="hat" image={hat}/> </div>
+        <div class ="card"> <ItemCard name="coat" image={coat}/> </div>
+        <div class ="card"> <ItemCard name="sunscreen" image={sunscreen}/> </div>
+        <div class ="card"> <ItemCard name="scarf" image={scarf}/> </div>
+        <div class ="card"> <ItemCard name="boots" image={boots}/> </div>
+        <div class ="card"> <ItemCard name="sunglasses" image={sunglasses}/> </div>
       </div>
     </>
   }

@@ -1,0 +1,21 @@
+.card {
+    background-color: white;
+    border-style: 2px solid gray;
+    border-radius: 8px;
+    padding: 7px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 30px;
+}
+
+.icon {
+    width: 110px;
+    height: 110px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.desc {
+    color: black;
+    font-size: 16px;
+}
