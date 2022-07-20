@@ -5,6 +5,7 @@ import logo from "./mlh-prep.png";
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
   const [city, setCity] = useState("New York");
   const [latitude, setLatitude] = useState(40.7143);
   const [longitude, setLongitude] = useState(-74.006);
@@ -16,6 +17,7 @@ function App() {
     } else {
       setIsLoaded(true);
       setResults(result);
+      setCity(result.name)
     }
   };
 
@@ -25,15 +27,15 @@ function App() {
   };
 
   const getCurrentPosition = () => {
+    setIsUseCurrentLocation(true);
     const userAllowPositionAccess = (position) => {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
-      console.log('lat change')
     };
 
     const userDenyPositionAccess = (error) => {
-      alert(error.message)
-    }
+      alert(error.message);
+    };
 
     window.navigator.geolocation.getCurrentPosition(
       userAllowPositionAccess,
@@ -41,30 +43,27 @@ function App() {
     );
   };
 
-  const getWeatherOnCurrentPosition = () => {
-    console.log(latitude)
-    fetch(
-      "https://api.openweathermap.org/data/2.5/weather?lat=" +
+  useEffect(() => {
+    let apiURL = "";
+    if (isUseCurrentLocation) {
+      apiURL =
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
         latitude +
         "&lon=" +
         longitude +
         "&units=metric&appid=" +
-        process.env.REACT_APP_APIKEY
-    )
-      .then((res) => res.json())
-      .then(getResults, getError);
-  };
-
-  useEffect(() => {
-    fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        process.env.REACT_APP_APIKEY;
+    } else {
+      apiURL =
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&units=metric&appid=" +
-        process.env.REACT_APP_APIKEY
-    )
+        process.env.REACT_APP_APIKEY;
+    }
+    fetch(apiURL)
       .then((res) => res.json())
       .then(getResults, getError);
-  }, [city]);
+  }, [city, longitude, latitude, isUseCurrentLocation]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -79,6 +78,7 @@ function App() {
             value={city}
             onChange={(event) => {
               setCity(event.target.value);
+              setIsUseCurrentLocation(false);
             }}
           />
           <br />
