@@ -17,7 +17,6 @@ function App() {
     } else {
       setIsLoaded(true);
       setResults(result);
-      setCity(result.name)
     }
   };
 
@@ -28,6 +27,7 @@ function App() {
 
   const getCurrentPosition = () => {
     setIsUseCurrentLocation(true);
+    setCity("")
     const userAllowPositionAccess = (position) => {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
@@ -60,6 +60,7 @@ function App() {
         "&units=metric&appid=" +
         process.env.REACT_APP_APIKEY;
     }
+    console.log(isUseCurrentLocation)
     fetch(apiURL)
       .then((res) => res.json())
       .then(getResults, getError);
