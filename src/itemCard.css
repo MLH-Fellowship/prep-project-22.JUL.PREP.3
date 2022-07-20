@@ -5,7 +5,12 @@
     padding: 7px;
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 30px;
+    margin-top: 30px;  
+    background: radial-gradient(#aacdfa, #d2c6f7);
+}
+
+.card:hover {
+    transform: scale(1.04);
 }
 
 .icon {
