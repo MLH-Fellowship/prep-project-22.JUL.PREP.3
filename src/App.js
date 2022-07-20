@@ -3,20 +3,7 @@ import './App.css';
 import logo from './mlh-prep.png';
 import { Helmet } from 'react-helmet';
 import defaultBg from './assets/default.jpg';
-import clear from './assets/clear.jpg';
-import ash from './assets/ash.jpg';
-import clouds from './assets/clouds.jpg';
-import dust from './assets/dust.jpg';
-import fog from './assets/fog.jpg';
-import haze from './assets/haze.jpg';
-import mist from './assets/mist.jpg';
-import rain from './assets/rain.jpg';
-import sand from './assets/sand.jpg';
-import smoke from './assets/smoke.jpg';
-import squall from './assets/squall.jpg';
-import thunderstorm from './assets/thunderstorm.jpg';
-import tornado from './assets/tornado.jpg';
-
+import changeBackground from './utils/changeBackground';
 function App() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -25,70 +12,6 @@ function App() {
 
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
-
-    const changeBackground = (result) => {
-        const weather = result.weather[0].main.toLowerCase();
-        const icon = result.weather[0].icon;
-        setBackground(`/assets/${weather}.jpg`);
-        switch (weather) {
-            case 'clear':
-                setBackground(`${clear}`);
-                break;
-
-            case 'ash':
-                setBackground(`${ash}`);
-                break;
-
-            case 'clouds':
-                setBackground(`${clouds}`);
-                break;
-
-            case 'dust':
-                setBackground(`${dust}`);
-                break;
-
-            case 'fog':
-                setBackground(`${fog}`);
-                break;
-
-            case 'haze':
-                setBackground(`${haze}`);
-                break;
-
-            case 'mist':
-                setBackground(`${mist}`);
-                break;
-
-            case 'rain':
-                setBackground(`${rain}`);
-                break;
-
-            case 'sand':
-                setBackground(`${sand}`);
-                break;
-
-            case 'smoke':
-                setBackground(`${smoke}`);
-                break;
-
-            case 'squall':
-                setBackground(`${squall}`);
-                break;
-
-            case 'thunderstorm':
-                setBackground(`${thunderstorm}`);
-                break;
-
-            case 'tornado':
-                setBackground(`${tornado}`);
-                break;
-
-            default:
-                setBackground(`${defaultBg}`);
-                break;
-        }
-        setWeatherIcon(icon);
-    };
     useEffect(() => {
         fetch(
             'https://api.openweathermap.org/data/2.5/weather?q=' +
@@ -107,7 +30,7 @@ function App() {
                         setResults(result);
                         //Inside this function we can make a switch case on results, and change the background picture
                         //to different sources based on the temperature provided
-                        changeBackground(result);
+                        changeBackground(result,setBackground,setWeatherIcon);
                     }
                 },
                 (error) => {
