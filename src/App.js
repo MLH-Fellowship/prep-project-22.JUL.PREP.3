@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import logo from "./mlh-prep.png";
+import logo from "./img/mlh-prep.png";
+import ItemCard from "./ItemCard";
+import Objects from "./Utilities/Objects";
 import React from "react";
 import {
   ComposableMap,
@@ -32,16 +34,49 @@ const geoUrl =
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [city, setCity] = useState("London,uk");
+  const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
+  const [objects, setObjects] = useState([]);
   const [content, setcontent] = useState("");
+
+  function bringRightThings(results) {
+    if (results.weather[0].main === "Clear") {
+      setObjects([Objects.hat, , Objects.sunscreen, Objects.sunglasses]);
+    } else if (
+      results.weather[0].main === "Rain" ||
+      results.weather[0].main === "Thunderstorm" ||
+      results.weather[0].main === "Drizzle" ||
+      results.weather[0].main === "Tornado" ||
+      results.weather[0].main === "Squall"
+    ) {
+      setObjects([Objects.raincoat, Objects.umbrella, Objects.boots]);
+    } else if (
+      results.weather[0].main === "Mist" ||
+      results.weather[0].main === "Smoke" ||
+      results.weather[0].main === "Haze" ||
+      results.weather[0].main === "Fog"
+    ) {
+      setObjects([Objects.torch, Objects.Coat]);
+    } else if (results.weather[0].main === "Snow") {
+      setObjects([Objects.coat, Objects.scarf, Objects.boots]);
+    } else if (results.weather[0].main === "Clouds") {
+      setObjects([Objects.coat, Objects.hat]);
+    } else if (
+      results.weather[0].main === "Ash" ||
+      results.weather[0].main === "Dust" ||
+      results.weather[0].main === "Sand"
+    ) {
+      setObjects([Objects.Hat, Objects.Glasses]);
+    }
+  }
+
 
   useEffect(() => {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&units=metric" +
-        "&APPID=" +
+        "&appid=" +
         process.env.REACT_APP_APIKEY
     )
       .then((res) => res.json())
@@ -52,6 +87,7 @@ function App() {
           } else {
             setIsLoaded(true);
             setResults(result);
+            bringRightThings(result);
           }
         },
         (error) => {
@@ -76,7 +112,6 @@ function App() {
           />
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
-            {console.log(results)}
             {isLoaded && results && (
               <>
                 <h3>{results.weather[0].main}</h3>
@@ -150,6 +185,21 @@ function App() {
           </div>
         </div>
         <Forecast />
+        <div className="cards">
+          {objects &&
+            objects.map((object) => {
+              let key = Object.keys(Objects).filter(function (key) {
+                return Objects[key] === object;
+              });
+
+              return (
+                <div className="card">
+                  {" "}
+                  <ItemCard name={key} image={object} />{" "}
+                </div>
+              );
+            })}
+        </div>
     </>
     )
   }
