@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import logo from "./mlh-prep.png";
+import logo from "./img/mlh-prep.png";
+import locationIcon from "./img/location-icon.jpg"
+import ItemCard from "./ItemCard";
+import Objects from "./Utilities/Objects";
 import React from "react";
 import {
   ComposableMap,
@@ -10,6 +13,7 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
+import Forecast from "./Components/Forecast/Forecast";
 
 const markers = [
   {
@@ -34,23 +38,10 @@ function App() {
   const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
   const [latitude, setLatitude] = useState(40.7143);
   const [longitude, setLongitude] = useState(-74.006);
-  const [city, setCity] = useState("London,uk");
+  const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
+  const [objects, setObjects] = useState([]);
   const [content, setcontent] = useState("");
-
-  const getResults = (result) => {
-    if (result["cod"] !== 200) {
-      setIsLoaded(false);
-    } else {
-      setIsLoaded(true);
-      setResults(result);
-    }
-  };
-
-  const getError = (error) => {
-    setIsLoaded(true);
-    setError(error);
-  };
 
   const getCurrentPosition = () => {
     setIsUseCurrentLocation(true);
@@ -70,6 +61,37 @@ function App() {
     );
   };
 
+  function bringRightThings(results) {
+    if (results.weather[0].main === "Clear") {
+      setObjects([Objects.hat, Objects.sunscreen, Objects.sunglasses]);
+    } else if (
+      results.weather[0].main === "Rain" ||
+      results.weather[0].main === "Thunderstorm" ||
+      results.weather[0].main === "Drizzle" ||
+      results.weather[0].main === "Tornado" ||
+      results.weather[0].main === "Squall"
+    ) {
+      setObjects([Objects.raincoat, Objects.umbrella, Objects.boots]);
+    } else if (
+      results.weather[0].main === "Mist" ||
+      results.weather[0].main === "Smoke" ||
+      results.weather[0].main === "Haze" ||
+      results.weather[0].main === "Fog"
+    ) {
+      setObjects([Objects.torch, Objects.Coat]);
+    } else if (results.weather[0].main === "Snow") {
+      setObjects([Objects.coat, Objects.scarf, Objects.boots]);
+    } else if (results.weather[0].main === "Clouds") {
+      setObjects([Objects.coat, Objects.hat]);
+    } else if (
+      results.weather[0].main === "Ash" ||
+      results.weather[0].main === "Dust" ||
+      results.weather[0].main === "Sand"
+    ) {
+      setObjects([Objects.Hat, Objects.Glasses]);
+    }
+  }
+
   useEffect(() => {
     let apiURL = "";
     if (isUseCurrentLocation) {
@@ -87,6 +109,22 @@ function App() {
         "&units=metric&appid=" +
         process.env.REACT_APP_APIKEY;
     }
+
+    const getResults = (result) => {
+      if (result["cod"] !== 200) {
+        setIsLoaded(false);
+      } else {
+        setIsLoaded(true);
+        setResults(result);
+        bringRightThings(result);
+      }
+    };
+
+    const getError = (error) => {
+      setIsLoaded(true);
+      setError(error);
+    };
+
     fetch(apiURL)
       .then((res) => res.json())
       .then(getResults, getError);
@@ -109,12 +147,11 @@ function App() {
             }}
           />
           <br />
-          <i onClick={getCurrentPosition} className="link">
-            Use current location
-          </i>
+          <button onClick={getCurrentPosition} className="btn">
+            <img className="location-icon" src={locationIcon} alt="Current Location Icon"></img> Current Location
+          </button>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
-            {console.log(results)}
             {isLoaded && results && (
               <>
                 <h3>{results.weather[0].main}</h3>
@@ -186,6 +223,22 @@ function App() {
               </ZoomableGroup>
             </ComposableMap>
           </div>
+        </div>
+        <Forecast />
+        <div className="cards">
+          {objects &&
+            objects.map((object) => {
+              let key = Object.keys(Objects).filter(function (key) {
+                return Objects[key] === object;
+              });
+
+              return (
+                <div className="card">
+                  {" "}
+                  <ItemCard name={key} image={object} />{" "}
+                </div>
+              );
+            })}
         </div>
       </>
     );
