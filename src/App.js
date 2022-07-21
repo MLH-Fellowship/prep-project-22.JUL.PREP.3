@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import './App.css';
 import logo from './mlh-prep.png';
-import Forecast from "./Components/Forecast/Forecast"
+import ForecastCard from "./Components/Forecast/ForecastCard"
 
 function App() {
   const [error, setError] = useState(null);
@@ -48,7 +48,13 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
-        <Forecast />
+        <div>
+          {!isLoaded && <h2>Loading...</h2>}
+          {console.log(results)}
+          {isLoaded && results && <>
+            <ForecastCard / >
+          </>}
+        </div>
       </div>
     </>
   }
