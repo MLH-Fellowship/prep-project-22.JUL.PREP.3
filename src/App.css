@@ -6,8 +6,12 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
 }
-
 
 .fade{
   opacity: 0;
@@ -37,7 +41,8 @@ input {
   padding: 10px;
   border-radius: 4px;
   border: 10px;
-  width: 200px
+  width: 200px;
+  margin-bottom: 0.83em;
 }
 
 .Results {
@@ -48,7 +53,33 @@ input {
   border-radius: 8px;
   color: black;
   padding: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.location-icon {
+  width: 12%;
+  margin-right: 3px;
+}
+
+.btn {
+  border-radius: 18px;
+  padding: 7px;
+  width: 10%;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  border-color: #fff;
+  background-color: #133667;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn:hover {
+  color: #133667;
+  background-color: #fff;
 }
 
 .cards {
@@ -57,4 +88,3 @@ input {
 .card {
   display: inline-block;
 }
-
