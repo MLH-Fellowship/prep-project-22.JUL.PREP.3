@@ -1,0 +1,272 @@
+
+/* keyframes */
+@keyframes eclipse {
+    from {
+      transform: translateX(0);
+    }
+    to{
+      transform: translateX(50px);
+   
+     
+    }
+  }
+  
+  @keyframes halo {
+    from {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+
+  }
+  
+  @keyframes sun{
+      from{
+          background-color: var(--bgColor);
+      }
+
+      50%{
+          background-color: #ffb52d;
+          opacity: 1;
+      }
+
+      100%{
+        opacity: 0;
+      }
+  }
+  
+  @keyframes moon{
+      from{
+          background-color:var(--bgColor);
+      }
+      to{
+          background-color: #fff900;
+      }
+  }
+  
+  /* main */
+  :root {
+    --bgColor: #022345;
+    --moonColor: #c2c5cc;
+  }
+  
+  .body {
+    background-color: var(--bgColor);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    /* animation:fadeout 1.5s ease-out;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-delay: 2.5s; */
+  }
+
+  .sun{
+    animation: sun 2.5s  ease-in;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+  }
+
+
+  @keyframes fadeout {
+
+    from{
+        opacity:1;
+
+    }
+    to{
+        opacity:0;
+    }
+    
+  }
+  
+  .container {
+  /*   position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .moon {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: var(--moonColor);
+  }
+  
+  /* halo */
+  .moon::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0px 0px 50px var(--moonColor);
+    opacity: 0;
+    animation-name: halo;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+  
+  }
+  
+  /* eclipse */
+  .moon::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -50px;
+    width: 140px;
+    height: 140px;
+    background-color:var(--bgColor);
+    border-radius: 50%;
+    animation-name: eclipse,moon;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-delay: .5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+  }
+  
+  .crater {
+    position: absolute;
+    border-radius: 50%;
+    background-color: grey;
+  }
+  
+  .crater:nth-child(1) {
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    left: 50px;
+  }
+  
+  .crater:nth-child(2) {
+    width: 10px;
+    height: 10px;
+    top: 40px;
+    left: 70px;
+  }
+  
+  .crater:nth-child(3) {
+    width: 15px;
+    height: 15px;
+    top: 50px;
+    left: 50px;
+  }
+  
+  /* media queries */
+  @media screen and (max-width: 600px) {
+    .container {
+      width: 98%;
+      margin: 10px auto;
+      transform: scale(0.9);
+    }
+  }
+  
+  @media (inverted-colors) {
+    :root {
+      filter: invert(1);
+    }
+  }
+
+
+  ul.pre-loader {
+
+    position: absolute;
+     top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    margin: 100px 0 0 0;
+    padding: 0;
+  }
+ 
+  ul.pre-loader li {
+    list-style: none;
+    color: #484848;
+    display: inline;
+    font-size: 2em;
+    letter-spacing: 15px;
+    animation: pre-load 3s linear infinite;
+  }
+  
+  @keyframes pre-load {
+    
+    0% {
+      color: #484848;
+      text-shadow: none;
+    }
+    
+    20% {
+      color: #484848;
+      text-shadow: none;
+    }
+    
+    40% {
+      color: #fff900;
+      text-shadow: 0 0 7px #fff900, 0 0 50px #ff6c00;
+    }
+    
+    60% {
+      color: #484848;
+      text-shadow: none;
+    }
+    
+    80% {
+      color: #484848;
+      text-shadow: none;
+    }
+    
+    100% {
+      color: #484848;
+      text-shadow: none;
+    }
+    
+  }
+  
+  ul li:nth-child(1) {
+    animation-delay: .2s;
+  }
+  
+  ul.pre-loader li:nth-child(2) {
+    animation-delay: .4s;
+  }
+  
+  ul.pre-loader li:nth-child(3) {
+    animation-delay: .6s;
+  }
+  
+  ul.pre-loader li:nth-child(4) {
+    animation-delay: .8s;
+  }
+  
+  ul.pre-loader li:nth-child(5) {
+    animation-delay: 1s;
+  }
+  
+  ul.pre-loader li:nth-child(6) {
+    animation-delay: 1.2s;
+  }
+  
+  ul.pre-loader li:nth-child(7) {
+    animation-delay: 1.4s;
+  }
+  
+  @media screen and (max-width: 980px) {
+    
+    ul.pre-loader li {
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    
+  }

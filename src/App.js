@@ -14,6 +14,9 @@ import {
 import ReactTooltip from "react-tooltip";
 import Forecast from "./Components/Forecast/Forecast"
 
+
+
+
 const markers = [
   {
     markerOffset: -15,
@@ -101,7 +104,7 @@ function App() {
     return <div>Error: {error.message}</div>;
   } else {
     return (
-      <>
+      <div className="fade">
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
           <h2>Enter a city below 👇</h2>
@@ -200,7 +203,7 @@ function App() {
               );
             })}
         </div>
-    </>
+    </div>
     )
   }
 }
