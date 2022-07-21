@@ -19,8 +19,6 @@ const WeatherApp = ()=>{
         {isLoading? <Loader/> : <App/>}
          </>
   )
-
-
 }
 
 ReactDOM.render(

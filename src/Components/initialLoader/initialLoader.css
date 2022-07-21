@@ -6,31 +6,26 @@
     }
     to{
       transform: translateX(50px);
-   
-     
     }
   }
   
-  @keyframes halo {
+@keyframes halo {
     from {
       opacity: 0;
     }
     50% {
       opacity: 1;
     }
-
   }
   
   @keyframes sun{
       from{
           background-color: var(--bgColor);
       }
-
       50%{
           background-color: #ffb52d;
           opacity: 1;
       }
-
       100%{
         opacity: 0;
       }
@@ -51,38 +46,18 @@
     --moonColor: #c2c5cc;
   }
   
-  .body {
+  .wrapper {
     background-color: var(--bgColor);
     width: 100%;
     height: 100%;
     margin: 0;
-    /* animation:fadeout 1.5s ease-out;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    animation-delay: 2.5s; */
-  }
-
-  .sun{
     animation: sun 2.5s  ease-in;
     animation-delay: 1s;
     animation-fill-mode: forwards;
   }
 
-
-  @keyframes fadeout {
-
-    from{
-        opacity:1;
-
-    }
-    to{
-        opacity:0;
-    }
-    
-  }
   
   .container {
-  /*   position: relative; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -169,7 +144,6 @@
   @media screen and (max-width: 600px) {
     .container {
       width: 98%;
-      margin: 10px auto;
       transform: scale(0.9);
     }
   }

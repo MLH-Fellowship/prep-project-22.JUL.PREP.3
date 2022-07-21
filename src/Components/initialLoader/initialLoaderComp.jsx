@@ -4,7 +4,7 @@ const Loader = ()=>{
 
 
     return (
-    <div className="body fadeout sun">
+    <div className="wrapper">
     <div className="container">
         <div class="moon">
           <div class="crater"></div>
