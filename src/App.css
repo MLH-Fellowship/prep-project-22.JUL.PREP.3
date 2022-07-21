@@ -49,17 +49,17 @@ input {
   display: inline-flex;
   justify-content: center;
   cursor: pointer;
-  color: #fff;
-  border-color: #fff;
-  background-color: #133667;
+  color: #133667;
+  border-color: #133667;
+  background-color: #fff;
   transition: all 0.3s;
   overflow: hidden;
   z-index: 1;
 }
 
 .btn:hover {
-  color: #133667;
-  background-color: #fff;
+  color: #fff;
+  background-color: #133667;
 }
 
 .cards {
