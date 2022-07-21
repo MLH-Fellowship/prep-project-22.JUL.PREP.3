@@ -1,9 +1,9 @@
 body {
-    background-color: #133667;
-    color: white;
-    text-align: center;
+  background-color: #133667;
+  color: white;
+  text-align: center;
 }
-ul{
+ul {
   list-style: none;
 }
 .logo {
@@ -14,13 +14,6 @@ ul{
   margin-top: 20px;
 }
 
-input {
-  padding: 10px;
-  border-radius: 4px;
-  border: 10px;
-  width: 200px
-}
-
 .Results {
   background-color: white;
   margin-left: 150px;
@@ -29,6 +22,44 @@ input {
   border-radius: 8px;
   color: black;
   padding: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+input {
+  border: 1px solid #999;
+  width: 300px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.no-suggestions {
+  color: #999;
+  padding: 0.5rem;
+}
+
+.suggestions {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: scroll;
+  padding-left: 0;
+  width: 320px;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+  background-color: #999;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
