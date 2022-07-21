@@ -10,6 +10,7 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
+import Forecast from "./Components/Forecast/Forecast"
 
 const markers = [
   {
@@ -148,8 +149,9 @@ function App() {
             </ComposableMap>
           </div>
         </div>
-      </>
-    );
+        <Forecast />
+    </>
+    )
   }
 }
 
