@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./img/mlh-prep.png";
+import locationIcon from "./img/location-icon.jpg"
 import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
@@ -12,7 +13,7 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import Forecast from "./Components/Forecast/Forecast"
+import Forecast from "./Components/Forecast/Forecast";
 
 const markers = [
   {
@@ -34,14 +35,35 @@ const geoUrl =
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
+  const [latitude, setLatitude] = useState(40.7143);
+  const [longitude, setLongitude] = useState(-74.006);
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
   const [objects, setObjects] = useState([]);
   const [content, setcontent] = useState("");
 
+  const getCurrentPosition = () => {
+    setIsUseCurrentLocation(true);
+    setCity("");
+    const userAllowPositionAccess = (position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    };
+
+    const userDenyPositionAccess = (error) => {
+      alert(error.message);
+    };
+
+    window.navigator.geolocation.getCurrentPosition(
+      userAllowPositionAccess,
+      userDenyPositionAccess
+    );
+  };
+
   function bringRightThings(results) {
     if (results.weather[0].main === "Clear") {
-      setObjects([Objects.hat, , Objects.sunscreen, Objects.sunglasses]);
+      setObjects([Objects.hat, Objects.sunscreen, Objects.sunglasses]);
     } else if (
       results.weather[0].main === "Rain" ||
       results.weather[0].main === "Thunderstorm" ||
@@ -70,32 +92,43 @@ function App() {
     }
   }
 
-
   useEffect(() => {
-    fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
+    let apiURL = "";
+    if (isUseCurrentLocation) {
+      apiURL =
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&units=metric&appid=" +
+        process.env.REACT_APP_APIKEY;
+    } else {
+      apiURL =
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
-        "&units=metric" +
-        "&appid=" +
-        process.env.REACT_APP_APIKEY
-    )
+        "&units=metric&appid=" +
+        process.env.REACT_APP_APIKEY;
+    }
+
+    const getResults = (result) => {
+      if (result["cod"] !== 200) {
+        setIsLoaded(false);
+      } else {
+        setIsLoaded(true);
+        setResults(result);
+        bringRightThings(result);
+      }
+    };
+
+    const getError = (error) => {
+      setIsLoaded(true);
+      setError(error);
+    };
+
+    fetch(apiURL)
       .then((res) => res.json())
-      .then(
-        (result) => {
-          if (result["cod"] !== 200) {
-            setIsLoaded(false);
-          } else {
-            setIsLoaded(true);
-            setResults(result);
-            bringRightThings(result);
-          }
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, [city]);
+      .then(getResults, getError);
+  }, [city, longitude, latitude, isUseCurrentLocation]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -108,8 +141,15 @@ function App() {
           <input
             type="text"
             value={city}
-            onChange={(event) => setCity(event.target.value)}
+            onChange={(event) => {
+              setCity(event.target.value);
+              setIsUseCurrentLocation(false);
+            }}
           />
+          <br />
+          <button onClick={getCurrentPosition} className="btn">
+            <img className="location-icon" src={locationIcon} alt="Current Location Icon"></img> Current Location
+          </button>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
             {isLoaded && results && (
@@ -200,8 +240,8 @@ function App() {
               );
             })}
         </div>
-    </>
-    )
+      </>
+    );
   }
 }
 
