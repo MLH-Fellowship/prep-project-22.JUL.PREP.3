@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./img/mlh-prep.png";
+import locationIcon from "./img/location-icon.jpg"
 import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
@@ -41,10 +42,31 @@ function App() {
     const [results, setResults] = useState(null);
     const [content, setcontent] = useState("");
     const [objects, setObjects] = useState([]);
+    const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
+    const [latitude, setLatitude] = useState(40.7143);
+    const [longitude, setLongitude] = useState(-74.006);
 
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
     
+    const getCurrentPosition = () => {
+      setIsUseCurrentLocation(true);
+      setCity("");
+      const userAllowPositionAccess = (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+      };
+  
+      const userDenyPositionAccess = (error) => {
+        alert(error.message);
+      };
+  
+      window.navigator.geolocation.getCurrentPosition(
+        userAllowPositionAccess,
+        userDenyPositionAccess
+      );
+    };
+
     function bringRightThings(results) {
       if (results.weather[0].main === "Clear") {
         setObjects([Objects.hat, , Objects.sunscreen, Objects.sunglasses]);
@@ -77,35 +99,47 @@ function App() {
     }
 
     useEffect(() => {
-        fetch(
-            'https://api.openweathermap.org/data/2.5/weather?q=' +
-                city +
-                '&units=metric' +
-                '&appid=' +
-                process.env.REACT_APP_APIKEY
-        )
-            .then((res) => res.json())
-            .then(
-                (result) => {
-                    if (result['cod'] !== 200) {
-                        setIsLoaded(false);
-                    } else {
-                        setIsLoaded(true);
-                        setResults(result);
-                        bringRightThings(result);
-                        //Inside this function we can make a switch case on results, and change the background picture
-                        //to different sources based on the temperature provided
-                        let weatherMetaData = changeBackground(result);
-                        setBackground(weatherMetaData.backgroundImg);
-                        setWeatherIcon(weatherMetaData.weatherIcon);
-                    }
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            );
-    }, [city]);
+      let apiURL = "";
+      if (isUseCurrentLocation) {
+        apiURL =
+          "https://api.openweathermap.org/data/2.5/weather?lat=" +
+          latitude +
+          "&lon=" +
+          longitude +
+          "&units=metric&appid=" +
+          process.env.REACT_APP_APIKEY;
+      } else {
+        apiURL =
+          "https://api.openweathermap.org/data/2.5/weather?q=" +
+          city +
+          "&units=metric&appid=" +
+          process.env.REACT_APP_APIKEY;
+      }
+  
+      const getResults = (result) => {
+        if (result["cod"] !== 200) {
+          setIsLoaded(false);
+        } else {
+          setIsLoaded(true);
+          setResults(result);
+          bringRightThings(result);
+          //Inside this function we can make a switch case on results, and change the background picture
+          //to different sources based on the temperature provided
+          let weatherMetaData = changeBackground(result);
+          setBackground(weatherMetaData.backgroundImg);
+          setWeatherIcon(weatherMetaData.weatherIcon);
+        }
+      };
+  
+      const getError = (error) => {
+        setIsLoaded(true);
+        setError(error);
+      };
+  
+      fetch(apiURL)
+        .then((res) => res.json())
+        .then(getResults, getError);
+    }, [city, longitude, latitude, isUseCurrentLocation]);
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -122,8 +156,15 @@ function App() {
             <input
               type="text"
               value={city}
-              onChange={(event) => setCity(event.target.value)}
+              onChange={(event) => {
+                setCity(event.target.value);
+                setIsUseCurrentLocation(false);
+              }}
             />
+            <br />
+          <button onClick={getCurrentPosition} className="btn">
+            <img className="location-icon" src={locationIcon} alt="Current Location Icon"></img> Current Location
+          </button>
             <div className="Results">
               {!isLoaded && <h2>Loading...</h2>}
               {console.log(results)}
