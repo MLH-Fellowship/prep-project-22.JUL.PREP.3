@@ -63,3 +63,10 @@ input {
 .suggestions li:not(:last-of-type) {
   border-bottom: 1px solid #999;
 }
+.cards {
+  margin-bottom: 30px;
+}
+.card {
+  display: inline-block;
+}
+
