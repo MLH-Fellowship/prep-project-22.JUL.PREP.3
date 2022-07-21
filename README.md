@@ -7,3 +7,9 @@ We're using the [OpenWeather API](https://openweathermap.org/current) to get wea
 You'll need to get your own API Key from their website (for free) and add it as an environment variable in a `.env` file. We have a template available as `example.env`.
 
 You'll be using React initially to build this. If you're new to React, check out the [website](https://reactjs.org) for some information on getting started! 
+
+## Installation
+
+You can start the appilcation manually by runing `npm install` to install all the dependencies and then `npm start` to start the development server.
+
+You can also use docker to build docker images that you can run and publish. Use `docker build .` in the root folder. Once the build is complete you will get a unique id, that will act as your docker image ID and then `docker run -p 3000:3000 IMAGE_ID`. This will expose the 3000 port to external Application. 
