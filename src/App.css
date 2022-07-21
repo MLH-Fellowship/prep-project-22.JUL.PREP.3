@@ -1,7 +1,12 @@
 body {
+    color: white;
+    text-align: center;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
   background-color: #133667;
-  color: white;
-  text-align: center;
 }
 
 .logo {
