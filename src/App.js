@@ -59,27 +59,13 @@ function App() {
             <h3>{results.weather[0].main}</h3>
             <p>Feels like {results.main.feels_like}°C</p>
             <i><p>{results.name}, {results.sys.country}</p></i>
-            {/* <ul>
-              {
-                forecast.list.map(e =>(
-                  <li>
-                    <h2>Date: Monday</h2>
-                    <h3>The weather is: {e.weather[0].description}</h3>
-                    <p>Day: {e.feels_like.day}</p>
-                    <p>Evening: {e.feels_like.eve}</p>
-                    <p>Morning: {e.feels_like.morn}</p>
-                    <p>Night: {e.feels_like.night}</p>
-                  </li>
-                ))
-              }
-            </ul> */}
           </>}
         </div>
         <div>
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}
           {isLoaded && results && <>
-            <ForecastCard data={forecast}/>
+            <ForecastCard data={forecast} results={results}/>
           </>}
         </div>
       </div>

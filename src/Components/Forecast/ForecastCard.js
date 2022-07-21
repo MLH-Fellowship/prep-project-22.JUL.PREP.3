@@ -1,31 +1,59 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "./ForecastCard.css";
 
-const ForecastCard = ({data}) => {
+const ForecastCard = ({data, results}) => {
     console.log("data", data);
 
-    const weekDay = () => {
-        let newDate = new Date()
-        let day = newDate.getDate()
-        console.log("day",day)
+    const [today, setToday] = useState("")
+    
+    // const weekDayHandle = () => {
+    //     let days = new Date().getDay()
+    //     console.log(days)
+        // if(days==='0') {
+        //     return "Monday"
+        // } else if(days==='4') {
+        //     return "Thursday"
+        // }
+
+    // }
+
+    useEffect(()=> {
+        let days = new Date().getDay()
+
+        // console.log(indexOf(data.list[1])
+        if(days === 4) {
+            setToday("Thursday")
+        }
+    },[])
+
+
+    const toCelsius = (el) => {
+        return el-273.15;
     }
 
-    const toC = (el) => {
-        return el-273.15
+    const getImage = (e) => {
+        if(e === "Clear") {
+            return "https://img.icons8.com/emoji/96/000000/sun-emoji.png"
+        } else if(e === "Rain") {
+            return "https://img.icons8.com/external-flat-lima-studio/344/external-rainny-spring-flat-lima-studio.png"
+        } else if(e === "Clouds") {
+            return "https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/344/external-clouds-weather-smashingstocks-flat-smashing-stocks.png"
+        }
     }
     
     return (
         <div >
-            {weekDay}
+            <h3>Weekly Forecast for {results.name}</h3>
             <div className="d-flex justify-content">
               {
                 data.list.map(e =>(
-                    <div className="weather">
+                    <div className="weather" key={e.dt}>
                         <div className="row">
                             <div className=" col-md-6">
                                 <div className="card">
-                                    <span className="icon"><img className="img-fluid" src="https://img.icons8.com/emoji/96/000000/sun-emoji.png"/></span>
-                                    <div className="temp">{Math.round(`${toC(`${e.feels_like.day}`)}`, -1)}°C</div>
+                                    <span className="icon"><img className="img-fluid" src={getImage(e.weather[0].main)}/></span>
+                                    <h4>{today}</h4>
+                                    <div className="temp">{Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C</div>
                                     <div className="value">{`${e.weather[0].description}`.toUpperCase()}</div>
                                     <div className="row">
                                         <div className="col-4">
@@ -45,7 +73,6 @@ const ForecastCard = ({data}) => {
                                             <div className="value">{e.humidity}%</div>
                                         </div>
                                     </div>
-                                            
                                 </div>
                             </div>
                         </div>
@@ -58,12 +85,3 @@ const ForecastCard = ({data}) => {
 };
 
 export default ForecastCard;
-
-//   <li>
-//     <h2>Date: Monday</h2>
-//     <h3>The weather is: {e.weather[0].description}</h3>
-//     <p>Day: {e.feels_like.day}</p>
-//     <p>Evening: {e.feels_like.eve}</p>
-//     <p>Morning: {e.feels_like.morn}</p>
-//     <p>Night: {e.feels_like.night}</p>
-//   </li>
