@@ -5,28 +5,29 @@ import logo from "./mlh-prep.png";
 import Cities from "./components/Cities";
 function App() {
   const [error, setError] = useState(null);
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const [city, setCity] = useState("New York City")
-  // const [results, setResults] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [city, setCity] = useState("");
+  const [countryCode,setCountryCode] = useState("");
+  const [results, setResults] = useState(null);
   const { data, setData } = useFetch();
-  // useEffect(() => {
-  //   fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
-  //     .then(res => res.json())
-  //     .then(
-  //       (result) => {
-  //         if (result['cod'] !== 200) {
-  //           setIsLoaded(false)
-  //         } else {
-  //           setIsLoaded(true);
-  //           setResults(result);
-  //         }
-  //       },
-  //       (error) => {
-  //         setIsLoaded(true);
-  //         setError(error);
-  //       }
-  //     )
-  // }, [city])
+  useEffect(() => {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + `${city},${countryCode}` + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          if (result['cod'] !== 200) {
+            setIsLoaded(false)
+          } else {
+            setIsLoaded(true);
+            setResults(result);
+          }
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+  }, [city,countryCode])
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -49,11 +50,11 @@ function App() {
                 setData({ ...data, cityPrefix: event.target.value })
               }
             />
-            <Cities list={data.results} />
+            <Cities list={data.results} selectCity={setCity} selectCountry={setCountryCode}/>
           </div>
           <br />
 
-          {/*         
+                  
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}
@@ -62,7 +63,7 @@ function App() {
             <p>Feels like {results.main.feels_like}°C</p>
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
-        </div> */}
+        </div>
         </div>
       </>
     );

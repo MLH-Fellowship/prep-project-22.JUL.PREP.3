@@ -1,39 +1,32 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 
 const useFetch = () => {
   // ..
   const [data, setData] = useState({
-    cityPrefix: "New",
+    cityPrefix: "",
     results: [],
   });
-
+  const autoCompleteURL = "https://autocomplete.search.hereapi.com/v1/autocomplete?";
   useEffect(() => {
-    if (data.cityPrefix !== "") {
+    
       const timeoutId = setTimeout(() => {
-        const fetch = async () => {
+        const getCities = async ()=>{
           try {
-            const options = {
-              method: "GET",
-              url: "https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions",
-              params: { namePrefix: data.cityPrefix, limit: "10" },
-              headers: {
-                "X-RapidAPI-Key":
-                  "16793b670bmsh708b19b6b68a92ap1c4a73jsne79ccfed1616",
-                "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
-              },
-            };
-            const res = await axios.request(options);
-            console.log(res);
-            setData({ ...data, results: res.data.data });
+            
+            const query = `q=${data.cityPrefix}&limit=10&types=city&apiKey=${process.env.REACT_APP_AUTOCOMPLETE_APIKEY}`;
+            fetch(`${autoCompleteURL}${query}`).then((res)=>res.json()).then((result)=>{
+
+            console.log("Response",result);
+            setData({ ...data, results:  result.items});
+            })
           } catch (err) {
             console.log(err);
           }
-        };
-        fetch();
+        }
+        getCities();
       }, 1000);
       return () => clearTimeout(timeoutId);
-    }
+    
   }, [data.cityPrefix]);
 
   return { data, setData };
