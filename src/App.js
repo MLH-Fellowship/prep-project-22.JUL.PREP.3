@@ -189,7 +189,7 @@ function App() {
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>
-          <div style={{ width: "320%", borderStyle: "single" }}>
+          <div style={{ width: "325%", borderStyle: "double" }}>
             <ComposableMap data-tip="">
               <ZoomableGroup zoom={1}>
                 {" "}
