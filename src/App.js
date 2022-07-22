@@ -48,7 +48,7 @@ function App() {
 
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
-    
+
     const getCurrentPosition = () => {
       setIsUseCurrentLocation(true);
       setCity("");
@@ -56,11 +56,11 @@ function App() {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
       };
-  
+
       const userDenyPositionAccess = (error) => {
         alert(error.message);
       };
-  
+
       window.navigator.geolocation.getCurrentPosition(
         userAllowPositionAccess,
         userDenyPositionAccess
@@ -115,7 +115,7 @@ function App() {
           "&units=metric&appid=" +
           process.env.REACT_APP_APIKEY;
       }
-  
+
       const getResults = (result) => {
         if (result["cod"] !== 200) {
           setIsLoaded(false);
@@ -123,6 +123,7 @@ function App() {
           setIsLoaded(true);
           setResults(result);
           bringRightThings(result);
+          isUseCurrentLocation && setCity(result.name)
           //Inside this function we can make a switch case on results, and change the background picture
           //to different sources based on the temperature provided
           let weatherMetaData = changeBackground(result);
@@ -130,12 +131,12 @@ function App() {
           setWeatherIcon(weatherMetaData.weatherIcon);
         }
       };
-  
+
       const getError = (error) => {
         setIsLoaded(true);
         setError(error);
       };
-  
+
       fetch(apiURL)
         .then((res) => res.json())
         .then(getResults, getError);
