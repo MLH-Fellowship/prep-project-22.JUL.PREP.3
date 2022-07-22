@@ -4,22 +4,42 @@ import ReactGlobe from 'react-globe';
 // import optional tippy styles for tooltip support
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/scale.css';
-import defaultMarkers from "./markers/markers";
+// import defaultMarkers from "./markers/markers";
+import countriesCords from './markers/countriesCoords.json';
+import markerColors from "./markers/markers_colors.json";
 
-function markerTooltipRenderer(marker) {
-  return `CITY: ${marker.city} (Value: ${marker.value})`;
-}
+
 
 const options = {
-  markerTooltipRenderer
+  // ambientLightColor: "black",
+  cameraRotateSpeed: 0.5,
+  focusAnimationDuration: 2000,
+  focusEasingFunction: ['Linear', 'None'],
+  pointLightColor: 'black',
+  pointLightIntensity: 1.5,
+  globeGlowColor: 'darkblue',
+  markerTooltipRenderer: marker => `${marker.country}`,
 };
 
-export default function MyGlobe() {
-  const randomMarkers = defaultMarkers.map((marker) => ({
+export default function MyGlobe({setCountry,setCity,setInput}) {
+
+  const countries = JSON.parse(JSON.stringify(countriesCords));
+  const colors = JSON.parse(JSON.stringify(markerColors));
+  const defaultMarkers = countries.map((marker,i)=>({
+    id:i,
     ...marker,
-    value: Math.floor(Math.random() * 100)
-  }));
-  const [markers, setMarkers] = useState([]);
+    coordinates: [marker.latitude,marker.longitude],
+    value: marker.numeric,
+    color: colors[i%130]["hex"],
+  }))
+  // const randomMarkers = defaultMarkers.map((marker) => ({
+  //   ...marker,
+  //   value: Math.floor(Math.random() * 100)
+  // }));
+
+  const [markers, setMarkers] = useState(defaultMarkers);
+  console.log(markers);
+  // setMarkers([...markers, randomMarkers[markers.length]]);
   const [event, setEvent] = useState(null);
   const [details, setDetails] = useState(null);
   function onClickMarker(marker, markerObject, event) {
@@ -29,7 +49,11 @@ export default function MyGlobe() {
       markerObjectID: markerObject.uuid,
       pointerEventPosition: { x: event.clientX, y: event.clientY }
     });
-    setDetails(markerTooltipRenderer(marker));
+    setCountry(marker.country);
+    setCity("");
+    setInput("");
+    // setContent(marker.country);
+    // setDetails(markerTooltipRenderer(marker));
   }
   function onDefocus(previousFocus) {
     setEvent({
@@ -61,6 +85,7 @@ export default function MyGlobe() {
       )}
       <ReactGlobe
         globeBackgroundTexture="https://toppng.com/uploads/preview/and-blank-effect-transparent-11546868080xgtiz6hxid.png"
+        // globeTexture="../img/3004470.jpg"
         height="70vh"
         markers={markers}
         options={options}

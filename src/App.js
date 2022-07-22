@@ -7,14 +7,6 @@ import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
 import MyGlobe from "./Components/globe_model.js";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Marker,
-  ZoomableGroup,
-} from "react-simple-maps";
-import ReactTooltip from "react-tooltip";
 import Forecast from "./Components/Forecast/Forecast"
 
 const markers = [
@@ -89,9 +81,15 @@ function App() {
       setInputValue(`${city}, ${countryCode}`);
       setData({ ...data, results: null });
     }
+    var queryString = `${city},${countryCode}`;
+    
+    if(queryString[0] == ',')
+    {
+      queryString = queryString.substring(1);
+    }
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
-        `${city},${countryCode}` +
+         queryString.trim() +
         "&units=metric" +
         "&appid=" +
         process.env.REACT_APP_APIKEY
@@ -162,68 +160,11 @@ function App() {
         </div>
     
         </div>
-        <div
-          // className="mapContainer"
-          // style={{
-          //   width: "100px",
-          //   height: "80px",
-          //   display: "flex",
-          //   flexDirection: "column",
-          //   justifyContent: "centre",
-          //   alignItems: "center",
-          // }}
-        >
+        <div>
           <h1> Weather Globe </h1>
-          {/* <ReactTooltip>{content}</ReactTooltip> */}
-          
-          {/* <div style={{ width: "1400px", borderStyle: "double" }}>
-            <ComposableMap data-tip="">
-              <ZoomableGroup zoom={1}>
-                {" "}
-                <Geographies geography={geoUrl}>
-                  {({ geographies }) =>
-                    geographies.map((geo) => (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        onMouseEnter={() => {
-                          const { name } = geo.properties;
-                          setcontent(`${name}`);
-                          setCity(`${name}`);
-                        }}
-                        onMouseLeave={() => {
-                          setcontent("");
-                          setCity("");
-                        }}
-                        style={{
-                          hover: {
-                            fill: "#F53",
-                            outline: "none",
-                          },
-                        }}
-                      />
-                    ))
-                  }
-                </Geographies>
-                {markers.map(({ name, coordinates, markerOffset }) => (
-                  <Marker key={name} coordinates={coordinates}>
-                    <circle r={10} fill="#F00" stroke="#fff" strokeWidth={2} />
-                    <text
-                      textAnchor="middle"
-                      y={markerOffset}
-                      style={{ fontFamily: "system-ui", fill: "#505A6D" }}
-                    >
-                      {" "}
-                      {name}{" "}
-                    </text>
-                  </Marker>
-                ))}
-              </ZoomableGroup>
-            </ComposableMap>
-          </div> */}
         </div>
         <div style={{display : "flex",padding:"0px 10px"} }>
-        <MyGlobe/>
+        <MyGlobe setCountry = {setCountryCode} setCity = {setCity} setInput = {setInputValue}/>
         <Forecast />
         </div>
         <div className="cards">
