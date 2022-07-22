@@ -4,28 +4,14 @@ import "./ForecastCard.css";
 const ForecastCard = ({data, results}) => {
     console.log("data", data);
 
+    let days = new Date().getDay()
+
     const [today, setToday] = useState("")
-    
-    // const weekDayHandle = () => {
-    //     let days = new Date().getDay()
-    //     console.log(days)
-        // if(days==='0') {
-        //     return "Monday"
-        // } else if(days==='4') {
-        //     return "Thursday"
-        // }
-
-    // }
-
     useEffect(()=> {
-        let days = new Date().getDay()
-
-        // console.log(indexOf(data.list[1])
         if(days === 4) {
             setToday("Thursday")
         }
     },[])
-
 
     const toCelsius = (el) => {
         return el-273.15;
@@ -38,43 +24,41 @@ const ForecastCard = ({data, results}) => {
             return "https://img.icons8.com/external-flat-lima-studio/344/external-rainny-spring-flat-lima-studio.png"
         } else if(e === "Clouds") {
             return "https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/344/external-clouds-weather-smashingstocks-flat-smashing-stocks.png"
+        } else if(e==="Snow") {
+            return "https://img.icons8.com/color/344/snow--v1.png"
+        } else if(e==="Extreme") {
+            return "https://img.icons8.com/clouds/344/storm.png"
         }
     }
     
     return (
-        <div >
+        <div  className="main-block">
             <h3>Weekly Forecast for {results.name}</h3>
-            <div className="d-flex justify-content">
+            <div className="car-block">
               {
                 data.list.map(e =>(
-                    <div className="weather" key={e.dt}>
-                        <div className="row">
-                            <div className=" col-md-6">
-                                <div className="card">
-                                    <span className="icon"><img className="img-fluid" src={getImage(e.weather[0].main)}/></span>
-                                    <h4>{today}</h4>
-                                    <div className="temp">{Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C</div>
-                                    <div className="value">{`${e.weather[0].description}`.toUpperCase()}</div>
-                                    <div className="row">
-                                        <div className="col-4">
-                                            <div className="header">General</div>
-                                            <div className="value">{e.weather[0].description}</div>
-                                        </div>
-                                        <div className="col-4">
-                                            <div className="header">Cloudiness</div>
-                                            <div className="value">{e.clouds}%</div>
-                                        </div>
-                                        <div className="col-4">
-                                            <div className="header">Wind speed</div>
-                                            <div className="value">{e.speed} m/s</div>
-                                        </div>
-                                        <div className="col-4">
-                                            <div className="header">Humidity</div>
-                                            <div className="value">{e.humidity}%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="card" key={e.dt}>
+                        <div className="card-container">
+                            <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
+                            <div className="temp">{Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C</div>
+                            <div className="desc">{`${e.weather[0].description}`.toUpperCase()}</div>
+                            <ul className="details">
+                                <li>
+                                    <div>Cloudiness {e.clouds}%</div>
+                                </li>
+                                <li>
+                                    <div>Wind speed {e.speed} m/s</div>
+                                </li>
+                                <li>
+                                    <div>Humidity {e.humidity}%</div>
+                                </li>
+                                <li className="min-max">
+                                    <div>Min temp {Math.round(`${toCelsius(`${e.temp.min}`)}`, -1)}°C</div>
+                                </li>
+                                <li>
+                                    <div>Max temp {Math.round(`${toCelsius(`${e.temp.max}`)}`, -1)}°C</div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 ))
