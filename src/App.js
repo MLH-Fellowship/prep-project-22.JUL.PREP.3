@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./img/mlh-prep.png";
-import locationIcon from "./img/location-icon.jpg"
+import locationIcon from "./img/location-icon.jpg";
 import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
@@ -13,13 +13,10 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import { Helmet } from 'react-helmet';
-import defaultBg from './assets/default.jpg';
-import changeBackground from './utils/changeBackground';
-import Forecast from "./Components/Forecast/Forecast"
-
-
-
+import { Helmet } from "react-helmet";
+import defaultBg from "./assets/default.jpg";
+import changeBackground from "./utils/changeBackground";
+import Forecast from "./Components/Forecast/Forecast";
 
 const markers = [
   {
@@ -39,118 +36,118 @@ const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
 function App() {
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [city, setCity] = useState('New York City');
-    const [results, setResults] = useState(null);
-    const [content, setcontent] = useState("");
-    const [objects, setObjects] = useState([]);
-    const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
-    const [latitude, setLatitude] = useState(40.7143);
-    const [longitude, setLongitude] = useState(-74.006);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [city, setCity] = useState("New York City");
+  const [results, setResults] = useState(null);
+  const [content, setcontent] = useState("");
+  const [objects, setObjects] = useState([]);
+  const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
+  const [latitude, setLatitude] = useState(40.7143);
+  const [longitude, setLongitude] = useState(-74.006);
 
-    const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
-    const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
+  const [weatherIcon, setWeatherIcon] = useState(""); //hook for updating the weather icon
+  const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
 
-    const getCurrentPosition = () => {
-      setIsUseCurrentLocation(true);
-      setCity("");
-      const userAllowPositionAccess = (position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-      };
-
-      const userDenyPositionAccess = (error) => {
-        alert(error.message);
-      };
-
-      window.navigator.geolocation.getCurrentPosition(
-        userAllowPositionAccess,
-        userDenyPositionAccess
-      );
+  const getCurrentPosition = () => {
+    setIsUseCurrentLocation(true);
+    setCity("");
+    const userAllowPositionAccess = (position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
     };
 
-    function bringRightThings(results) {
-      if (results.weather[0].main === "Clear") {
-        setObjects([Objects.hat, , Objects.sunscreen, Objects.sunglasses]);
-      } else if (
-        results.weather[0].main === "Rain" ||
-        results.weather[0].main === "Thunderstorm" ||
-        results.weather[0].main === "Drizzle" ||
-        results.weather[0].main === "Tornado" ||
-        results.weather[0].main === "Squall"
-      ) {
-        setObjects([Objects.raincoat, Objects.umbrella, Objects.boots]);
-      } else if (
-        results.weather[0].main === "Mist" ||
-        results.weather[0].main === "Smoke" ||
-        results.weather[0].main === "Haze" ||
-        results.weather[0].main === "Fog"
-      ) {
-        setObjects([Objects.torch, Objects.Coat]);
-      } else if (results.weather[0].main === "Snow") {
-        setObjects([Objects.coat, Objects.scarf, Objects.boots]);
-      } else if (results.weather[0].main === "Clouds") {
-        setObjects([Objects.coat, Objects.hat]);
-      } else if (
-        results.weather[0].main === "Ash" ||
-        results.weather[0].main === "Dust" ||
-        results.weather[0].main === "Sand"
-      ) {
-        setObjects([Objects.Hat, Objects.Glasses]);
-      }
+    const userDenyPositionAccess = (error) => {
+      alert(error.message);
+    };
+
+    window.navigator.geolocation.getCurrentPosition(
+      userAllowPositionAccess,
+      userDenyPositionAccess
+    );
+  };
+
+  function bringRightThings(results) {
+    if (results.weather[0].main === "Clear") {
+      setObjects([Objects.hat, , Objects.sunscreen, Objects.sunglasses]);
+    } else if (
+      results.weather[0].main === "Rain" ||
+      results.weather[0].main === "Thunderstorm" ||
+      results.weather[0].main === "Drizzle" ||
+      results.weather[0].main === "Tornado" ||
+      results.weather[0].main === "Squall"
+    ) {
+      setObjects([Objects.raincoat, Objects.umbrella, Objects.boots]);
+    } else if (
+      results.weather[0].main === "Mist" ||
+      results.weather[0].main === "Smoke" ||
+      results.weather[0].main === "Haze" ||
+      results.weather[0].main === "Fog"
+    ) {
+      setObjects([Objects.torch, Objects.Coat]);
+    } else if (results.weather[0].main === "Snow") {
+      setObjects([Objects.coat, Objects.scarf, Objects.boots]);
+    } else if (results.weather[0].main === "Clouds") {
+      setObjects([Objects.coat, Objects.hat]);
+    } else if (
+      results.weather[0].main === "Ash" ||
+      results.weather[0].main === "Dust" ||
+      results.weather[0].main === "Sand"
+    ) {
+      setObjects([Objects.Hat, Objects.Glasses]);
+    }
+  }
+
+  useEffect(() => {
+    let apiURL = "";
+    if (isUseCurrentLocation) {
+      apiURL =
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&units=metric&appid=" +
+        process.env.REACT_APP_APIKEY;
+    } else {
+      apiURL =
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
+        city +
+        "&units=metric&appid=" +
+        process.env.REACT_APP_APIKEY;
     }
 
-    useEffect(() => {
-      let apiURL = "";
-      if (isUseCurrentLocation) {
-        apiURL =
-          "https://api.openweathermap.org/data/2.5/weather?lat=" +
-          latitude +
-          "&lon=" +
-          longitude +
-          "&units=metric&appid=" +
-          process.env.REACT_APP_APIKEY;
+    const getResults = (result) => {
+      if (result["cod"] !== 200) {
+        setIsLoaded(false);
       } else {
-        apiURL =
-          "https://api.openweathermap.org/data/2.5/weather?q=" +
-          city +
-          "&units=metric&appid=" +
-          process.env.REACT_APP_APIKEY;
-      }
-
-      const getResults = (result) => {
-        if (result["cod"] !== 200) {
-          setIsLoaded(false);
-        } else {
-          setIsLoaded(true);
-          setResults(result);
-          bringRightThings(result);
-          isUseCurrentLocation && setCity(result.name)
-          //Inside this function we can make a switch case on results, and change the background picture
-          //to different sources based on the temperature provided
-          let weatherMetaData = changeBackground(result);
-          setBackground(weatherMetaData.backgroundImg);
-          setWeatherIcon(weatherMetaData.weatherIcon);
-        }
-      };
-
-      const getError = (error) => {
         setIsLoaded(true);
-        setError(error);
-      };
+        setResults(result);
+        bringRightThings(result);
+        isUseCurrentLocation && setCity(result.name);
+        //Inside this function we can make a switch case on results, and change the background picture
+        //to different sources based on the temperature provided
+        let weatherMetaData = changeBackground(result);
+        setBackground(weatherMetaData.backgroundImg);
+        setWeatherIcon(weatherMetaData.weatherIcon);
+      }
+    };
 
-      fetch(apiURL)
-        .then((res) => res.json())
-        .then(getResults, getError);
-    }, [city, longitude, latitude, isUseCurrentLocation]);
+    const getError = (error) => {
+      setIsLoaded(true);
+      setError(error);
+    };
+
+    fetch(apiURL)
+      .then((res) => res.json())
+      .then(getResults, getError);
+  }, [city, longitude, latitude, isUseCurrentLocation]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
     return (
       <div className="fade">
-         <Helmet>
+        <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
   background-size: cover; }`}</style>
         </Helmet>
@@ -165,9 +162,14 @@ function App() {
               setIsUseCurrentLocation(false);
             }}
           />
-            <br />
+          <br />
           <button onClick={getCurrentPosition} className="btn">
-            <img className="location-icon" src={locationIcon} alt="Current Location Icon"></img> Current Location
+            <img
+              className="location-icon"
+              src={locationIcon}
+              alt="Current Location Icon"
+            ></img>{" "}
+            Current Location
           </button>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
@@ -227,7 +229,12 @@ function App() {
                   </Geographies>
                   {markers.map(({ name, coordinates, markerOffset }) => (
                     <Marker key={name} coordinates={coordinates}>
-                      <circle r={10} fill="#F00" stroke="#fff" strokeWidth={2} />
+                      <circle
+                        r={10}
+                        fill="#F00"
+                        stroke="#fff"
+                        strokeWidth={2}
+                      />
                       <text
                         textAnchor="middle"
                         y={markerOffset}
@@ -243,24 +250,25 @@ function App() {
             </div>
           </div>
           <Forecast />
-        <div className="cards">
-          {objects &&
-            objects.map((object) => {
-              let key = Object.keys(Objects).filter(function (key) {
-                return Objects[key] === object;
-              });
+          <div className="cards">
+            {objects &&
+              objects.map((object) => {
+                let key = Object.keys(Objects).filter(function (key) {
+                  return Objects[key] === object;
+                });
 
-              return (
-                <div className="card">
-                  {" "}
-                  <ItemCard name={key} image={object} />{" "}
-                </div>
-              );
-            })}
+                return (
+                  <div className="card">
+                    {" "}
+                    <ItemCard name={key} image={object} />{" "}
+                  </div>
+                );
+              })}
+          </div>
         </div>
-        </div>
-    </div>
-    )
-  }}
+      </div>
+    );
+  }
+}
 
 export default App;
