@@ -38,7 +38,7 @@ input {
 }
 
 .location-icon {
-  width: 12%;
+  width: 22px;
   margin-right: 3px;
 }
 
@@ -128,7 +128,7 @@ h2 {
   }
 
   .btn {
-    width: 50%;
+    width: 55%;
   }
 
   p {
@@ -145,5 +145,36 @@ h2 {
 
   h1 {
     font-size: 3rem;
+  }
+}
+
+@media (min-width: 508px) {
+  .btn {
+    width: 40%;
+  }
+}
+
+@media (min-width:751px) {
+  input {
+    width: 30%;
+  }
+
+  .btn {
+    width: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  input {
+    width: 250px;
+  }
+
+  .btn {
+    width: 180px;
+  }
+
+  .Results {
+    margin-left: 42%;
+    margin-right: 42%;
   }
 }
