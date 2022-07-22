@@ -2110,11 +2110,6 @@
 "binary-extensions@^2.0.0":
   "version" "2.2.0"
 
-"bindings@^1.5.0":
-  "version" "1.5.0"
-  dependencies:
-    "file-uri-to-path" "1.0.0"
-
 "bluebird@^3.5.5":
   "version" "3.7.2"
 
@@ -3849,9 +3844,6 @@
     "loader-utils" "^2.0.0"
     "schema-utils" "^3.0.0"
 
-"file-uri-to-path@1.0.0":
-  "version" "1.0.0"
-
 "filesize@6.1.0":
   "version" "6.1.0"
 
@@ -4022,15 +4014,6 @@
 
 "fs.realpath@^1.0.0":
   "version" "1.0.0"
-
-"fsevents@^1.2.7":
-  "version" "1.2.13"
-  dependencies:
-    "bindings" "^1.5.0"
-    "nan" "^2.12.1"
-
-"fsevents@^2.1.2", "fsevents@^2.1.3", "fsevents@~2.3.1":
-  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "version" "1.1.1"
@@ -5672,9 +5655,6 @@
   dependencies:
     "dns-packet" "^1.3.1"
     "thunky" "^1.0.2"
-
-"nan@^2.12.1":
-  "version" "2.14.2"
 
 "nanoid@^3.1.20":
   "version" "3.1.20"

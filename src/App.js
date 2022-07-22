@@ -43,23 +43,59 @@ function App() {
   const [objects, setObjects] = useState([]);
   const [content, setcontent] = useState("");
 
-  const getCurrentPosition = () => {
-    setIsUseCurrentLocation(true);
-    setCity("");
-    const userAllowPositionAccess = (position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    };
+  // const getCurrentPosition = () => {
+  //   setIsUseCurrentLocation(true);
+  //   setCity("");
+  //   const userAllowPositionAccess = (position) => {
+  //     setLatitude(position.coords.latitude);
+  //     setLongitude(position.coords.longitude);
+  //   };
 
-    const userDenyPositionAccess = (error) => {
-      alert(error.message);
-    };
+  //   const userDenyPositionAccess = (error) => {
+  //     alert(error.message);
+  //   };
 
-    window.navigator.geolocation.getCurrentPosition(
-      userAllowPositionAccess,
-      userDenyPositionAccess
+  //   window.navigator.geolocation.getCurrentPosition(
+  //     userAllowPositionAccess,
+  //     userDenyPositionAccess
+  //   );
+  // };
+
+  useEffect(() => {
+
+    function onSuccess(position) {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_APIKEY}`
+      )
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setCity(result.name);
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+    }
+
+    function onError(error) {
+      setError(error);
+    }
+
+    if(!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+    } else {
+    navigator.geolocation.getCurrentPosition(
+      onSuccess,
+      onError
     );
-  };
+    }
+  }, []);
+
 
   function bringRightThings(results) {
     if (results.weather[0].main === "Clear") {
@@ -147,9 +183,9 @@ function App() {
             }}
           />
           <br />
-          <button onClick={getCurrentPosition} className="btn">
+          {/* <button onClick={getCurrentPosition} className="btn">
             <img className="location-icon" src={locationIcon} alt="Current Location Icon"></img> Current Location
-          </button>
+          </button> */}
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
             {isLoaded && results && (
