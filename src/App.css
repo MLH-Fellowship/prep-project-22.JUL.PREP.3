@@ -196,4 +196,25 @@ h2 {
     margin-left: 42%;
     margin-right: 42%;
   }
+
 }
+
+@media (min-width: 1400px) {
+
+  p {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+  
+} 

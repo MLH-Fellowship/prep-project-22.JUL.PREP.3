@@ -185,20 +185,10 @@ function App() {
               </>
             )}
           </div>
-          <div
-            className="mapContainer"
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "centre",
-              alignItems: "center",
-            }}
-          >
+          <div className="mapContainer">
             <h1> Global Weather Map </h1>
             <ReactTooltip>{content}</ReactTooltip>
-            <div style={{ width: "1400px", borderStyle: "double" }}>
+            <div style={{ width: "320%", borderStyle: "double" }}>
               <ComposableMap data-tip="">
                 <ZoomableGroup zoom={1}>
                   {" "}
