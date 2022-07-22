@@ -47,7 +47,7 @@ const ForecastCard = ({data, results}) => {
             <h3>Weekly Forecast for {results.name}</h3>
             <div className="car-block">
               {
-                allData.map(e =>(
+                allData.map((e) =>(
                     <div className="card" key={e.dt}>
                         <div className="card-container">
                             <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
