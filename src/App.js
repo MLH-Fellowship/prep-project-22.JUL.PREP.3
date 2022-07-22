@@ -18,6 +18,9 @@ import defaultBg from "./assets/default.jpg";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
 
+
+
+
 const markers = [
   {
     markerOffset: -15,
@@ -46,15 +49,25 @@ function App() {
   const [latitude, setLatitude] = useState(40.7143);
   const [longitude, setLongitude] = useState(-74.006);
 
-  const [weatherIcon, setWeatherIcon] = useState(""); //hook for updating the weather icon
-  const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
+    const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
+    const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
 
-  const getCurrentPosition = () => {
-    setIsUseCurrentLocation(true);
-    setCity("");
-    const userAllowPositionAccess = (position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
+    const getCurrentPosition = () => {
+      setIsUseCurrentLocation(true);
+      setCity("");
+      const userAllowPositionAccess = (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+      };
+
+      const userDenyPositionAccess = (error) => {
+        alert(error.message);
+      };
+
+      window.navigator.geolocation.getCurrentPosition(
+        userAllowPositionAccess,
+        userDenyPositionAccess
+      );
     };
 
     const userDenyPositionAccess = (error) => {
@@ -120,33 +133,45 @@ function App() {
       if (result["cod"] !== 200) {
         setIsLoaded(false);
       } else {
-        setIsLoaded(true);
-        setResults(result);
-        bringRightThings(result);
-        //Inside this function we can make a switch case on results, and change the background picture
-        //to different sources based on the temperature provided
-        let weatherMetaData = changeBackground(result);
-        setBackground(weatherMetaData.backgroundImg);
-        setWeatherIcon(weatherMetaData.weatherIcon);
+        apiURL =
+          "https://api.openweathermap.org/data/2.5/weather?q=" +
+          city +
+          "&units=metric&appid=" +
+          process.env.REACT_APP_APIKEY;
       }
-    };
 
-    const getError = (error) => {
-      setIsLoaded(true);
-      setError(error);
-    };
+      const getResults = (result) => {
+        if (result["cod"] !== 200) {
+          setIsLoaded(false);
+        } else {
+          setIsLoaded(true);
+          setResults(result);
+          bringRightThings(result);
+          isUseCurrentLocation && setCity(result.name)
+          //Inside this function we can make a switch case on results, and change the background picture
+          //to different sources based on the temperature provided
+          let weatherMetaData = changeBackground(result);
+          setBackground(weatherMetaData.backgroundImg);
+          setWeatherIcon(weatherMetaData.weatherIcon);
+        }
+      };
 
-    fetch(apiURL)
-      .then((res) => res.json())
-      .then(getResults, getError);
-  }, [city, longitude, latitude, isUseCurrentLocation]);
+      const getError = (error) => {
+        setIsLoaded(true);
+        setError(error);
+      };
+
+      fetch(apiURL)
+        .then((res) => res.json())
+        .then(getResults, getError);
+    }, [city, longitude, latitude, isUseCurrentLocation]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
     return (
-      <>
-        <Helmet>
+      <div className="fade">
+         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
   background-size: cover; }`}</style>
         </Helmet>
@@ -161,7 +186,7 @@ function App() {
               setIsUseCurrentLocation(false);
             }}
           />
-          <br />
+            <br />
           <button onClick={getCurrentPosition} className="btn">
             <img
               className="location-icon"
@@ -172,7 +197,6 @@ function App() {
           </button>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
-            {console.log(results)}
             {isLoaded && results && (
               <>
                 <h3>{results.weather[0].main}</h3>
@@ -251,9 +275,10 @@ function App() {
               );
             })}
         </div>
-      </>
-    );
-  }
-}
+
+        </div>
+    </div>
+    )
+  }}
 
 export default App;
