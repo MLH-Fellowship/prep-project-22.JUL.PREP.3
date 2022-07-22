@@ -6,6 +6,7 @@ import logo from "./img/mlh-prep.png";
 import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
+import MyGlobe from "./Components/globe_model.js";
 import {
   ComposableMap,
   Geographies,
@@ -162,19 +163,20 @@ function App() {
     
         </div>
         <div
-          className="mapContainer"
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "centre",
-            alignItems: "center",
-          }}
+          // className="mapContainer"
+          // style={{
+          //   width: "100px",
+          //   height: "80px",
+          //   display: "flex",
+          //   flexDirection: "column",
+          //   justifyContent: "centre",
+          //   alignItems: "center",
+          // }}
         >
-          <h1> Global Weather Map </h1>
-          <ReactTooltip>{content}</ReactTooltip>
-          <div style={{ width: "1400px", borderStyle: "double" }}>
+          <h1> Weather Globe </h1>
+          {/* <ReactTooltip>{content}</ReactTooltip> */}
+          
+          {/* <div style={{ width: "1400px", borderStyle: "double" }}>
             <ComposableMap data-tip="">
               <ZoomableGroup zoom={1}>
                 {" "}
@@ -218,9 +220,12 @@ function App() {
                 ))}
               </ZoomableGroup>
             </ComposableMap>
-          </div>
+          </div> */}
         </div>
+        <div style={{display : "flex",padding:"0px 10px"} }>
+        <MyGlobe/>
         <Forecast />
+        </div>
         <div className="cards">
           {objects &&
             objects.map((object) => {
