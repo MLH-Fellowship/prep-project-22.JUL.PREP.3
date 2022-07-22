@@ -30,13 +30,15 @@ const ForecastCard = ({data, results}) => {
             return "https://img.icons8.com/clouds/344/storm.png"
         }
     }
+
+    let allData = data.list;
     
     return (
         <div  className="main-block">
             <h3>Weekly Forecast for {results.name}</h3>
             <div className="car-block">
               {
-                data.list.map(e =>(
+                allData.map(e =>(
                     <div className="card" key={e.dt}>
                         <div className="card-container">
                             <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
