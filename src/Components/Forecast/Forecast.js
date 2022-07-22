@@ -5,7 +5,7 @@ const Forecast = () => {
   return (
     <div className="forecast-display">
       <h3>The forecast for selected city</h3>
-      <div id="openweathermap-widget-11"></div>
+      <div className="forecast-widget" id="openweathermap-widget-11"></div>
       <script src="//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js" />
       <script>
         window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];

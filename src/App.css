@@ -7,7 +7,7 @@ body {
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
   background-color: #133667;
-  display: inline-block;
+  
 }
 
 .logo {
@@ -102,5 +102,48 @@ h2 {
 
   input {
     width: 25%;
+  }
+
+  .btn {
+    width: 25%;
+  }
+
+  .logo {
+    width: 40%;
+  }
+}
+
+@media (max-width: 508px) {
+  .Results {
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+  }
+
+  .logo {
+    width: 50%;
+  }
+
+  input {
+    width: 55%;
+  }
+
+  .btn {
+    width: 50%;
+  }
+
+  p {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+  }
+
+  h1 {
+    font-size: 3rem;
   }
 }
