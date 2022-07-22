@@ -1,13 +1,33 @@
+
 body {
-    color: white;
-    text-align: center;
-    transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
   background-color: #133667;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
 }
+
+.fade{
+  opacity: 0;
+  animation: fadein 1.5s forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadein {
+   from{
+    opacity: 0;
+   }
+   to{
+    opacity: 1;
+   }
+}
+
 
 .logo {
   display: block;

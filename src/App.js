@@ -18,6 +18,9 @@ import defaultBg from './assets/default.jpg';
 import changeBackground from './utils/changeBackground';
 import Forecast from "./Components/Forecast/Forecast"
 
+
+
+
 const markers = [
   {
     markerOffset: -15,
@@ -142,45 +145,43 @@ function App() {
         .then(getResults, getError);
     }, [city, longitude, latitude, isUseCurrentLocation]);
 
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else {
-      return (
-        <>
-        <Helmet>
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else {
+    return (
+      <div className="fade">
+         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
   background-size: cover; }`}</style>
         </Helmet>
-          <img className="logo" src={logo} alt="MLH Prep Logo"></img>
-          <div>
-            <h2>Enter a city below 👇</h2>
-            <input
-              type="text"
-              value={city}
-              onChange={(event) => {
-                setCity(event.target.value);
-                setIsUseCurrentLocation(false);
-              }}
-            />
+        <img className="logo" src={logo} alt="MLH Prep Logo"></img>
+        <div>
+          <h2>Enter a city below 👇</h2>
+          <input
+            type="text"
+            value={city}
+            onChange={(event) => {
+              setCity(event.target.value);
+              setIsUseCurrentLocation(false);
+            }}
+          />
             <br />
           <button onClick={getCurrentPosition} className="btn">
             <img className="location-icon" src={locationIcon} alt="Current Location Icon"></img> Current Location
           </button>
-            <div className="Results">
-              {!isLoaded && <h2>Loading...</h2>}
-              {console.log(results)}
-              {isLoaded && results && (
-                <>
-                  <h3>{results.weather[0].main}</h3>
-                  <p>Feels like {results.main.feels_like}°C</p>
-                  <i>
-                    <p>
-                      {results.name}, {results.sys.country}
-                    </p>
-                  </i>
-                </>
-              )}
-            </div>
+          <div className="Results">
+            {!isLoaded && <h2>Loading...</h2>}
+            {isLoaded && results && (
+              <>
+                <h3>{results.weather[0].main}</h3>
+                <p>Feels like {results.main.feels_like}°C</p>
+                <i>
+                  <p>
+                    {results.name}, {results.sys.country}
+                  </p>
+                </i>
+              </>
+            )}
           </div>
           <div
             className="mapContainer"
@@ -257,9 +258,9 @@ function App() {
               );
             })}
         </div>
-        </>
-      );
-    }
-  }
+        </div>
+    </div>
+    )
+  }}
 
 export default App;
