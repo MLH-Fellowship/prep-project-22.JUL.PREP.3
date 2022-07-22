@@ -27,12 +27,13 @@ input {
 
 .Results {
   background-color: white;
-  margin-left: 150px;
-  margin-right: 150px;
+  width: 80%;
+  max-width:300px;
+  padding: 1em;
+  margin: auto;
   margin-top: 20px;
-  border-radius: 8px;
+  border-radius: 5px;
   color: black;
-  padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -67,4 +68,28 @@ input {
 }
 .card {
   display: inline-block;
+}
+.result_title{
+   font-size: 32px;
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 700;
+   margin: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.result_description{
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #444;
+}
+
+.result_description span{
+  font-size: 24px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+.result_country{
+  color: #444;
 }
