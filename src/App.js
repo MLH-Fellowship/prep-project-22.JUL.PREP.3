@@ -45,7 +45,7 @@ function App() {
     const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
     const [latitude, setLatitude] = useState(40.7143);
     const [longitude, setLongitude] = useState(-74.006);
- main
+
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
     
@@ -95,108 +95,7 @@ function App() {
         results.weather[0].main === "Sand"
       ) {
         setObjects([Objects.Hat, Objects.Glasses]);
-   
-  // const getCurrentPosition = () => {
-  //   setIsUseCurrentLocation(true);
-  //   setCity("");
-  //   const userAllowPositionAccess = (position) => {
-  //     setLatitude(position.coords.latitude);
-  //     setLongitude(position.coords.longitude);
-  //   };
-
-  //   const userDenyPositionAccess = (error) => {
-  //     alert(error.message);
-  //   };
-
-  //   window.navigator.geolocation.getCurrentPosition(
-  //     userAllowPositionAccess,
-  //     userDenyPositionAccess
-  //   );
-  // };
-
-  useEffect(() => {
-
-    function onSuccess(position) {
-      let latitude = position.coords.latitude;
-      let longitude = position.coords.longitude;
-
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_APIKEY}`
-      )
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setCity(result.name);
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
-        );
-    }
-
-    function onError(error) {
-      setError(error);
-    }
-
-    if(!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser');
-    } else {
-    navigator.geolocation.getCurrentPosition(
-      onSuccess,
-      onError
-    );
-    }
-  }, []);
-
-
-  function bringRightThings(results) {
-    if (results.weather[0].main === "Clear") {
-      setObjects([Objects.hat, Objects.sunscreen, Objects.sunglasses]);
-    } else if (
-      results.weather[0].main === "Rain" ||
-      results.weather[0].main === "Thunderstorm" ||
-      results.weather[0].main === "Drizzle" ||
-      results.weather[0].main === "Tornado" ||
-      results.weather[0].main === "Squall"
-    ) {
-      setObjects([Objects.raincoat, Objects.umbrella, Objects.boots]);
-    } else if (
-      results.weather[0].main === "Mist" ||
-      results.weather[0].main === "Smoke" ||
-      results.weather[0].main === "Haze" ||
-      results.weather[0].main === "Fog"
-    ) {
-      setObjects([Objects.torch, Objects.Coat]);
-    } else if (results.weather[0].main === "Snow") {
-      setObjects([Objects.coat, Objects.scarf, Objects.boots]);
-    } else if (results.weather[0].main === "Clouds") {
-      setObjects([Objects.coat, Objects.hat]);
-    } else if (
-      results.weather[0].main === "Ash" ||
-      results.weather[0].main === "Dust" ||
-      results.weather[0].main === "Sand"
-    ) {
-      setObjects([Objects.Hat, Objects.Glasses]);
-    }
-  }
-
-  useEffect(() => {
-    let apiURL = "";
-    if (isUseCurrentLocation) {
-      apiURL =
-        "https://api.openweathermap.org/data/2.5/weather?lat=" +
-        latitude +
-        "&lon=" +
-        longitude +
-        "&units=metric&appid=" +
-        process.env.REACT_APP_APIKEY;
-    } else {
-      apiURL =
-        "https://api.openweathermap.org/data/2.5/weather?q=" +
-        city +
-        "&units=metric&appid=" +
-        process.env.REACT_APP_APIKEY; main
+      }
     }
 
     useEffect(() => {
@@ -242,7 +141,6 @@ function App() {
         .then(getResults, getError);
     }, [city, longitude, latitude, isUseCurrentLocation]);
 
-main
     if (error) {
       return <div>Error: {error.message}</div>;
     } else {
@@ -282,41 +180,6 @@ main
                 </>
               )}
             </div>
-=======
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else {
-    return (
-      <>
-        <img className="logo" src={logo} alt="MLH Prep Logo"></img>
-        <div>
-          <h2>Enter a city below 👇</h2>
-          <input
-            type="text"
-            value={city}
-            onChange={(event) => {
-              setCity(event.target.value);
-              setIsUseCurrentLocation(false);
-            }}
-          />
-          <br />
-          {/* <button onClick={getCurrentPosition} className="btn">
-            <img className="location-icon" src={locationIcon} alt="Current Location Icon"></img> Current Location
-          </button> */}
-          <div className="Results">
-            {!isLoaded && <h2>Loading...</h2>}
-            {isLoaded && results && (
-              <>
-                <h3>{results.weather[0].main}</h3>
-                <p>Feels like {results.main.feels_like}°C</p>
-                <i>
-                  <p>
-                    {results.name}, {results.sys.country}
-                  </p>
-                </i>
-              </>
-            )}
-main
           </div>
           <div
             className="mapContainer"
