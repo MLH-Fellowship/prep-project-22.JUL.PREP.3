@@ -3,6 +3,11 @@ import "./ForecastCard.css";
 
 const ForecastCard = ({data, results}) => {
     console.log("data", data);
+    const [error, setError] = useState(null);
+    useEffect(()=> {
+            setError(error);
+          
+    },[]);
 
     let days = new Date().getDay()
 
@@ -33,7 +38,11 @@ const ForecastCard = ({data, results}) => {
 
     let allData = data.list;
     
-    return (
+    if (error) {
+        return <div>Error: {error.message}</div>;
+      } else {
+
+    return <>
         <div  className="main-block">
             <h3>Weekly Forecast for {results.name}</h3>
             <div className="car-block">
@@ -67,7 +76,8 @@ const ForecastCard = ({data, results}) => {
                 }
             </div>
         </div>
-    );
+    </>
+    };
 };
 
 export default ForecastCard;
