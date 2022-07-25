@@ -7,6 +7,7 @@ body {
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
   background-color: #133667;
+   font-family: 'Poppins', sans-serif;
 }
 
 .logo {
@@ -70,7 +71,7 @@ input {
   display: inline-block;
 }
 .result_title{
-   font-size: 32px;
+   font-size: 28px;
    font-family: 'Open Sans', sans-serif;
    font-weight: 700;
    margin: 0;
@@ -80,9 +81,7 @@ input {
 }
 
 .result_description{
-  font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  color: #444;
 }
 
 .result_description span{
@@ -90,6 +89,6 @@ input {
   font-weight: 700;
   margin-left: 10px;
 }
-.result_country{
+.result_country,.result_description{
   color: #444;
 }
