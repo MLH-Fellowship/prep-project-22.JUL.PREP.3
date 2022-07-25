@@ -2,3 +2,16 @@
   text-align: center;
   padding-top: 50px;
 }
+
+@media (max-width: 750px) {
+  .forecast-widget {
+    overflow: scroll;
+  }
+
+}
+
+@media (min-width: 751px) {
+  .forecast-display {
+    display: inline-block;
+  }
+}
