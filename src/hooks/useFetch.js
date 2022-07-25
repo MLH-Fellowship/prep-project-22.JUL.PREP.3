@@ -16,11 +16,10 @@ const useFetch = (autoCompleteURL) => {
             const query = `q=${data.cityPrefix}&limit=10&types=city&apiKey=${process.env.REACT_APP_AUTOCOMPLETE_APIKEY}`;
             fetch(`${autoCompleteURL}${query}`).then((res)=>res.json()).then((result)=>{
 
-            console.log("Response",result);
             setData({ ...data, results:  result.items});
             })
           } catch (err) {
-            console.log(err);
+            alert(err.message);
           }
         }
         getCities();

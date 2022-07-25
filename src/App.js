@@ -206,7 +206,7 @@ function App() {
           </button>
             <div className="Results">
               {!isLoaded && <h2>Loading...</h2>}
-              {console.log(results)}
+              
               {isLoaded && results && (
                 <>
                   <h3>{results.weather[0].main}</h3>
