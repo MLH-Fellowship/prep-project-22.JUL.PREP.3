@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import ReactGlobe from 'react-globe';
  
-// import optional tippy styles for tooltip support
+// import tippy styles for tooltip support
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/scale.css';
-// import defaultMarkers from "./markers/markers";
 import countriesCords from './markers/countriesCoords.json';
 import markerColors from "./markers/markers_colors.json";
 
 
-
 const options = {
-  // ambientLightColor: "black",
   cameraRotateSpeed: 0.5,
   focusAnimationDuration: 2000,
   focusEasingFunction: ['Linear', 'None'],
@@ -32,14 +29,8 @@ export default function MyGlobe({setCountry,setCity,setInput}) {
     value: marker.numeric,
     color: colors[i%130]["hex"],
   }))
-  // const randomMarkers = defaultMarkers.map((marker) => ({
-  //   ...marker,
-  //   value: Math.floor(Math.random() * 100)
-  // }));
 
   const [markers, setMarkers] = useState(defaultMarkers);
-  console.log(markers);
-  // setMarkers([...markers, randomMarkers[markers.length]]);
   const [event, setEvent] = useState(null);
   const [details, setDetails] = useState(null);
   function onClickMarker(marker, markerObject, event) {
@@ -52,8 +43,6 @@ export default function MyGlobe({setCountry,setCity,setInput}) {
     setCountry(marker.country);
     setCity("");
     setInput("");
-    // setContent(marker.country);
-    // setDetails(markerTooltipRenderer(marker));
   }
   function onDefocus(previousFocus) {
     setEvent({
@@ -85,7 +74,6 @@ export default function MyGlobe({setCountry,setCity,setInput}) {
       )}
       <ReactGlobe
         globeBackgroundTexture="https://toppng.com/uploads/preview/and-blank-effect-transparent-11546868080xgtiz6hxid.png"
-        // globeTexture="../img/3004470.jpg"
         height="70vh"
         markers={markers}
         options={options}
@@ -95,7 +83,4 @@ export default function MyGlobe({setCountry,setCity,setInput}) {
       />
     </div>
 
-)
-  // support rendering markers with simple data
-
-        }
+)}
