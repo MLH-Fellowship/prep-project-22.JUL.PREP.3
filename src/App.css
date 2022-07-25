@@ -17,6 +17,9 @@ body {
   animation: fadein 1.5s forwards;
   animation-iteration-count: 1;
 }
+ul{
+  list-style: none;
+}
 
 @keyframes fadein {
   from {
@@ -80,6 +83,44 @@ input {
   background-color: #133667;
 }
 
+input {
+  border: 1px solid #999;
+  width: 300px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.no-suggestions {
+  color: #999;
+  padding: 0.5rem;
+}
+
+.suggestions {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: scroll;
+  padding-left: 0;
+  width: 320px;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+  background-color: #999;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
 .cards {
   margin-bottom: 30px;
 }
