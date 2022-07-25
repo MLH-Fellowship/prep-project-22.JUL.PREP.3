@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Cities({ list , selectCity, selectCountry}) {
-    console.log("Cities", list);
     if (!list?.length) {
         return (
           <div className="no-suggestions">
