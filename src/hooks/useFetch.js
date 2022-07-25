@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-const useFetch = () => {
+const useFetch = (autoCompleteURL) => {
   // ..
   const [data, setData] = useState({
     cityPrefix: "",
     results: [],
   });
-  const autoCompleteURL = "https://autocomplete.search.hereapi.com/v1/autocomplete?";
+  // const autoCompleteURL = "https://autocomplete.search.hereapi.com/v1/autocomplete?";
   useEffect(() => {
     
       const timeoutId = setTimeout(() => {

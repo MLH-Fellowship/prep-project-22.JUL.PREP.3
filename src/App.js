@@ -48,7 +48,7 @@ function App() {
     const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
     const [latitude, setLatitude] = useState(40.7143);
     const [longitude, setLongitude] = useState(-74.006);
-    const {data,setData} = useFetch();
+    const {data,setData} = useFetch("https://autocomplete.search.hereapi.com/v1/autocomplete?");
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
 
