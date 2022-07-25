@@ -83,7 +83,7 @@ input {
 .cards {
   margin-bottom: 30px;
 }
-.card1 {
+.card-wrapper {
   display: inline-block;
   margin: 10px;
 }
