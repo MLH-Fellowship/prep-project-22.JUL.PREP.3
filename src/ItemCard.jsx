@@ -15,7 +15,7 @@ function ItemCard(props) {
       style={{ height: 300, width: 250 }}
     >
       <div className="card">
-        <img src={props.image} alt="" class="icon" />
+        <img src={props.image} alt="" className="icon" />
         <h3 className="desc">
           Don't forget to bring your <br /> {props.name}!{" "}
         </h3>
