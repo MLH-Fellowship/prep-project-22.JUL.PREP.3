@@ -1,4 +1,3 @@
-
 body {
   background-color: #133667;
   color: white;
@@ -13,21 +12,20 @@ body {
   -o-transition: all 0.5s ease;
 }
 
-.fade{
+.fade {
   opacity: 0;
   animation: fadein 1.5s forwards;
   animation-iteration-count: 1;
 }
 
 @keyframes fadein {
-   from{
+  from {
     opacity: 0;
-   }
-   to{
+  }
+  to {
     opacity: 1;
-   }
+  }
 }
-
 
 .logo {
   display: block;
@@ -85,8 +83,9 @@ input {
 .cards {
   margin-bottom: 30px;
 }
-.card {
+.card-wrapper {
   display: inline-block;
+  margin: 10px;
 }
 
 .mapContainer {
@@ -173,7 +172,7 @@ h2 {
   }
 }
 
-@media (min-width:751px) {
+@media (min-width: 751px) {
   input {
     width: 30%;
   }
@@ -196,11 +195,9 @@ h2 {
     margin-left: 42%;
     margin-right: 42%;
   }
-
 }
 
 @media (min-width: 1400px) {
-
   p {
     font-size: 1.75rem;
   }
@@ -216,5 +213,4 @@ h2 {
   h1 {
     font-size: 3rem;
   }
-  
-} 
+}
