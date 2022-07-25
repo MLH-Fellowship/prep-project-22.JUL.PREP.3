@@ -48,7 +48,7 @@ function App() {
     const [isUseCurrentLocation, setIsUseCurrentLocation] = useState(false);
     const [latitude, setLatitude] = useState(40.7143);
     const [longitude, setLongitude] = useState(-74.006);
-    const {data,setData} = useFetch("https://autocomplete.search.hereapi.com/v1/autocomplete?");
+    const {suggestions,setSuggestions} = useFetch("https://autocomplete.search.hereapi.com/v1/autocomplete?");
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
 
@@ -104,7 +104,7 @@ function App() {
     useEffect(() => {
       // no city is selected yet
       if (city === "" && countryCode === "") {
-        setData({ ...data, cityPrefix: inputValue });
+        setSuggestions({ ...suggestions, cityPrefix: inputValue });
       }
     }, [inputValue]);
 
@@ -126,7 +126,7 @@ function App() {
         //   process.env.REACT_APP_APIKEY;
         if (city && countryCode) {
           setInputValue(`${city}, ${countryCode}`);
-          setData({ ...data, results: null });
+          setSuggestions({ ...suggestions, results: null });
         }
         apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
             `${city},${countryCode}` +
@@ -192,9 +192,9 @@ function App() {
                 setIsUseCurrentLocation(false);
               }}
             />
-             {data.results !== null && (
+             {suggestions.results !== null && (
               <Cities
-                list={data.results}
+                list={suggestions.results}
                 selectCity={setCity}
                 selectCountry={setCountryCode}
               />

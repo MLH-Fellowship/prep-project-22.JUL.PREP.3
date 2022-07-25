@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const useFetch = (autoCompleteURL) => {
   // ..
-  const [data, setData] = useState({
+  const [suggestions, setSuggestions] = useState({
     cityPrefix: "",
     results: [],
   });
@@ -13,10 +13,10 @@ const useFetch = (autoCompleteURL) => {
         const getCities = async ()=>{
           try {
             
-            const query = `q=${data.cityPrefix}&limit=10&types=city&apiKey=${process.env.REACT_APP_AUTOCOMPLETE_APIKEY}`;
+            const query = `q=${suggestions.cityPrefix}&limit=10&types=city&apiKey=${process.env.REACT_APP_AUTOCOMPLETE_APIKEY}`;
             fetch(`${autoCompleteURL}${query}`).then((res)=>res.json()).then((result)=>{
 
-            setData({ ...data, results:  result.items});
+            setSuggestions({ ...suggestions, results:  result.items});
             })
           } catch (err) {
             alert(err.message);
@@ -26,9 +26,9 @@ const useFetch = (autoCompleteURL) => {
       }, 1000);
       return () => clearTimeout(timeoutId);
     
-  }, [data.cityPrefix]);
+  }, [suggestions.cityPrefix]);
 
-  return { data, setData };
+  return { suggestions, setSuggestions };
 };
 
 export default useFetch;
