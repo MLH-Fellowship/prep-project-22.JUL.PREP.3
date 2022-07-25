@@ -6,7 +6,7 @@ const BookmarkIcon= ()=>{
 const [isClicked,setIsClicked] =useState(false)
 
 return(
-     <BsBookmarkHeartFill className="bookmark-icon" style={{color:isClicked?"rgb(17, 64, 110)":"#333"}} onClick={()=>setIsClicked(!isClicked)}/>
+     <BsBookmarkHeartFill className="bookmark-icon" style={{color:isClicked?"blue":"#333"}} onClick={()=>setIsClicked(!isClicked)}/>
 )
 
 }
