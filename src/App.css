@@ -1,9 +1,14 @@
 body {
+    color: white;
+    text-align: center;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
   background-color: #133667;
-  color: white;
-  text-align: center;
 }
-ul {
+ul{
   list-style: none;
 }
 .logo {
@@ -23,6 +28,32 @@ ul {
   color: black;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.location-icon {
+  width: 12%;
+  margin-right: 3px;
+}
+
+.btn {
+  border-radius: 18px;
+  padding: 7px;
+  width: 150px;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  cursor: pointer;
+  color: #133667;
+  border-color: #133667;
+  background-color: #fff;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: #133667;
 }
 
 input {
@@ -69,4 +100,3 @@ input {
 .card {
   display: inline-block;
 }
-
