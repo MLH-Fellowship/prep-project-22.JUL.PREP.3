@@ -283,7 +283,7 @@ function App() {
                   ))}
                 </ZoomableGroup>
               </ComposableMap>
-            </div>
+           
           </div>
           <div className="cards">
             {objects &&
