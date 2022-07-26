@@ -255,3 +255,16 @@ h2 {
     font-size: 3rem;
   }
 }
+.select-search-wrapper{
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.select-wrapper{
+  width: 300px;
+  margin: 0 12px;
+}
+.search-wrapper{
+margin: 0 12px;
+}

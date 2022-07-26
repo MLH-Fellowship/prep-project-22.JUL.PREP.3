@@ -21,6 +21,7 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import ScrollToTop from "react-scroll-to-top";
+import PodSelector from "./Components/PodSelector/PodSelector";
 const markers = [
   {
     markerOffset: -15,
@@ -78,6 +79,7 @@ function App() {
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
     const [inputValue,setInputValue] = useState("");
+    const [filterInput, setFilterInput]=useState("");
     useEffect(() => {
       // no city is selected yet
       if (city === "" && countryCode === "") {
@@ -190,6 +192,14 @@ function App() {
       .then(getResults, getError);
   }, [city,countryCode, longitude, latitude, isUseCurrentLocation]);
 
+  //useEffect hook for updating the city 
+  //based on the member's location selected in the filter.
+  useEffect(()=>{
+    const filteredPlace = filterInput.value
+    setCity(filteredPlace)
+  },[filterInput])
+
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
@@ -202,11 +212,12 @@ function App() {
         </Helmet>
           <img className="logo" src={logo} alt="MLH Prep Logo"></img>
           <div>
-            <h2>Enter a city below 👇</h2>
+            <div className="select-search-wrapper">
+            <div className="input-wrapper">
+            <p style={{fontSize:"16px"}}>Enter a city below 👇</p>
             <div
             style={{
               margin: "auto",
-              width: 300,
             }}
             >
             <input
@@ -226,6 +237,15 @@ function App() {
                 selectCountry={setCountryCode}
               />
             )}
+            </div>
+            </div>
+            <div className="select-wrapper">
+            <p style={{fontSize:"16px"}}>Select pod's member location 👇</p>
+              <PodSelector
+                filterInput={filterInput}
+                onChange={setFilterInput}
+              ></PodSelector>
+            </div>
             </div>
             <br />
           <button onClick={getCurrentPosition} className="btn">
