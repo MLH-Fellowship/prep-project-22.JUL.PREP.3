@@ -273,7 +273,6 @@ function App() {
                           key={geo.rsmKey}
                           geography={geo}
                           onMouseEnter={() => {
-                            console.log(geo.properties);
                             const { name } = geo.properties;
                             setcontent(`${name}`);
                             setCity("");
