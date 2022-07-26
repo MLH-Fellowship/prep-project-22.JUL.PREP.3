@@ -12,6 +12,7 @@ import Forecast from "./Components/Forecast/Forecast"
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
 import changeBackground from "./utils/changeBackground";
+import BookmarkIcon from './Components/BookmarkIcon/bookmarkIconComponent.jsx'
 import {
   ComposableMap,
   Geographies,
@@ -236,18 +237,13 @@ function App() {
             ></img>{" "}
             Current Location
           </button>
-            <div className="Results">
+          <div className="Results">
               {!isLoaded && <h2>Loading...</h2>}
-              
               {isLoaded && results && (
                 <>
-                  <h3>{results.weather[0].main}</h3>
-                  <p>Feels like {results.main.feels_like}°C</p>
-                  <i>
-                    <p>
-                      {results.name}, {results.sys.country}
-                    </p>
-                  </i>
+                  <h3 className="result_title">{results.weather[0].main} <BookmarkIcon/> </h3>
+                  <p className="result_description">Feels like <span>{results.main.feels_like}°C</span></p>
+                  <p className="result_description"><span className="result_country">{results.name},{results.sys.country}</span></p>
                 </>
               )}
             </div>
