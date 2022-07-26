@@ -8,10 +8,8 @@ import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
 import MyGlobe from "./Components/globe_model.js";
-import Forecast from "./Components/Forecast/Forecast";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
-import changeBackground from "./utils/changeBackground";
 import {
   ComposableMap,
   Geographies,
@@ -20,15 +18,13 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import { Helmet } from "react-helmet";
-import defaultBg from "./assets/default.jpg";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
 //import Suggestor from "./Components/suggestor/Suggestor";
 
 // OpenAI API
 const { Configuration, OpenAIApi } = require("openai");
-const OPENAI_API_KEY = "USE_YOUR_OWN_KEY";
+const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 const configuration = new Configuration({
   apiKey: OPENAI_API_KEY,
 });
@@ -93,15 +89,7 @@ function App() {
   const [weatherIcon, setWeatherIcon] = useState(""); //hook for updating the weather icon
   const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
   const [inputValue, setInputValue] = useState("");
-  // const [openai, setOpenai] = useState(null);
-
-  // useEffect(() => {
-  // const configuration = new Configuration({
-  //   apiKey: process.env.OPENAI_API_KEY,
-  // });
-  //   const openai = new OpenAIApi(configuration);
-  //   setOpenai(openai);
-  // }, []);
+  const [activities, setActivities] = useState("");
 
   useEffect(() => {
     // no city is selected yet
@@ -174,8 +162,8 @@ function App() {
         openai
           .createCompletion({
             model: "text-davinci-002",
-            prompt: `Top 5 activities to do in ${city} when its ${result.weather[0].main}`,
-            temperature: 0.9,
+            prompt: `Top 5 activities to do in ${city} when its ${result.weather[0].main}:`,
+            temperature: 0.8,
             max_tokens: 256,
             top_p: 1,
             frequency_penalty: 0,
@@ -183,6 +171,7 @@ function App() {
           })
           .then((response) => {
             console.log(response.data.choices[0].text);
+            setActivities(response.data.choices[0].text);
           });
       }
       setIsLoaded(true);
@@ -298,17 +287,30 @@ function App() {
           </div>
           <br />
         </div>
+        {activities && (
+          <div>
+            {/* Make a card which shows the activities in bullets */}
+            <div className="Activities">
+              <h2>Activities</h2>
+              <ul>
+                {activities.split("\n").map((activity) => (
+                  <li>{activity}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
         <div>
           <h1> Weather Globe </h1>
         </div>
-        <div style={{ display: "flex", padding: "0px 10px" }}>
+        <span style={{ display: "inline-block", padding: "0px 10px" }}>
           <MyGlobe
             setCountry={setCountryCode}
             setCity={setCity}
             setInput={setInputValue}
           />
           <Forecast />
-        </div>
+        </span>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>

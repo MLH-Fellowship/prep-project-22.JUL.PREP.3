@@ -57,6 +57,18 @@ input {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+/* Make a card class for the suggested activities */
+.Activities {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-top: 20px;
+  margin-left: 35%;
+  margin-right: 35%;
+  border-radius: 15px;
+  padding: 10px;
+  /* background-color: white; */
+  align-items: center;
+}
+
 .location-icon {
   width: 22px;
   margin-right: 3px;
