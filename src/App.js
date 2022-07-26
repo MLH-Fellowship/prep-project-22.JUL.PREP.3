@@ -53,6 +53,7 @@ function App() {
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
     const [inputValue,setInputValue] = useState("");
+    const [forecast, setForecast] = useState([]);
     useEffect(() => {
       // no city is selected yet
       if (city === "" && countryCode === "") {
@@ -60,23 +61,23 @@ function App() {
       }
     }, [inputValue]);
 
-  const getCurrentPosition = () => {
+  function getCurrentPosition() {
     setIsUseCurrentLocation(true);
     setCity("");
-    const userAllowPositionAccess = (position) => {
+    function userAllowPositionAccess(position) {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
-    };
+    }
 
-    const userDenyPositionAccess = (error) => {
+    function userDenyPositionAccess(error) {
       alert(error.message);
-    };
+    }
 
     window.navigator.geolocation.getCurrentPosition(
       userAllowPositionAccess,
       userDenyPositionAccess
     );
-  };
+  }
 
   function bringRightThings(results) {
     if (results.weather[0].main === "Clear") {
