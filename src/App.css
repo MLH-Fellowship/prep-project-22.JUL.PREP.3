@@ -63,6 +63,10 @@ input {
   margin-right: 3px;
 }
 
+*{
+  border:1px solid red
+}
+
 .btn {
   border-radius: 18px;
   padding: 7px;
@@ -155,10 +159,6 @@ h2 {
 }
 
 @media (max-width: 750px) {
-  .Results {
-    margin-left: 25%;
-    margin-right: 25%;
-  }
 
   input {
     width: 25%;
