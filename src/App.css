@@ -10,6 +10,7 @@ body {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
+  font-family:'Poppins', sans-serif; 
 }
 
 .fade {
@@ -254,4 +255,25 @@ h2 {
   h1 {
     font-size: 3rem;
   }
+}
+
+.result_title{
+  font-size: 28px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result_description{
+ font-size: 14px;
+ color: #444;
+}
+
+.result_description span{
+ font-size: 20px;
+ font-weight: 700;
+ margin-left: 10px;
 }
