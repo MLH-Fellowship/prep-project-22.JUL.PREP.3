@@ -24,14 +24,38 @@ import changeBackground from "./utils/changeBackground";
 const markers = [
   {
     markerOffset: -15,
-    name: "Sao Paulo",
-    coordinates: [-58.3816, -34.6037],
+    name: "South America",
+    coordinates: [-55.491478, -8.783195],
   },
-
   {
     markerOffset: -15,
-    name: "Melbourne",
-    coordinates: [144.963058, -37.813629],
+    name: "Asia",
+    coordinates: [100.619652, 34.047863],
+  },
+  {
+    markerOffset: -15,
+    name: "North America",
+    coordinates: [-105.255119, 54.525963],
+  },
+  {
+    markerOffset: -15,
+    name: "Africa",
+    coordinates: [34.508522, -8.783195],
+  },
+  {
+    markerOffset: -15,
+    name: "Australia",
+    coordinates: [133.775131, -25.274399],
+  },
+  {
+    markerOffset: -15,
+    name: "Europe",
+    coordinates: [15.255119, 54.525963],
+  },
+  {
+    markerOffset: -15,
+    name: "Antarctica",
+    coordinates: [135.000000, -82.862755],
   },
 ];
 
@@ -235,7 +259,7 @@ function App() {
           <div className="mapContainer">
             <h1> Global Weather Map </h1>
             <ReactTooltip>{content}</ReactTooltip>
-            <div style={{ width: "320%", borderStyle: "double" }}>
+            <div style={{ width: "320%" }}>
               <ComposableMap data-tip="">
                 <ZoomableGroup zoom={1}>
                   {" "}
@@ -256,8 +280,8 @@ function App() {
                           }}
                           style={{
                             hover: {
-                              fill: "#F53",
-                              outline: "none",
+                              fill: "#0088FF",
+                              stroke: "#fff",
                             },
                           }}
                         />
@@ -267,8 +291,8 @@ function App() {
                   {markers.map(({ name, coordinates, markerOffset }) => (
                     <Marker key={name} coordinates={coordinates}>
                       <circle
-                        r={10}
-                        fill="#F00"
+                        r={5}
+                        fill="#0088FF"
                         stroke="#fff"
                         strokeWidth={2}
                       />
