@@ -49,15 +49,15 @@ input {
 
 .Results {
   background-color: white;
-  width: 80%;
+  width: 75%;
   max-width:300px;
   padding: 1em;
-  margin: auto;
-  margin-top: 20px;
+  margin: 20px auto 0;
   border-radius: 5px;
   color: black;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+
 
 .location-icon {
   width: 22px;
@@ -156,10 +156,6 @@ h2 {
 }
 
 @media (max-width: 750px) {
-  .Results {
-    margin-left: 25%;
-    margin-right: 25%;
-  }
 
   input {
     width: 25%;
@@ -234,10 +230,7 @@ h2 {
     width: 180px;
   }
 
-  .Results {
-    margin-left: 42%;
-    margin-right: 42%;
-  }
+
 }
 
 @media (min-width: 1400px) {
