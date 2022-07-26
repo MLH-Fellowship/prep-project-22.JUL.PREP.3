@@ -20,7 +20,6 @@ import {
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
-//import Suggestor from "./Components/suggestor/Suggestor";
 
 // OpenAI API
 const { Configuration, OpenAIApi } = require("openai");
@@ -163,7 +162,7 @@ function App() {
           .createCompletion({
             model: "text-davinci-002",
             prompt: `Top 5 activities to do in ${city} when its ${result.weather[0].main}:`,
-            temperature: 0.8,
+            temperature: 0.86,
             max_tokens: 256,
             top_p: 1,
             frequency_penalty: 0,
@@ -232,9 +231,6 @@ function App() {
   background-size: cover; }`}</style>
         </Helmet>
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
-        {/* {results !== null && city !== undefined && (
-          <Suggestor location={city} feels={results.weather[0].main} />
-        )} */}
         <div>
           <h2>Enter a city below 👇</h2>
           <div
@@ -289,7 +285,6 @@ function App() {
         </div>
         {activities && (
           <div>
-            {/* Make a card which shows the activities in bullets */}
             <div className="Activities">
               <h2>Activities</h2>
               <ul>
