@@ -7,6 +7,11 @@ import locationIcon from "./img/location-icon.jpg";
 import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
+import MyGlobe from "./Components/globe_model.js";
+import Forecast from "./Components/Forecast/Forecast"
+import { Helmet } from "react-helmet";
+import defaultBg from "./assets/default.jpg";
+import changeBackground from "./utils/changeBackground";
 import {
   ComposableMap,
   Geographies,
@@ -15,11 +20,6 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import { Helmet } from "react-helmet";
-import defaultBg from "./assets/default.jpg";
-import changeBackground from "./utils/changeBackground";
-import Forecast from "./Components/Forecast/Forecast";
-
 const markers = [
   {
     markerOffset: -15,
@@ -60,6 +60,7 @@ const markers = [
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+
 
 function App() {
     const [error, setError] = useState(null);
@@ -169,13 +170,19 @@ function App() {
         "&units=metric&appid=" +
         process.env.REACT_APP_APIKEY;
     } else {
-
+    var queryString = `${city},${countryCode}`;
+    
+    if(queryString[0] == ',')
+    {
+      queryString = queryString.substring(1);
+    }
       apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-      `${city},${countryCode}` +
+      queryString.trim() +
       "&units=metric" +
       "&appid=" +
       process.env.REACT_APP_APIKEY
     }
+    
 
     fetch(apiURL)
       .then((res) => res.json())
@@ -242,7 +249,16 @@ function App() {
                 </>
               )}
             </div>
-          </div>
+          <br />  
+    
+        </div>
+        <div>
+          <h1> Weather Globe </h1>
+        </div>
+        <div style={{display : "flex",padding:"0px 10px"} }>
+        <MyGlobe setCountry = {setCountryCode} setCity = {setCity} setInput = {setInputValue}/>
+        <Forecast />
+        </div>
           <div className="mapContainer">
             <h1> Global Weather Map </h1>
             <ReactTooltip>{content}</ReactTooltip>
@@ -259,7 +275,9 @@ function App() {
                           onMouseEnter={() => {
                             const { name } = geo.properties;
                             setcontent(`${name}`);
-                            setCity(`${name}`);
+                            setCity("");
+                            setCountryCode(`${name}`);
+                            setInputValue(`${name}`)
                           }}
                           onMouseLeave={() => {
                             setcontent("");
@@ -297,7 +315,6 @@ function App() {
               </ComposableMap>
             </div>
           </div>
-          <Forecast />
           <div className="cards">
             {objects &&
               objects.map((object) => {
