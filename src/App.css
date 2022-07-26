@@ -1,4 +1,3 @@
-
 body {
   background-color: #133667;
   color: white;
@@ -13,21 +12,23 @@ body {
   -o-transition: all 0.5s ease;
 }
 
-.fade{
+.fade {
   opacity: 0;
   animation: fadein 1.5s forwards;
   animation-iteration-count: 1;
 }
-
-@keyframes fadein {
-   from{
-    opacity: 0;
-   }
-   to{
-    opacity: 1;
-   }
+ul{
+  list-style: none;
 }
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .logo {
   display: block;
@@ -82,11 +83,50 @@ input {
   background-color: #133667;
 }
 
+input {
+  border: 1px solid #999;
+  width: 300px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.no-suggestions {
+  color: #999;
+  padding: 0.5rem;
+}
+
+.suggestions {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: scroll;
+  padding-left: 0;
+  width: 320px;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+  background-color: #999;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
 .cards {
   margin-bottom: 30px;
 }
-.card {
+.card-wrapper {
   display: inline-block;
+  margin: 10px;
 }
 
 .mapContainer {
@@ -173,7 +213,7 @@ h2 {
   }
 }
 
-@media (min-width:751px) {
+@media (min-width: 751px) {
   input {
     width: 30%;
   }
@@ -196,11 +236,9 @@ h2 {
     margin-left: 42%;
     margin-right: 42%;
   }
-
 }
 
 @media (min-width: 1400px) {
-
   p {
     font-size: 1.75rem;
   }
@@ -216,5 +254,4 @@ h2 {
   h1 {
     font-size: 3rem;
   }
-  
-} 
+}
