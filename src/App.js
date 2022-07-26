@@ -12,20 +12,54 @@ import Forecast from "./Components/Forecast/Forecast"
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
 import changeBackground from "./utils/changeBackground";
-
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Marker,
+  ZoomableGroup,
+} from "react-simple-maps";
+import ReactTooltip from "react-tooltip";
 const markers = [
   {
     markerOffset: -15,
-    name: "Sao Paulo",
-    coordinates: [-58.3816, -34.6037],
+    name: "South America",
+    coordinates: [-55.491478, -8.783195],
   },
-
   {
     markerOffset: -15,
-    name: "Melbourne",
-    coordinates: [144.963058, -37.813629],
+    name: "Asia",
+    coordinates: [100.619652, 34.047863],
+  },
+  {
+    markerOffset: -15,
+    name: "North America",
+    coordinates: [-105.255119, 54.525963],
+  },
+  {
+    markerOffset: -15,
+    name: "Africa",
+    coordinates: [34.508522, -8.783195],
+  },
+  {
+    markerOffset: -15,
+    name: "Australia",
+    coordinates: [133.775131, -25.274399],
+  },
+  {
+    markerOffset: -15,
+    name: "Europe",
+    coordinates: [15.255119, 54.525963],
+  },
+  {
+    markerOffset: -15,
+    name: "Antarctica",
+    coordinates: [135.000000, -82.862755],
   },
 ];
+
+const geoUrl =
+  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
 
 function App() {
@@ -225,12 +259,69 @@ function App() {
         <MyGlobe setCountry = {setCountryCode} setCity = {setCity} setInput = {setInputValue}/>
         <Forecast />
         </div>
-        <div className="cards">
-          {objects &&
-            objects.map((object) => {
-              let key = Object.keys(Objects).filter(function (key) {
-                return Objects[key] === object;
-              });
+          <div className="mapContainer">
+            <h1> Global Weather Map </h1>
+            <ReactTooltip>{content}</ReactTooltip>
+            <div style={{ width: "320%" }}>
+              <ComposableMap data-tip="">
+                <ZoomableGroup zoom={1}>
+                  {" "}
+                  <Geographies geography={geoUrl}>
+                    {({ geographies }) =>
+                      geographies.map((geo) => (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          onMouseEnter={() => {
+                            console.log(geo.properties);
+                            const { name } = geo.properties;
+                            setcontent(`${name}`);
+                            setCity("");
+                            setCountryCode(`${name}`);
+                            setInputValue(`${name}`)
+                          }}
+                          onMouseLeave={() => {
+                            setcontent("");
+                            setCity("");
+                          }}
+                          style={{
+                            hover: {
+                              fill: "#0088FF",
+                              stroke: "#fff",
+                            },
+                          }}
+                        />
+                      ))
+                    }
+                  </Geographies>
+                  {markers.map(({ name, coordinates, markerOffset }) => (
+                    <Marker key={name} coordinates={coordinates}>
+                      <circle
+                        r={5}
+                        fill="#0088FF"
+                        stroke="#fff"
+                        strokeWidth={2}
+                      />
+                      <text
+                        textAnchor="middle"
+                        y={markerOffset}
+                        style={{ fontFamily: "system-ui", fill: "#505A6D" }}
+                      >
+                        {" "}
+                        {name}{" "}
+                      </text>
+                    </Marker>
+                  ))}
+                </ZoomableGroup>
+              </ComposableMap>
+            </div>
+          </div>
+          <div className="cards">
+            {objects &&
+              objects.map((object) => {
+                let key = Object.keys(Objects).filter(function (key) {
+                  return Objects[key] === object;
+                });
 
                 return (
                   <div className="card-wrapper">
