@@ -16,6 +16,7 @@
     "react-scripts": "^4.0.3",
     "react-helmet": "^6.1.0",
     "react-simple-maps": "^2.3.0",
+    "react-tilt": "^0.1.4",
     "react-tooltip": "^4.2.21",
     "three": "^0.118.3",
     "web-vitals": "^1.0.1"

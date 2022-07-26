@@ -233,7 +233,7 @@ function App() {
               });
 
                 return (
-                  <div className="card">
+                  <div className="card-wrapper">
                     {" "}
                     <ItemCard name={key} image={object} />{" "}
                   </div>
