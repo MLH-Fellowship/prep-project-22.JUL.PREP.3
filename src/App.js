@@ -20,6 +20,7 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
+import ScrollToTop from "react-scroll-to-top";
 const markers = [
   {
     markerOffset: -15,
@@ -194,6 +195,7 @@ function App() {
   } else {
     return (
       <div className="fade">
+        <ScrollToTop smooth color="#6f00ff"/>
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
   background-size: cover; }`}</style>
