@@ -6,7 +6,6 @@ const useFetch = (autoCompleteURL) => {
     cityPrefix: "",
     results: [],
   });
-  // const autoCompleteURL = "https://autocomplete.search.hereapi.com/v1/autocomplete?";
   useEffect(() => {
     
       const timeoutId = setTimeout(() => {

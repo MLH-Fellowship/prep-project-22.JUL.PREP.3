@@ -7,6 +7,11 @@ import locationIcon from "./img/location-icon.jpg";
 import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
+import MyGlobe from "./Components/globe_model.js";
+import Forecast from "./Components/Forecast/Forecast";
+import { Helmet } from "react-helmet";
+import defaultBg from "./assets/default.jpg";
+import changeBackground from "./utils/changeBackground";
 import {
   ComposableMap,
   Geographies,
@@ -29,17 +34,42 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+import ScrollToTop from "react-scroll-to-top";
 const markers = [
   {
     markerOffset: -15,
-    name: "Sao Paulo",
-    coordinates: [-58.3816, -34.6037],
+    name: "South America",
+    coordinates: [-55.491478, -8.783195],
   },
-
   {
     markerOffset: -15,
-    name: "Melbourne",
-    coordinates: [144.963058, -37.813629],
+    name: "Asia",
+    coordinates: [100.619652, 34.047863],
+  },
+  {
+    markerOffset: -15,
+    name: "North America",
+    coordinates: [-105.255119, 54.525963],
+  },
+  {
+    markerOffset: -15,
+    name: "Africa",
+    coordinates: [34.508522, -8.783195],
+  },
+  {
+    markerOffset: -15,
+    name: "Australia",
+    coordinates: [133.775131, -25.274399],
+  },
+  {
+    markerOffset: -15,
+    name: "Europe",
+    coordinates: [15.255119, 54.525963],
+  },
+  {
+    markerOffset: -15,
+    name: "Antarctica",
+    coordinates: [135.0, -82.862755],
   },
 ];
 
@@ -184,9 +214,14 @@ function App() {
         "&units=metric&appid=" +
         process.env.REACT_APP_APIKEY;
     } else {
+      var queryString = `${city},${countryCode}`;
+
+      if (queryString[0] == ",") {
+        queryString = queryString.substring(1);
+      }
       apiURL =
         "https://api.openweathermap.org/data/2.5/weather?q=" +
-        `${city},${countryCode}` +
+        queryString.trim() +
         "&units=metric" +
         "&appid=" +
         process.env.REACT_APP_APIKEY;
@@ -202,6 +237,7 @@ function App() {
   } else {
     return (
       <div className="fade">
+        <ScrollToTop smooth color="#6f00ff" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
   background-size: cover; }`}</style>
@@ -260,11 +296,23 @@ function App() {
               </>
             )}
           </div>
+          <br />
+        </div>
+        <div>
+          <h1> Weather Globe </h1>
+        </div>
+        <div style={{ display: "flex", padding: "0px 10px" }}>
+          <MyGlobe
+            setCountry={setCountryCode}
+            setCity={setCity}
+            setInput={setInputValue}
+          />
+          <Forecast />
         </div>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>
-          <div style={{ width: "320%", borderStyle: "double" }}>
+          <div style={{ width: "320%" }}>
             <ComposableMap data-tip="">
               <ZoomableGroup zoom={1}>
                 {" "}
@@ -277,7 +325,9 @@ function App() {
                         onMouseEnter={() => {
                           const { name } = geo.properties;
                           setcontent(`${name}`);
-                          setCity(`${name}`);
+                          setCity("");
+                          setCountryCode(`${name}`);
+                          setInputValue(`${name}`);
                         }}
                         onMouseLeave={() => {
                           setcontent("");
@@ -285,8 +335,8 @@ function App() {
                         }}
                         style={{
                           hover: {
-                            fill: "#F53",
-                            outline: "none",
+                            fill: "#0088FF",
+                            stroke: "#fff",
                           },
                         }}
                       />
@@ -295,7 +345,12 @@ function App() {
                 </Geographies>
                 {markers.map(({ name, coordinates, markerOffset }) => (
                   <Marker key={name} coordinates={coordinates}>
-                    <circle r={10} fill="#F00" stroke="#fff" strokeWidth={2} />
+                    <circle
+                      r={5}
+                      fill="#0088FF"
+                      stroke="#fff"
+                      strokeWidth={2}
+                    />
                     <text
                       textAnchor="middle"
                       y={markerOffset}
@@ -310,14 +365,12 @@ function App() {
             </ComposableMap>
           </div>
         </div>
-        <Forecast />
         <div className="cards">
           {objects &&
             objects.map((object) => {
               let key = Object.keys(Objects).filter(function (key) {
                 return Objects[key] === object;
               });
-
               return (
                 <div className="card-wrapper">
                   {" "}
