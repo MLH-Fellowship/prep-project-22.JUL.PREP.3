@@ -302,11 +302,9 @@ function App() {
           </div>
         </div>
         <div>
-          {!isLoaded && <h2>Loading...</h2>}
-          {console.log(results)}
-          {isLoaded && results && <>
+          {results!==null && data!==null&& (
             <ForecastCard data={forecast} results={results}/>
-          </>}
+          )}
         </div>
       </div>
     );
