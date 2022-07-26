@@ -1,6 +1,4 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import ForecastCard from "./Components/Forecast/ForecastCard";
 import "./App.css";
 import useFetch from "./hooks/useFetch";
 import Cities from "./Components/Cities";
@@ -9,6 +7,11 @@ import locationIcon from "./img/location-icon.jpg";
 import ItemCard from "./ItemCard";
 import Objects from "./Utilities/Objects";
 import React from "react";
+import MyGlobe from "./Components/globe_model.js";
+import Forecast from "./Components/Forecast/Forecast"
+import { Helmet } from "react-helmet";
+import defaultBg from "./assets/default.jpg";
+import changeBackground from "./utils/changeBackground";
 import {
   ComposableMap,
   Geographies,
@@ -17,10 +20,6 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import { Helmet } from "react-helmet";
-import defaultBg from "./assets/default.jpg";
-import changeBackground from "./utils/changeBackground";
-
 const markers = [
   {
     markerOffset: -15,
@@ -62,6 +61,7 @@ const markers = [
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
+
 function App() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -77,7 +77,6 @@ function App() {
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
     const [inputValue,setInputValue] = useState("");
-    const [forecast, setForecast] = useState([]);
     useEffect(() => {
       // no city is selected yet
       if (city === "" && countryCode === "") {
@@ -85,23 +84,23 @@ function App() {
       }
     }, [inputValue]);
 
-  function getCurrentPosition() {
+  const getCurrentPosition = () => {
     setIsUseCurrentLocation(true);
     setCity("");
-    function userAllowPositionAccess(position) {
+    const userAllowPositionAccess = (position) => {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
-    }
+    };
 
-    function userDenyPositionAccess(error) {
+    const userDenyPositionAccess = (error) => {
       alert(error.message);
-    }
+    };
 
     window.navigator.geolocation.getCurrentPosition(
       userAllowPositionAccess,
       userDenyPositionAccess
     );
-  }
+  };
 
   function bringRightThings(results) {
     if (results.weather[0].main === "Clear") {
@@ -171,29 +170,24 @@ function App() {
         "&units=metric&appid=" +
         process.env.REACT_APP_APIKEY;
     } else {
-
+    var queryString = `${city},${countryCode}`;
+    
+    if(queryString[0] == ',')
+    {
+      queryString = queryString.substring(1);
+    }
       apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-      `${city},${countryCode}` +
+      queryString.trim() +
       "&units=metric" +
       "&appid=" +
       process.env.REACT_APP_APIKEY
     }
+    
 
     fetch(apiURL)
       .then((res) => res.json())
       .then(getResults, getError);
   }, [city,countryCode, longitude, latitude, isUseCurrentLocation]);
-
-  useEffect(()=> {
-    axios
-      .get("http://api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&cnt=7&appid=7817e68c00a90c5a142287a9f7d664c3")
-      .then(resp=> {
-        setForecast(resp.data)
-      })
-  },[city])
-
-  console.log("forecast", forecast)
-
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -255,7 +249,16 @@ function App() {
                 </>
               )}
             </div>
-          </div>
+          <br />  
+    
+        </div>
+        <div>
+          <h1> Weather Globe </h1>
+        </div>
+        <div style={{display : "flex",padding:"0px 10px"} }>
+        <MyGlobe setCountry = {setCountryCode} setCity = {setCity} setInput = {setInputValue}/>
+        <Forecast />
+        </div>
           <div className="mapContainer">
             <h1> Global Weather Map </h1>
             <ReactTooltip>{content}</ReactTooltip>
@@ -272,7 +275,9 @@ function App() {
                           onMouseEnter={() => {
                             const { name } = geo.properties;
                             setcontent(`${name}`);
-                            setCity(`${name}`);
+                            setCity("");
+                            setCountryCode(`${name}`);
+                            setInputValue(`${name}`)
                           }}
                           onMouseLeave={() => {
                             setcontent("");
@@ -308,7 +313,7 @@ function App() {
                   ))}
                 </ZoomableGroup>
               </ComposableMap>
-           
+            </div>
           </div>
           <div className="cards">
             {objects &&
@@ -326,12 +331,6 @@ function App() {
               })}
           </div>
         </div>
-        <div>
-          {results!==null && data!==null&& (
-            <ForecastCard data={forecast} results={results}/>
-          )}
-        </div>
-      </div>
     );
   }
 }
