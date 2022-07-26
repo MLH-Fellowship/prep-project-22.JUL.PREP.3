@@ -6,13 +6,13 @@ const Loader = ()=>{
     return (
     <div className="wrapper">
     <div className="container">
-        <div class="moon">
-          <div class="crater"></div>
-          <div class="crater"></div>
-          <div class="crater"></div>
+        <div className="moon">
+          <div className="crater"></div>
+          <div className="crater"></div>
+          <div className="crater"></div>
         </div>
     </div>
-    <ul class="pre-loader">
+    <ul className="pre-loader">
         <li>W</li>
         <li>E</li>
         <li>A</li>
