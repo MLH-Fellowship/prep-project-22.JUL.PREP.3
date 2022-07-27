@@ -5,6 +5,7 @@ import Cities from "./Components/Cities";
 import logo from "./img/mlh-prep.png";
 import locationIcon from "./img/location-icon.jpg";
 import ItemCard from "./ItemCard";
+import Warning from "./Warning";
 import Objects from "./Utilities/Objects";
 import React from "react";
 import MyGlobe from "./Components/globe_model.js";
@@ -103,6 +104,16 @@ function App() {
     );
   };
 
+  function extremeWeather(results) {
+    if (
+      results.weather[0].main === "Thunderstorm" ||
+      results.weather[0].main === "Tornado" ||
+      results.weather[0].main === "Squall"
+    ) {
+      return <Warning />
+    }
+  }
+
   function bringRightThings(results) {
     if (results.weather[0].main === "Clear") {
       setObjects([Objects.hat, , Objects.sunscreen, Objects.sunglasses]);
@@ -144,6 +155,7 @@ function App() {
       }
       setIsLoaded(true);
       setResults(result);
+      extremeWeather(result);
       bringRightThings(result);
       isUseCurrentLocation && setCity(result.name)
       //Inside this function we can make a switch case on results, and change the background picture
@@ -202,6 +214,8 @@ function App() {
         </Helmet>
           <img className="logo" src={logo} alt="MLH Prep Logo"></img>
           <div>
+            {/* {extremeWeather(results) && <Warning />} */}
+            <Warning extremeWeather={extremeWeather} />
             <h2>Enter a city below 👇</h2>
             <div
             style={{
