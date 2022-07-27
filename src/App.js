@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import useFetch from "./hooks/useFetch";
@@ -20,7 +21,7 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
-import Forecast from "./Components/Forecast/Forecast";
+import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
@@ -97,6 +98,16 @@ function App() {
   const [airQualityValue, setAirQualityValue] = useState(null);
   const [airQualityDesc, setAirQualityDesc] = useState("");
   const [barColor, setBarColor] = useState("transparent");
+  const [data, setData] = useState(null);
+
+  useEffect(()=> {
+    fetch("http://api.openweathermap.org/data/2.5/forecast/daily?q="+city+"&units=metric&cnt=7&appid=" + process.env.REACT_APP_APIKEY)
+      .then((res)=>{ console.log(res); return res.json(); })
+      .then((resp)=>{
+        setData(resp)
+        console.log("data", data)
+      })
+  },[city])
 
   useEffect(() => {
     // no city is selected yet
@@ -402,7 +413,9 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
-          <Forecast />
+          {data!==undefined && data!==null && results!==undefined && results!== null &&
+            <ForecastCard data={data} results={results} />
+          }
         </span>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>

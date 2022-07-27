@@ -9,18 +9,9 @@ const ForecastCard = ({data, results}) => {
           
     },[]);
 
-    let days = new Date().getDay()
-
-    const [today, setToday] = useState("")
-    useEffect(()=> {
-        if(days === 4) {
-            setToday("Thursday")
-        }
-    },[])
-
-    const toCelsius = (el) => {
-        return el-273.15;
-    }
+    // const toCelsius = (el) => {
+    //     return el-273.15;
+    // }
 
     const getImage = (e) => {
         if(e === "Clear") {
@@ -36,7 +27,6 @@ const ForecastCard = ({data, results}) => {
         }
     }
 
-    let allData = data.list;
     
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -47,11 +37,11 @@ const ForecastCard = ({data, results}) => {
             <h3>Weekly Forecast for {results.name}</h3>
             <div className="car-block">
               {
-                allData.map((e) =>(
+                data.list.map((e) =>(
                     <div className="card" key={e.dt}>
                         <div className="card-container">
                             <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
-                            <div className="temp">{Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C</div>
+                            <div className="temp">{e.feels_like.day}°C</div>
                             <div className="desc">{`${e.weather[0].description}`.toUpperCase()}</div>
                             <ul className="details">
                                 <li>
@@ -64,10 +54,10 @@ const ForecastCard = ({data, results}) => {
                                     <div>Humidity {e.humidity}%</div>
                                 </li>
                                 <li className="min-max">
-                                    <div>Min temp {Math.round(`${toCelsius(`${e.temp.min}`)}`, -1)}°C</div>
+                                    <div>Min temp {e.temp.min}°C</div>
                                 </li>
                                 <li>
-                                    <div>Max temp {Math.round(`${toCelsius(`${e.temp.max}`)}`, -1)}°C</div>
+                                    <div>Max temp {e.temp.max}°C</div>
                                 </li>
                             </ul>
                         </div>
