@@ -1,4 +1,103 @@
-.forecast-display {
+a {
+  color: white;
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+a:hover, a:active, a:focus{
+  color: white;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.active {
+  color: white;
+  text-decoration: none;
+  opacity: 1;
+}
+
+/* body{
+  background-color: #F4F6F7;
+} */
+
+#wrapper {
+  background-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 1px 5px 25px 3px #444;
+  border-radius: 10px;
+  margin: 100px auto;
+  max-width: 720px;
+  padding: 0px;
+  color: white;  
+}
+
+#current-weather{
+  padding: 15px;
+}
+
+#mainTemperature{
+  font-size: 5.5em; 
+  line-height: 0.7;
+}
+
+#tempDescription {
+  margin-top: 10px;
   text-align: center;
-  padding-top: 50px;
+}
+
+.day-weather-box {
+  border: 1px solid #28688C;
+  background-color: #2E7FA1;
+  border-radius: 5px;
+  height: 5em;
+}
+
+.day-weather-box p{
+  margin-bottom: 0;
+}
+
+.side-weather-info {
+  padding: 0px 10px;
+}
+
+.day-weather-inner-box {
+  display: inline-flex;
+  margin: 14px auto;
+  padding: 0px 5px;
+}
+
+.forecast-main {
+  padding: 0px 0px 0px 30px;
+}
+
+.forecast-icon {
+  font-size: 25px;
+  margin-left: 5px;
+}
+
+.modal-body p{
+  color: #333;
+}
+
+#celsius{
+  color: white;
+  background: transparent;
+  border-width: 0px;
+  outline: none;
+}
+
+#ferenheit{
+  color: white;
+  background: transparent;
+  border-width: 0px;
+  outline: none;
+}
+
+#ferenheit:hover {
+  color: #F4F6F7;
+  cursor: pointer;
+}
+
+#celsius:hover{
+  color: #F4F6F7;
+  cursor: pointer;
 }

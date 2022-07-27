@@ -17,7 +17,7 @@ import { Helmet } from 'react-helmet';
 import defaultBg from './assets/default.jpg';
 import changeBackground from './utils/changeBackground';
 import Forecast from "./Components/Forecast/Forecast"
-
+import axios from "axios";
 
 
 
@@ -51,6 +51,7 @@ function App() {
 
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
+    const [forecast, setForecast] = useState([]);
 
     const getCurrentPosition = () => {
       setIsUseCurrentLocation(true);
@@ -101,6 +102,14 @@ function App() {
       }
     }
 
+    useEffect(()=> {
+      axios
+        .get("http://api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&cnt=7&appid=88c9761cef44d75aeb649aeef5ea3657")
+        .then(resp=> {
+          setForecast(resp.data)
+        })
+    },[city])
+
     useEffect(() => {
       let apiURL = "";
       if (isUseCurrentLocation) {
@@ -148,6 +157,8 @@ function App() {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
+    
+    
     return (
       <div className="fade">
          <Helmet>
@@ -183,6 +194,10 @@ function App() {
               </>
             )}
           </div>
+          <div className = "forecast-container" id = "forecast-wrapper">
+            <Forecast results = {results}/>
+          </div>
+          
           <div
             className="mapContainer"
             style={{
@@ -242,7 +257,6 @@ function App() {
               </ComposableMap>
             </div>
           </div>
-          <Forecast />
         <div className="cards">
           {objects &&
             objects.map((object) => {
@@ -259,7 +273,9 @@ function App() {
             })}
         </div>
         </div>
+        
     </div>
+    
     )
   }}
 

@@ -88,3 +88,13 @@ input {
 .card {
   display: inline-block;
 }
+
+#forecast-wrapper {
+  background-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 1px 5px 25px 3px #444;
+  border-radius: 10px;
+  margin: 100px auto;
+  max-width: 720px;
+  padding: 0px;
+  color: white;  
+}
