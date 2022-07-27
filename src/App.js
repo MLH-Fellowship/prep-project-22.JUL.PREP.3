@@ -357,7 +357,7 @@ function App() {
             </div>
             </div>
             <div className="select-wrapper">
-            <p style={{fontSize:"16px"}}>Select pod's member location 👇</p>
+            <h2>Select pod's member location 👇</h2>
               <PodSelector
                 filterInput={filterInput}
                 onChange={setFilterInput}

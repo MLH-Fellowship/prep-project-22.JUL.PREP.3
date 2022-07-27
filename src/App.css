@@ -314,6 +314,25 @@ h4 {
   flex-direction: row;
   justify-content: center;
 }
+
+
+@media (max-width:600px) {
+  .select-search-wrapper{
+    flex-direction: column;
+  }
+  .select-wrapper{
+    width:auto !important; 
+  }
+}
+@media (min-width: 768px) {
+  .select-search-wrapper{
+    flex-direction: row;
+
+  }
+  .select-wrapper{
+    width:300px; 
+  }
+}
 .select-wrapper{
   width: 300px;
   margin: 0 12px;

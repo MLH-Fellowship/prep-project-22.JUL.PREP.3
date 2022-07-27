@@ -11,6 +11,10 @@ const PodSelector = (props) =>{
                 backgroundColor:"#133667",
                 color:"white"
             }
+        }),
+        control:(provided,state)=>({
+            ...provided,
+            padding:"10px",
         })
     }
     return(
