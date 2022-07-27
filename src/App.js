@@ -21,6 +21,7 @@ import {
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
+import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
 // OpenAI API
@@ -91,7 +92,7 @@ function App() {
   const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
   const [inputValue, setInputValue] = useState("");
   const [activities, setActivities] = useState("");
-  const [showWarning,setShowWarning] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
   const [airQualityIndex, setAirQualityIndex] = useState(null);
   const [airQualityValue, setAirQualityValue] = useState(null);
   const [airQualityDesc, setAirQualityDesc] = useState("");
@@ -473,6 +474,7 @@ function App() {
               );
             })}
         </div>
+        <Footer />
       </div>
     );
   }
