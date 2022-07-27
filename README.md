@@ -15,21 +15,22 @@ Live demo version is available [here](https://prep-22-jul-prep-3-project.netlify
 
 ## Authors
 
-| Author | Country | Github link | LinkedIn link | Avatar |
-| :---:       |     :---:      |       :---:      | :---:      |  :---: |
-| A.S.L. Manasa   | India     | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/aslmanasa.jpeg" width="110" height="130"> |
-| Chidera Innocent   | Nigeria     | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/chidera.jpeg" width="110" height="130"> |
-| Di Wu  | USA     | --    |  --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/diwu.png" width="110" height="130"> |
-|Elmar Abdulkarimov   | Azerbaijan  | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/elmar.png" width="110" height="130"> |
-| Himanshu Thakur   | India     | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/himanshu.jpg" width="110" height="130"> |
-| Indira Sowy   | Canada     | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/indira.jpeg" width="110" height="130"> |
-| Julian Willis | USA     | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/mlh.jpg" width="110" height="130"> |
-| Liubov Rukhlina  | Hungary     | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/liuba.jpeg" width="110" height="130"> |
-| Sadiq Babalola  | Nigeria     | --    |  --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/sadiq.png" width="110" height="130"> |
-| Saswat Samal | India    | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/saswat.jpeg" width="110" height="130"> |
-| Shehab Adel | Egypt    | --    |  --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/shehab.jpg" width="110" height="130"> |
-| Somaditya Singh | India    | --    | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/somaditya.jpg" width="110" height="130"> |
-| Vy Nguyen | --     | --    |  --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/vy.jpeg" width="110" height="130"> |
+| Author | Country | Github link |  Avatar |
+| :---:       |     :---:      |       :---:  |  :---: |
+| A.S.L. Manasa   | India     | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/aslmanasa.jpeg" width="110" height="130"> |
+| Chidera Innocent   | Nigeria     | [codewarsfx](https://github.com/codewarsfx)  | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/chidera.jpeg" width="110" height="130"> |
+| Di Wu  | USA     | [dw2761](https://github.com/dw2761)  | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/diwu.png" width="110" height="130"> |
+|Elmar Abdulkarimov   | Azerbaijan  | [elmar8287](https://github.com/elmar8287)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/elmar.png" width="110" height="130"> |
+| Himanshu Thakur   | India     |[himanshu-thakur-7](https://github.com/himanshu-thakur-7)   | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/himanshu.jpg" width="110" height="130"> |
+| Indira Sowy   | Canada     | [indywip](https://github.com/indywip)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/indira.jpeg" width="110" height="130"> |
+| Julian Willis | USA     | [gibbonhug](https://github.com/gibbonhug)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/mlh.jpg" width="110" height="130"> |
+| Liubov Rukhlina  | Hungary     | [LiubovRukhlina](https://github.com/LiubovRukhlina)    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/liuba.jpeg" width="110" height="130"> |
+| Sadiq Babalola  | Nigeria     |[Sadiq-b](https://github.com/Sadiq-b)      | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/sadiq.png" width="110" height="130"> |
+| Sanjay | India    | --     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/sanjay.jpg" width="110" height="130"> |
+| Saswat Samal | India    | [saswatsam786](https://github.com/saswatsam786)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/saswat.jpeg" width="110" height="130"> |
+| Shehab Adel | Egypt    | [shehabadel](https://github.com/shehabadel)    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/shehab.jpg" width="110" height="130"> |
+| Somaditya Singh | India    | [somadisingh](https://github.com/somadisingh)      | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/somaditya.jpg" width="110" height="130"> |
+| Vy Nguyen | Canada     | [thucvy](https://github.com/thucvy)    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/vy.jpeg" width="110" height="130"> |
 
 
 ## 🤝 Contributing
