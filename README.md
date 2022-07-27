@@ -1,15 +1,42 @@
-# MLH Prep Project
+#Weather Application
 
-Over the next 2 weeks, you'll be building a React App that works with various APIs (Application Programming Interfaces) that talk to different data sources to do cool stuff.
+>> This is a React Application, which fetching data from Open Weather API, and displaying it on UI. The displayed data is related to the weather condition, considering of selected city (or coordinates)
 
-We're using the [OpenWeather API](https://openweathermap.org/current) to get weather data on different cities. Your challenge over the next 2 weeks is to build out this website and add even more functionality to it. At the moment, it displays basic information about a location when you type it in. Check out [Issues](/issues) for some more ideas!
 
-You'll need to get your own API Key from their website (for free) and add it as an environment variable in a `.env` file. We have a template available as `example.env`.
+## Live version
+Live demo version is available [here](https://prep-22-jul-prep-3-project.netlify.app/)
 
-You'll be using React initially to build this. If you're new to React, check out the [website](https://reactjs.org) for some information on getting started! 
+<!-- ![Screen Shot](./desktop-version.PNG) -->
+![cyc1](https://user-images.githubusercontent.com/49064106/181218310-1cf443fd-4d88-440b-96d5-0a4673653571.JPG)
 
-## Installation
 
-You can start the appilcation manually by runing `npm install` to install all the dependencies and then `npm start` to start the development server.
+## Built With
 
-You can also use docker to build docker images that you can run and publish. Use `docker build .` in the root folder. Once the build is complete you will get a unique id, that will act as your docker image ID and then `docker run -p 3000:3000 IMAGE_ID`. This will expose the 3000 port to external Application. 
+- React JS
+- Open Weather API
+- Axios
+- Netlify
+
+## Authors
+
+👤 **Elmar Abdulkarimov**
+
+- GitHub: [@elmar8287](https://github.com/elmar8287)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+The project personalized for my  purposes. See the MIT.md file
+
+## 📝 License
+
+This project is [licensed](https://github.com/elmar8287/air-pollution-api-react-app/blob/dev/LICENSE).
