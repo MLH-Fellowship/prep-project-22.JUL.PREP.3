@@ -25,7 +25,21 @@ const ForecastCard = ({data, results}) => {
         } else if(e==="Extreme") {
             return "https://img.icons8.com/clouds/344/storm.png"
         }
+    };
+
+    const weekDay = (e) => {
+        let unix_timestamp = e;
+        var date = new Date(unix_timestamp * 1000).toLocaleString('en-us', {weekday:'long'});
+        // var days = date.getDay();
+        return date;
+    };
+
+    const currentDate = (e) => {
+        let unix_timestamp = e;
+        var s = new Date(unix_timestamp * 1000).toLocaleDateString("en-UK");
+        return s;
     }
+
 
     
     if (error) {
@@ -41,6 +55,8 @@ const ForecastCard = ({data, results}) => {
                     <div className="card" key={e.dt}>
                         <div className="card-container">
                             <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
+                            <div>{weekDay(e.dt)}</div>
+                            <div>{currentDate(e.dt)}</div>
                             <div className="temp">{e.feels_like.day}°C</div>
                             <div className="desc">{`${e.weather[0].description}`.toUpperCase()}</div>
                             <ul className="details">
