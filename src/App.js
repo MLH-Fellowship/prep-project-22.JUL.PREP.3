@@ -35,6 +35,8 @@ const openai = new OpenAIApi(configuration);
 
 import ScrollToTop from "react-scroll-to-top";
 import Result from "./Components/Result/ResultComponent";
+import BookmarkDropdownIcon from "./Components/bookmarkDropdownIcon/bookmarkDropdown";
+import BookmarkDropdown from "./Components/BookmarkDropDown/bookmarkDropDownComponent";
 const markers = [
   {
     markerOffset: -15,
@@ -99,6 +101,7 @@ function App() {
   const [airQualityValue, setAirQualityValue] = useState(null);
   const [airQualityDesc, setAirQualityDesc] = useState("");
   const [barColor, setBarColor] = useState("transparent");
+  const [dropDownClicked, setDropDownClicked] = useState(false);
 
 
   useEffect(() => {
@@ -315,7 +318,7 @@ function App() {
     return <div>Error: {error.message}</div>;
   } else {
     return (
-      <div className="fade">
+      <><BookmarkDropdownIcon/>
         <ScrollToTop smooth color="#6f00ff" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
@@ -463,7 +466,7 @@ function App() {
             })}
         </div>
         <Footer />
-      </div>
+      </>
     );
   }
 }

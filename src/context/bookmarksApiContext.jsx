@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 
 //utility functions
@@ -20,7 +20,7 @@ const removeBookmark = (removedBookmark, bookmarks)=>{
 
 //reducer for state management
 const reducer = (state,action)=>{
-
+console.log(state)
 const {type,payload} = action;
 
   switch (type) {
@@ -28,16 +28,24 @@ const {type,payload} = action;
         return addBookmark(payload, state)
     case 'remove':
         return removeBookmark(payload, state);
+    case 'inial':
+        return payload
     default:
         return state
   }
 }
 
-export const BookmarkContext = createContext([])
+export const BookmarkContext = createContext()
 
 
 const BookmarkProvider = ({children})=>{
-    const [bookmarks, dispatch ] = useReducer(reducer,[])
+    const [bookmarks, dispatch ] = useReducer(reducer,JSON.parse(localStorage.getItem('bookmarks')))
+
+useEffect(()=>{
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+    console.log('done')
+},[bookmarks])
+
 return (
     <BookmarkContext.Provider value={{bookmarks,dispatch}}>{children}</BookmarkContext.Provider>
 )

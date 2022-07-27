@@ -13,11 +13,6 @@ body {
   font-family:'Poppins', sans-serif; 
 }
 
-.fade {
-  opacity: 0;
-  animation: fadein 1.5s forwards;
-  animation-iteration-count: 1;
-}
 ul {
   list-style: none;
 }

@@ -6,7 +6,7 @@ import { BookmarkContext } from '../../context/bookmarksApiContext'
 
 
 const BookmarkIcon= ({isClicked,changeIconsColor,results})=>{
-   const {bookmarks,dispatch} = useContext(BookmarkContext)
+   const {dispatch} = useContext(BookmarkContext)
 
    const changeOnClick =()=>{
    

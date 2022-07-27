@@ -1,0 +1,36 @@
+.dropdown-icon-container{
+    position: absolute;
+    top: 1%;
+    right:10%;
+}
+
+.dropicon{
+    position: relative;
+}
+
+.bookamarked-total{
+    font-weight: 700;
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    cursor: pointer;
+}
+
+.dropdown-icon{
+    font-size: 36px;
+
+}
+
+
+@media (max-width: 768px){
+    .dropdown-icon{
+        font-size: 24px;
+    }
+
+
+    .dropdown-icon-container{
+        position: absolute;
+        top: .4%;
+        right:10%;
+    }
+}
