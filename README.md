@@ -1,6 +1,6 @@
 # Weather Application
 
-> This is a React Application, which fetching data from Open Weather API, and displaying it on UI. The displayed data is related to the weather condition, considering of selected city (or coordinates)
+> This is a React Application, which fetching data from [Open Weather API](https://openweathermap.org/api), and displaying it on UI. The displayed data is related to the weather condition, considering of selected city (or coordinates)
 
 
 ## Live version
@@ -9,8 +9,8 @@ Live demo version is available [here](https://prep-22-jul-prep-3-project.netlify
 ## Built With
 
 - React JS
-- Open Weather API
-- Axios
+- [Open Weather API](https://openweathermap.org/api)
+- [Axios](https://www.npmjs.com/package/axios)
 - Netlify
 
 ## Authors
@@ -42,9 +42,9 @@ Feel free to check the [issues page](../../issues/).
 
 Give a ⭐️ if you like this project!
 
-## Acknowledgments
+<!-- ## Acknowledgments
 
-The project personalized for my  purposes. See the MIT.md file
+The project personalized for my  purposes. See the MIT.md file -->
 <!-- 
 ## 📝 License
 
