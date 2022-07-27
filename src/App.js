@@ -11,7 +11,7 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
-import BookmarkIcon from './Components/BookmarkIcon/bookmarkIconComponent.jsx'
+
 import {
   ComposableMap,
   Geographies,
@@ -23,7 +23,7 @@ import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
 import Footer from "./Components/Footer/Footer";
-import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
+
 
 // OpenAI API
 const { Configuration, OpenAIApi } = require("openai");
@@ -34,6 +34,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 import ScrollToTop from "react-scroll-to-top";
+import Result from "./Components/Result/ResultComponent";
 const markers = [
   {
     markerOffset: -15,
@@ -98,6 +99,7 @@ function App() {
   const [airQualityValue, setAirQualityValue] = useState(null);
   const [airQualityDesc, setAirQualityDesc] = useState("");
   const [barColor, setBarColor] = useState("transparent");
+
 
   useEffect(() => {
     // no city is selected yet
@@ -355,19 +357,14 @@ function App() {
             Current Location
           </button>
           <div className="Results">
-              {!isLoaded && <h2>Loading...</h2>}
+              {!isLoaded && <h4>Loading...</h4>}
               {isLoaded && results && (
-                <>
-                  <h3 className="result_title">{results.weather[0].main} <BookmarkIcon/> </h3>
-                  <p className="result_description">Feels like <span>{results.main.feels_like}°C</span></p>
-                  <p className="result_description"><span className="result_country">{results.name},{results.sys.country}</span></p>
-                  {airQualityValue && (
-                  <AQIPollution
-                    airQualityIndex={airQualityIndex}
-                    airQualityValue={airQualityValue}
-                    airQualityDesc={airQualityDesc}
-                    barColor={barColor}/>)}
-                </>
+                  <Result results={results}
+                   airQualityIndex={airQualityIndex} 
+                   airQualityValue={airQualityValue} 
+                   airQualityDesc={airQualityDesc} 
+                   barColor={barColor}/>
+
               )}
             </div>
           <br />  

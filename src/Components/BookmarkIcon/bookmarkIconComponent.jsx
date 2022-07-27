@@ -1,21 +1,34 @@
 import './bookmarkIconStyles.css'
 import {BsBookmarkHeartFill} from 'react-icons/bs'
-import { useState } from 'react'
-
-
-const BookmarkIcon= ()=>{
-const [isClicked,setIsClicked] =useState(false)
+import { useContext } from 'react'
+import { BookmarkContext } from '../../context/bookmarksApiContext'
 
 
 
+const BookmarkIcon= ({isClicked,changeIconsColor,results})=>{
+   const {bookmarks,dispatch} = useContext(BookmarkContext)
+
+   const changeOnClick =()=>{
+   
+    if(isClicked){
+        dispatch({
+            type:'remove',
+            payload:results
+        })
+    }else{
+        dispatch({
+            type:'create',
+            payload:results
+        })
+    }
+   changeIconsColor()
+   }
 
 return(
     <>
-     <BsBookmarkHeartFill className="bookmark-icon" style={{color:isClicked?"blue":"#333"}} onClick={()=>setIsClicked(!isClicked)}/>
-     </>
+     <BsBookmarkHeartFill className="bookmark-icon" style={{color:isClicked?"blue":"#333"}} onClick={changeOnClick}/>
+    </>
 )
-
-
 }
 
 
