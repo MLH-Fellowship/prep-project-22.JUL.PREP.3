@@ -48,7 +48,7 @@ const ForecastCard = ({data, results}) => {
 
     return <>
         <div  className="main-block">
-            <h3>Weekly Forecast for {results.name}</h3>
+            <h3 className="forecast-section-header">Weekly Forecast for {results.name}</h3>
             <div className="car-block">
               {
                 data.list.map((e) =>(
@@ -57,7 +57,7 @@ const ForecastCard = ({data, results}) => {
                             <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
                             <div>{weekDay(e.dt)}</div>
                             <div>{currentDate(e.dt)}</div>
-                            <div className="temp">{e.feels_like.day}°C</div>
+                            <div className="temp">{Math.round(`${e.feels_like.day}`, -1)}°C</div>
                             <div className="desc">{`${e.weather[0].description}`.toUpperCase()}</div>
                             <ul className="details">
                                 <li>
@@ -70,10 +70,10 @@ const ForecastCard = ({data, results}) => {
                                     <div>Humidity {e.humidity}%</div>
                                 </li>
                                 <li className="min-max">
-                                    <div>Min temp {e.temp.min}°C</div>
+                                    <div>Min temp {Math.round(`${e.temp.min}`, -1)}°C</div>
                                 </li>
                                 <li>
-                                    <div>Max temp {e.temp.max}°C</div>
+                                    <div>Max temp {Math.round(`${e.temp.max}`, -1)}°C</div>
                                 </li>
                             </ul>
                         </div>
