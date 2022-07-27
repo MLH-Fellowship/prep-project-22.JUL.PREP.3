@@ -154,7 +154,7 @@ function App() {
         setInputValue(`${city}, ${countryCode}`);
         setSuggestions({ ...suggestions, results: null });
 
-        // OpenAI API Config
+        // OpenAI API engine config for fetching activities based on the weather
         console.log(
           `Top 5 activities to do in ${city} when its ${result.weather[0].main}`
         );
