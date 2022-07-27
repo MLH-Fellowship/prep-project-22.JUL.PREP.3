@@ -1,309 +1,318 @@
 body {
-  background-color: #133667;
-  color: white;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  font-family:'Poppins', sans-serif; 
+    background-color: #133667;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .fade {
-  opacity: 0;
-  animation: fadein 1.5s forwards;
-  animation-iteration-count: 1;
+    opacity: 0;
+    animation: fadein 1.5s forwards;
+    animation-iteration-count: 1;
 }
 ul {
-  list-style: none;
+    list-style: none;
 }
 
 @keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
-  margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    margin-top: 20px;
 }
 
 input {
-  padding: 10px;
-  border-radius: 4px;
-  border: 10px;
-  width: 12%;
-  margin-bottom: 0.83em;
+    padding: 10px;
+    border-radius: 4px;
+    border: 10px;
+    width: 12%;
+    margin-bottom: 0.83em;
 }
 
 .Results {
-  background-color: white;
-  width: 75%;
-  max-width:300px;
-  padding: 1em;
-  border-radius: 5px;
-  margin:20px auto;
-  color: black;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    background-color: white;
+    width: 75%;
+    max-width: 300px;
+    padding: 1em;
+    border-radius: 5px;
+    margin: 20px auto;
+    color: black;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 /* Make a card class for the suggested activities */
 .Activities {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin-top: 20px;
-  margin-left: 35%;
-  margin-right: 35%;
-  border-radius: 15px;
-  padding: 10px;
-  /* background-color: white; */
-  align-items: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-top: 20px;
+    margin-left: 35%;
+    margin-right: 35%;
+    border-radius: 15px;
+    padding: 10px;
+    /* background-color: white; */
+    align-items: center;
 }
 
 .location-icon {
-  width: 22px;
-  margin-right: 3px;
+    width: 22px;
+    margin-right: 3px;
 }
 
-
 .btn {
-  border-radius: 18px;
-  padding: 7px;
-  width: 14%;
-  align-items: center;
-  display: inline-flex;
-  justify-content: center;
-  cursor: pointer;
-  color: #133667;
-  border-color: #133667;
-  background-color: #fff;
-  transition: all 0.3s;
-  overflow: hidden;
-  z-index: 1;
+    border-radius: 18px;
+    padding: 7px;
+    width: 14%;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    cursor: pointer;
+    color: #133667;
+    border-color: #133667;
+    background-color: #fff;
+    transition: all 0.3s;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .btn:hover {
-  color: #fff;
-  background-color: #133667;
+    color: #fff;
+    background-color: #133667;
 }
 
 input {
-  border: 1px solid #999;
-  width: 300px;
-  padding: 10px;
-  border-radius: 4px;
+    border: 1px solid #999;
+    width: 300px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.input-and-unit-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.unit-toggle-and-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .no-suggestions {
-  color: #999;
-  padding: 0.5rem;
+    color: #999;
+    padding: 0.5rem;
 }
 
 .suggestions {
-  border: 1px solid #999;
-  border-top-width: 0;
-  list-style: none;
-  margin-top: 0;
-  max-height: 143px;
-  overflow-y: scroll;
-  padding-left: 0;
-  width: 320px;
+    border: 1px solid #999;
+    border-top-width: 0;
+    list-style: none;
+    margin-top: 0;
+    max-height: 143px;
+    overflow-y: scroll;
+    padding-left: 0;
+    width: 320px;
 }
 
 .suggestions li {
-  padding: 0.5rem;
+    padding: 0.5rem;
 }
 
 .suggestion-active,
 .suggestions li:hover {
-  background-color: #999;
-  color: white;
-  cursor: pointer;
-  font-weight: 700;
+    background-color: #999;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
 }
 
 .suggestions li:not(:last-of-type) {
-  border-bottom: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 .cards {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 .card-wrapper {
-  display: inline-block;
-  margin: 10px;
+    display: inline-block;
+    margin: 10px;
 }
 
 .mapContainer {
-  margin-left: 35%;
-  margin-right: 35%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    margin-left: 35%;
+    margin-right: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .warning {
-  background-color: white;
-  border-radius: 15px;
-  color: red;
-  margin-top: 20px;
-  padding: 25px;
-  display: inline-flex;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    border-radius: 15px;
+    color: red;
+    margin-top: 20px;
+    padding: 25px;
+    display: inline-flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .exclaim {
-  width: 150px;
-  height: 150px;
-  max-width: 70%;
+    width: 150px;
+    height: 150px;
+    max-width: 70%;
 }
 
 p {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 h1 {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
 h3 {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 h2 {
-  font-size: 1.75rem;
+    font-size: 1.75rem;
 }
 
 h4 {
-  font-size: 1.35rem;
+    font-size: 1.35rem;
 }
 
 @media (max-width: 750px) {
+    input {
+        width: 25%;
+    }
 
-  input {
-    width: 25%;
-  }
+    .btn {
+        width: 25%;
+    }
 
-  .btn {
-    width: 25%;
-  }
-
-  .logo {
-    width: 40%;
-  }
+    .logo {
+        width: 40%;
+    }
 }
 
 @media (max-width: 508px) {
+    .logo {
+        width: 50%;
+    }
 
+    input {
+        width: 55%;
+    }
 
-  .logo {
-    width: 50%;
-  }
+    .btn {
+        width: 55%;
+    }
 
-  input {
-    width: 55%;
-  }
+    p {
+        font-size: 1.75rem;
+    }
 
-  .btn {
-    width: 55%;
-  }
+    h3 {
+        font-size: 2.25rem;
+    }
 
-  p {
-    font-size: 1.75rem;
-  }
+    h2 {
+        font-size: 2.75rem;
+    }
 
-  h3 {
-    font-size: 2.25rem;
-  }
+    h1 {
+        font-size: 3rem;
+    }
 
-  h2 {
-    font-size: 2.75rem;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  h4 {
-    font-size: 2rem;
-  }
+    h4 {
+        font-size: 2rem;
+    }
 }
 
 @media (min-width: 508px) {
-  .btn {
-    width: 40%;
-  }
+    .btn {
+        width: 40%;
+    }
 }
 
 @media (min-width: 751px) {
-  input {
-    width: 30%;
-  }
+    input {
+        width: 30%;
+    }
 
-  .btn {
-    width: 20%;
-  }
+    .btn {
+        width: 20%;
+    }
 }
 
 @media (min-width: 1200px) {
-  input {
-    width: 250px;
-  }
+    input {
+        width: 250px;
+    }
 
-  .btn {
-    width: 180px;
-  }
-
+    .btn {
+        width: 180px;
+    }
 }
 
 @media (min-width: 1400px) {
-  p {
-    font-size: 1.75rem;
-  }
+    p {
+        font-size: 1.75rem;
+    }
 
-  h3 {
-    font-size: 2.25rem;
-  }
+    h3 {
+        font-size: 2.25rem;
+    }
 
-  h2 {
-    font-size: 2.75rem;
-  }
+    h2 {
+        font-size: 2.75rem;
+    }
 
-  h1 {
-    font-size: 3rem;
-  }
+    h1 {
+        font-size: 3rem;
+    }
 
-  h4 {
-    font-size: 2rem;
-  }
+    h4 {
+        font-size: 2rem;
+    }
 }
 
-.result_title{
-  font-size: 28px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.result_title {
+    font-size: 28px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.result_description{
- font-size: 14px;
- color: #444;
+.result_description {
+    font-size: 14px;
+    color: #444;
 }
 
-.result_description span{
- font-size: 20px;
- font-weight: 700;
- margin-left: 10px;
+.result_description span {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 10px;
 }
