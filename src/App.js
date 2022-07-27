@@ -340,25 +340,27 @@ function App() {
                             width: 300,
                         }}
                     >
-                      <div className='input-and-unit-toggle'>
-                        <input
-                            type='text'
-                            value={inputValue}
-                            onChange={(event) => {
-                                setInputValue(event.target.value);
-                                setCity('');
-                                setCountryCode('');
-                                setIsUseCurrentLocation(false);
-                            }}
-                        />
-                        <div className='unit-toggle-and-label'>
-                            <UnitToggle onChange={handleUnitToggleChange} />
+                        <div className='input-and-unit-toggle'>
+                            <input
+                                type='text'
+                                value={inputValue}
+                                onChange={(event) => {
+                                    setInputValue(event.target.value);
+                                    setCity('');
+                                    setCountryCode('');
+                                    setIsUseCurrentLocation(false);
+                                }}
+                            />
+                            <div className='unit-toggle-and-label'>
+                                <UnitToggle onChange={handleUnitToggleChange} />
 
-                            <div>
-                                {unit == 'metric' ? 'Celcius' : 'Fahrenheit'}
+                                <div>
+                                    {unit == 'metric'
+                                        ? 'Celcius'
+                                        : 'Fahrenheit'}
+                                </div>
                             </div>
                         </div>
-                      </div>
 
                         {suggestions.results !== null && (
                             <Cities
@@ -384,9 +386,18 @@ function App() {
                                 <h3 className='result_title'>
                                     {results.weather[0].main} <BookmarkIcon />{' '}
                                 </h3>
-                                <p className='result_description'>
-                                    Feels like{' '}
-                                    <span>{results.main.feels_like}°C</span>
+                                <p>
+                                    Feels like
+                                    {unit == 'metric'
+                                        ? ' ' + results.main.feels_like + ' °C'
+                                        : ' ' +
+                                          truncateDecimals(
+                                              results.main.feels_like *
+                                                  (9 / 5) +
+                                                  32,
+                                              2
+                                          ) +
+                                          ' °F'}
                                 </p>
                                 <p className='result_description'>
                                     <span className='result_country'>
