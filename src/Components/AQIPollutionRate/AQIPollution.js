@@ -9,7 +9,7 @@ const AQIPollution = ({
   barColor,
 }) => {
   return (
-    <div>
+    <div className="aqi-display">
       <div className="aqi-box">
         <div className="aqi-text-group">
           <h4 className="aqi-text">Air Quality: </h4>
