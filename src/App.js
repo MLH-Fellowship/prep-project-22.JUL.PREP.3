@@ -275,20 +275,18 @@ function App() {
       .then(getResults, getError);
 
     // get Air Quality Index
-    if (city || countryCode || isUseCurrentLocation) {
-      fetch(
-        "https://api.openweathermap.org/data/2.5/air_pollution?lat=" +
-          latitude +
-          "&lon=" +
-          longitude +
-          "&appid=" +
-          process.env.REACT_APP_APIKEY
-      )
-        .then((res) => res.json())
-        .then((result) =>
-          setAirQualityIndex(Math.round(result.list[0].components.no2))
-        );
-    }
+    fetch(
+      "https://api.openweathermap.org/data/2.5/air_pollution?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&appid=" +
+        process.env.REACT_APP_APIKEY
+    )
+      .then((res) => res.json())
+      .then((result) =>
+        setAirQualityIndex(Math.round(result.list[0].components.no2))
+      );
   }, [city, countryCode, longitude, latitude, isUseCurrentLocation]);
 
   if (error) {
