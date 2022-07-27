@@ -92,7 +92,7 @@ function App() {
   const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
   const [inputValue, setInputValue] = useState("");
   const [activities, setActivities] = useState("");
-  const [showWarning,setShowWarning] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
   const [airQualityIndex, setAirQualityIndex] = useState(null);
   const [airQualityValue, setAirQualityValue] = useState(null);
   const [airQualityDesc, setAirQualityDesc] = useState("");
@@ -459,7 +459,6 @@ function App() {
               </ZoomableGroup>
             </ComposableMap>
           </div>
-          <Footer />
         </div>
         <div className="cards">
           {objects &&
@@ -475,6 +474,7 @@ function App() {
               );
             })}
         </div>
+        <Footer />
       </div>
     );
   }
