@@ -145,6 +145,7 @@ function App() {
       );
       setBarColor("brown");
     }
+    console.log(airQualityIndex);
   }, [airQualityIndex]);
 
   const getCurrentPosition = () => {
@@ -284,9 +285,13 @@ function App() {
         process.env.REACT_APP_APIKEY
     )
       .then((res) => res.json())
-      .then((result) =>
-        setAirQualityIndex(Math.round(result.list[0].components.no2))
-      );
+      .then((result) => {
+        const o3Rate = Math.round(result.list[0].components.o3);
+        const no2Rate = Math.round(result.list[0].components.no2);
+        o3Rate > no2Rate
+          ? setAirQualityIndex(o3Rate)
+          : setAirQualityIndex(no2Rate);
+      });
   }, [city, countryCode, longitude, latitude, isUseCurrentLocation]);
 
   if (error) {
