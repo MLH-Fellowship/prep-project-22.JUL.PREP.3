@@ -5,6 +5,7 @@ import Cities from "./Components/Cities";
 import logo from "./img/mlh-prep.png";
 import locationIcon from "./img/location-icon.jpg";
 import ItemCard from "./ItemCard";
+import Warning from "./Warning";
 import Objects from "./Utilities/Objects";
 import React from "react";
 import MyGlobe from "./Components/globe_model.js";
@@ -90,6 +91,7 @@ function App() {
   const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
   const [inputValue, setInputValue] = useState("");
   const [activities, setActivities] = useState("");
+  const [showWarning,setShowWarning] = useState(false);
   const [airQualityIndex, setAirQualityIndex] = useState(null);
   const [airQualityValue, setAirQualityValue] = useState(null);
   const [airQualityDesc, setAirQualityDesc] = useState("");
@@ -166,6 +168,16 @@ function App() {
     );
   };
 
+  function extremeWeather(results) {
+    if (
+      results.weather[0].main === "Thunderstorm" ||
+      results.weather[0].main === "Tornado" ||
+      results.weather[0].main === "Squall"
+    ) {
+      return setShowWarning(true);
+    }
+  }
+
   function bringRightThings(results) {
     if (results.weather[0].main === "Clear") {
       setObjects([Objects.hat, , Objects.sunscreen, Objects.sunglasses]);
@@ -226,6 +238,7 @@ function App() {
       }
       setIsLoaded(true);
       setResults(result);
+      extremeWeather(result);
       bringRightThings(result);
       if (isUseCurrentLocation) {
         setCity(result.name);
@@ -306,6 +319,7 @@ function App() {
         </Helmet>
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
+          {showWarning ? <Warning /> : null}
           <h2>Enter a city below 👇</h2>
           <div
             style={{
