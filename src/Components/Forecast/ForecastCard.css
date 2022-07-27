@@ -1,3 +1,12 @@
+.main-block {
+  padding-bottom: 20px;
+}
+
+.forecast-section-header {
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+
 .temp {
     font-size: 40px;
     margin-bottom: 20px;
@@ -24,7 +33,7 @@
   margin-right: -2.5rem;
   margin-top: -2rem;
   z-index: 999;
-  height: 80px;
+  height: 100px;
 }
 
 .card {
