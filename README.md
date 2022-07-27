@@ -1,15 +1,54 @@
-# MLH Prep Project
+# Weather Application
 
-Over the next 2 weeks, you'll be building a React App that works with various APIs (Application Programming Interfaces) that talk to different data sources to do cool stuff.
+> This is a React Application, which fetching data from [Open Weather API](https://openweathermap.org/api), and displaying it on UI. The displayed data is related to the weather condition, considering of selected city (or coordinates)
 
-We're using the [OpenWeather API](https://openweathermap.org/current) to get weather data on different cities. Your challenge over the next 2 weeks is to build out this website and add even more functionality to it. At the moment, it displays basic information about a location when you type it in. Check out [Issues](/issues) for some more ideas!
 
-You'll need to get your own API Key from their website (for free) and add it as an environment variable in a `.env` file. We have a template available as `example.env`.
+## Live version
+Live demo version is available [here](https://prep-22-jul-prep-3-project.netlify.app/)
 
-You'll be using React initially to build this. If you're new to React, check out the [website](https://reactjs.org) for some information on getting started! 
+## Built With
 
-## Installation
+- React JS
+- [Open Weather API](https://openweathermap.org/api)
+- [Axios](https://www.npmjs.com/package/axios)
+- Netlify
 
-You can start the appilcation manually by runing `npm install` to install all the dependencies and then `npm start` to start the development server.
+## Authors
 
-You can also use docker to build docker images that you can run and publish. Use `docker build .` in the root folder. Once the build is complete you will get a unique id, that will act as your docker image ID and then `docker run -p 3000:3000 IMAGE_ID`. This will expose the 3000 port to external Application. 
+| Author | Country | Github link |  Avatar |
+| :---:       |     :---:      |       :---:  |  :---: |
+| A.S.L. Manasa   | India     | --    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/aslmanasa.jpeg" width="110" height="130"> |
+| Chidera Innocent   | Nigeria     | [codewarsfx](https://github.com/codewarsfx)  | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/chidera.jpeg" width="110" height="130"> |
+| Di Wu  | USA     | [dw2761](https://github.com/dw2761)  | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/diwu.png" width="110" height="130"> |
+|Elmar Abdulkarimov   | Azerbaijan  | [elmar8287](https://github.com/elmar8287)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/elmar.png" width="110" height="130"> |
+| Himanshu Thakur   | India     |[himanshu-thakur-7](https://github.com/himanshu-thakur-7)   | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/himanshu.jpg" width="110" height="130"> |
+| Indira Sowy   | Canada     | [indywip](https://github.com/indywip)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/indira.jpeg" width="110" height="130"> |
+| Julian Willis | USA     | [gibbonhug](https://github.com/gibbonhug)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/mlh.jpg" width="110" height="130"> |
+| Liubov Rukhlina  | Hungary     | [LiubovRukhlina](https://github.com/LiubovRukhlina)    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/liuba.jpeg" width="110" height="130"> |
+| Sadiq Babalola  | Nigeria     |[Sadiq-b](https://github.com/Sadiq-b)      | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/sadiq.png" width="110" height="130"> |
+| Sanjay | India    | --     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/sanjay.jpg" width="110" height="130"> |
+| Saswat Samal | India    | [saswatsam786](https://github.com/saswatsam786)     | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/saswat.jpeg" width="110" height="130"> |
+| Shehab Adel | Egypt    | [shehabadel](https://github.com/shehabadel)    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/shehab.jpg" width="110" height="130"> |
+| Somaditya Singh | India    | [somadisingh](https://github.com/somadisingh)      | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/somaditya.jpg" width="110" height="130"> |
+| Vy Nguyen | Canada     | [thucvy](https://github.com/thucvy)    | <img src="https://prep-22-jul-prep-3-portfolio.netlify.app/assets/img/vy.jpeg" width="110" height="130"> |
+
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+<!-- ## Acknowledgments
+
+The project personalized for my  purposes. See the MIT.md file -->
+<!-- 
+## 📝 License
+
+This project is [licensed](https://github.com/elmar8287/air-pollution-api-react-app/blob/dev/LICENSE). -->
+<!-- ![Screen Shot](./desktop-version.PNG) -->
+<!-- ![cyc1](https://user-images.githubusercontent.com/49064106/181218310-1cf443fd-4d88-440b-96d5-0a4673653571.JPG) -->
