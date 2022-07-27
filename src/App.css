@@ -13,11 +13,6 @@ body {
   font-family:'Poppins', sans-serif; 
 }
 
-.fade {
-  opacity: 0;
-  animation: fadein 1.5s forwards;
-  animation-iteration-count: 1;
-}
 ul {
   list-style: none;
 }
@@ -45,7 +40,9 @@ input {
   border: 10px;
   width: 12%;
   margin-bottom: 0.83em;
-  color: black;
+  font-family: inherit;
+  color: #444;
+
 }
 
 .Results {
@@ -189,7 +186,9 @@ h4 {
 }
 
 @media (max-width: 750px) {
-
+.Results{
+  padding: .5em;
+}
   input {
     width: 25%;
   }
@@ -288,23 +287,3 @@ h4 {
   }
 }
 
-.result_title{
-  font-size: 28px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.result_description{
- font-size: 14px;
- color: #444;
-}
-
-.result_description span{
- font-size: 20px;
- font-weight: 700;
- margin-left: 10px;
-}

@@ -12,7 +12,7 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
-import BookmarkIcon from './Components/BookmarkIcon/bookmarkIconComponent.jsx'
+
 import {
   ComposableMap,
   Geographies,
@@ -24,7 +24,7 @@ import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
 import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
-import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
+
 
 // OpenAI API
 const { Configuration, OpenAIApi } = require("openai");
@@ -35,6 +35,8 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 import ScrollToTop from "react-scroll-to-top";
+import Result from "./Components/Result/ResultComponent";
+import BookmarkDropdownIcon from "./Components/bookmarkDropdownIcon/bookmarkDropdown";
 const markers = [
   {
     markerOffset: -15,
@@ -109,6 +111,8 @@ function App() {
         console.log("data", data)
       })
   },[city])
+  const [dropDownClicked, setDropDownClicked] = useState(false);
+
 
   useEffect(() => {
     // no city is selected yet
@@ -324,7 +328,7 @@ function App() {
     return <div>Error: {error.message}</div>;
   } else {
     return (
-      <div className="fade">
+      <><BookmarkDropdownIcon/>
         <ScrollToTop smooth color="#6f00ff" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
@@ -366,19 +370,14 @@ function App() {
             Current Location
           </button>
           <div className="Results">
-              {!isLoaded && <h2>Loading...</h2>}
+              {!isLoaded && <h4>Loading...</h4>}
               {isLoaded && results && (
-                <>
-                  <h3 className="result_title">{results.weather[0].main} <BookmarkIcon/> </h3>
-                  <p className="result_description">Feels like <span>{results.main.feels_like}°C</span></p>
-                  <p className="result_description"><span className="result_country">{results.name},{results.sys.country}</span></p>
-                  {airQualityValue && (
-                  <AQIPollution
-                    airQualityIndex={airQualityIndex}
-                    airQualityValue={airQualityValue}
-                    airQualityDesc={airQualityDesc}
-                    barColor={barColor}/>)}
-                </>
+                  <Result results={results}
+                   airQualityIndex={airQualityIndex} 
+                   airQualityValue={airQualityValue} 
+                   airQualityDesc={airQualityDesc} 
+                   barColor={barColor}/>
+
               )}
             </div>
           <br />  
@@ -405,7 +404,7 @@ function App() {
             setInput={setInputValue}
           />
           {data!==undefined && data!==null && results!==undefined && results!== null &&
-            <ForecastCard data={data} results={results} />
+            <ForecastCard data={data} results={results} /> 
           }
         </span>
         <div className="mapContainer">
@@ -479,7 +478,7 @@ function App() {
             })}
         </div>
         <Footer />
-      </div>
+      </>
     );
   }
 }

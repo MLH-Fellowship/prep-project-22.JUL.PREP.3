@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import Loader from "./Components/initialLoader/initialLoaderComp";
+import BookmarkProvider from "./context/bookmarksApiContext";
 
 const WeatherApp = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,7 @@ const WeatherApp = () => {
     }, 3500);
   }, []);
 
-  return <>{isLoading ? <Loader /> : <App />}</>;
+  return <>{isLoading ? <Loader /> : <BookmarkProvider><App /></BookmarkProvider>}</>;
 };
 
 ReactDOM.render(
