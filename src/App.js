@@ -19,6 +19,7 @@ import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
+import Footer from "./Components/Footer/Footer";
 
 const markers = [
   {
@@ -289,6 +290,7 @@ function App() {
                 );
               })}
           </div>
+          <Footer />
         </div>
     );
   }

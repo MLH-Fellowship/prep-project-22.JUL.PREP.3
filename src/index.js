@@ -14,7 +14,7 @@ const WeatherApp = ()=>{
      },3500)
 
   },[])
-
+  
   return(<>
         {isLoading? <Loader/> : <App/>}
          </>
