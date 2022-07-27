@@ -275,7 +275,7 @@ function App() {
       .then(getResults, getError);
 
     // get Air Quality Index
-    if ((city && countryCode) || isUseCurrentLocation) {
+    if (city || countryCode || isUseCurrentLocation) {
       fetch(
         "https://api.openweathermap.org/data/2.5/air_pollution?lat=" +
           latitude +
