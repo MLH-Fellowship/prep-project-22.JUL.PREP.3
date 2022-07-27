@@ -20,6 +20,7 @@ import {
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
+import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
 // OpenAI API
 const { Configuration, OpenAIApi } = require("openai");
@@ -89,6 +90,10 @@ function App() {
   const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
   const [inputValue, setInputValue] = useState("");
   const [activities, setActivities] = useState("");
+  const [airQualityIndex, setAirQualityIndex] = useState(null);
+  const [airQualityValue, setAirQualityValue] = useState(null);
+  const [airQualityDesc, setAirQualityDesc] = useState("");
+  const [barColor, setBarColor] = useState("transparent");
 
   useEffect(() => {
     // no city is selected yet
@@ -96,6 +101,52 @@ function App() {
       setSuggestions({ ...suggestions, cityPrefix: inputValue });
     }
   }, [inputValue]);
+
+  useEffect(() => {
+    if (!airQualityIndex) {
+      setAirQualityIndex(null);
+      setAirQualityValue(null);
+      setAirQualityDesc("");
+      setBarColor("transparent");
+    } else if (airQualityIndex <= 50) {
+      setAirQualityValue("Good");
+      setAirQualityDesc(
+        "Air quality is satisfactory, and air pollution poses little or no risk."
+      );
+      setBarColor("green");
+    } else if (airQualityIndex <= 100) {
+      setAirQualityValue("Moderate");
+      setAirQualityDesc(
+        "Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution."
+      );
+      setBarColor("yellow");
+    } else if (airQualityIndex <= 150) {
+      setAirQualityValue("Unhealthy for sensitive groups");
+      setAirQualityDesc(
+        "Members of sensitive groups may experience health effects. The general public is less likely to be affected."
+      );
+      setBarColor("orange");
+    } else if (airQualityIndex <= 200) {
+      setAirQualityValue("Unhealthy");
+      setAirQualityDesc(
+        "Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects."
+      );
+      setBarColor("red");
+    } else if (airQualityIndex <= 300) {
+      setAirQualityValue("Very Unhealthy");
+      setAirQualityDesc(
+        "Health alert: The risk of health effects is increased for everyone."
+      );
+      setBarColor("purple");
+    } else {
+      setAirQualityValue("Harzadous");
+      setAirQualityDesc(
+        "Health warning of emergency conditions: everyone is more likely to be affected."
+      );
+      setBarColor("brown");
+    }
+    console.log(airQualityIndex);
+  }, [airQualityIndex]);
 
   const getCurrentPosition = () => {
     setIsUseCurrentLocation(true);
@@ -176,7 +227,12 @@ function App() {
       setIsLoaded(true);
       setResults(result);
       bringRightThings(result);
-      isUseCurrentLocation && setCity(result.name);
+      if (isUseCurrentLocation) {
+        setCity(result.name);
+      } else {
+        setLatitude(result.coord.lat);
+        setLongitude(result.coord.lon);
+      }
       //Inside this function we can make a switch case on results, and change the background picture
       //to different sources based on the temperature provided
       let weatherMetaData = changeBackground(result);
@@ -218,6 +274,24 @@ function App() {
     fetch(apiURL)
       .then((res) => res.json())
       .then(getResults, getError);
+
+    // get Air Quality Index
+    fetch(
+      "https://api.openweathermap.org/data/2.5/air_pollution?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&appid=" +
+        process.env.REACT_APP_APIKEY
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        const o3Rate = Math.round(result.list[0].components.o3);
+        const no2Rate = Math.round(result.list[0].components.no2);
+        o3Rate > no2Rate
+          ? setAirQualityIndex(o3Rate)
+          : setAirQualityIndex(no2Rate);
+      });
   }, [city, countryCode, longitude, latitude, isUseCurrentLocation]);
 
   if (error) {
@@ -271,17 +345,26 @@ function App() {
 
             {isLoaded && results && (
               <>
-                <h3>{results.weather[0].main}</h3>
-                <p>Feels like {results.main.feels_like}°C</p>
-                <i>
-                  <p>
-                    {results.name}, {results.sys.country}
-                  </p>
-                </i>
+                <div>
+                  <h3>{results.weather[0].main}</h3>
+                  <p>Feels like {results.main.feels_like}°C</p>
+                  <i>
+                    <p>
+                      {results.name}, {results.sys.country}
+                    </p>
+                  </i>
+                </div>
+                {airQualityValue && (
+                  <AQIPollution
+                    airQualityIndex={airQualityIndex}
+                    airQualityValue={airQualityValue}
+                    airQualityDesc={airQualityDesc}
+                    barColor={barColor}
+                  />
+                )}
               </>
             )}
           </div>
-          <br />
         </div>
         {activities && (
           <div>
