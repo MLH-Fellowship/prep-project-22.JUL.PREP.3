@@ -172,8 +172,7 @@ function App() {
     if (
       results.weather[0].main === "Thunderstorm" ||
       results.weather[0].main === "Tornado" ||
-      results.weather[0].main === "Squall" ||
-      results.weather[0].main === "Snow"
+      results.weather[0].main === "Squall"
     ) {
       return setShowWarning(true);
     }
