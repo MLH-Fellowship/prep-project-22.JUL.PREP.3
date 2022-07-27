@@ -11,7 +11,6 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
-import BookmarkIcon from './Components/BookmarkIcon/bookmarkIconComponent.jsx'
 import {
   ComposableMap,
   Geographies,
@@ -22,7 +21,6 @@ import {
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
-import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
 // OpenAI API
@@ -174,7 +172,8 @@ function App() {
     if (
       results.weather[0].main === "Thunderstorm" ||
       results.weather[0].main === "Tornado" ||
-      results.weather[0].main === "Squall"
+      results.weather[0].main === "Squall" ||
+      results.weather[0].main === "Snow"
     ) {
       return setShowWarning(true);
     }
@@ -219,7 +218,7 @@ function App() {
         setInputValue(`${city}, ${countryCode}`);
         setSuggestions({ ...suggestions, results: null });
 
-        // OpenAI API engine config for fetching activities based on the weather
+        // OpenAI API
         console.log(
           `Top 5 activities to do in ${city} when its ${result.weather[0].main}`
         );
@@ -329,14 +328,16 @@ function App() {
               width: 300,
             }}
           >
-            <input type="text"
+            <input
+              type="text"
               value={inputValue}
               onChange={(event) => {
-              setInputValue(event.target.value);
-              setCity("");
-              setCountryCode("");
-              setIsUseCurrentLocation(false);
-              }}/>
+                setInputValue(event.target.value);
+                setCity("");
+                setCountryCode("");
+                setIsUseCurrentLocation(false);
+              }}
+            />
             {suggestions.results !== null && (
               <Cities
                 list={suggestions.results}
@@ -355,27 +356,35 @@ function App() {
             Current Location
           </button>
           <div className="Results">
-              {!isLoaded && <h2>Loading...</h2>}
-              {isLoaded && results && (
-                <>
-                  <h3 className="result_title">{results.weather[0].main} <BookmarkIcon/> </h3>
-                  <p className="result_description">Feels like <span>{results.main.feels_like}°C</span></p>
-                  <p className="result_description"><span className="result_country">{results.name},{results.sys.country}</span></p>
-                  {airQualityValue && (
+            {!isLoaded && <h2>Loading...</h2>}
+
+            {isLoaded && results && (
+              <>
+                <div>
+                  <h3>{results.weather[0].main}</h3>
+                  <p>Feels like {results.main.feels_like}°C</p>
+                  <i>
+                    <p>
+                      {results.name}, {results.sys.country}
+                    </p>
+                  </i>
+                </div>
+                {airQualityValue && (
                   <AQIPollution
                     airQualityIndex={airQualityIndex}
                     airQualityValue={airQualityValue}
                     airQualityDesc={airQualityDesc}
-                    barColor={barColor}/>)}
-                </>
-              )}
-            </div>
-          <br />  
+                    barColor={barColor}
+                  />
+                )}
+              </>
+            )}
+          </div>
         </div>
         {activities && (
           <div>
             <div className="Activities">
-              <h2>Activities</h2>
+              <h2>Activities to do in {results.name}</h2>
               <ul>
                 {activities.split("\n").map((activity) => (
                   <li>{activity}</li>
@@ -414,6 +423,23 @@ function App() {
                           setCity("");
                           setCountryCode(`${name}`);
                           setInputValue(`${name}`);
+                          console.log(
+                            `Top 5 activities to do in ${name} when its ${results.weather[0].main}:`
+                          );
+                          openai
+                            .createCompletion({
+                              model: "text-davinci-002",
+                              prompt: `Top 5 activities to do in ${name} when its ${results.weather[0].main}:`,
+                              temperature: 0.86,
+                              max_tokens: 256,
+                              top_p: 1,
+                              frequency_penalty: 0,
+                              presence_penalty: 0,
+                            })
+                            .then((response) => {
+                              console.log(response.data.choices[0].text);
+                              setActivities(response.data.choices[0].text);
+                            });
                         }}
                         onMouseLeave={() => {
                           setcontent("");
@@ -465,7 +491,6 @@ function App() {
               );
             })}
         </div>
-        <Footer />
       </div>
     );
   }
