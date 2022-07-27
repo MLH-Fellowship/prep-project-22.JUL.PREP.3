@@ -21,7 +21,7 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
-import ForecastCard from "./Components/Forecast/ForecastCard";
+//import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
@@ -100,14 +100,22 @@ function App() {
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
 
-  useEffect(()=> {
-    fetch("https://api.openweathermap.org/data/2.5/forecast/daily?q="+city+"&units=metric&cnt=7&appid=" + process.env.REACT_APP_APIKEY)
-      .then((res)=>{ console.log(res); return res.json(); })
-      .then((resp)=>{
-        setData(resp)
-        console.log("data", data)
+  useEffect(() => {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
+        city +
+        "&units=metric&cnt=7&appid=" +
+        process.env.REACT_APP_APIKEY
+    )
+      .then((res) => {
+        console.log(res);
+        return res.json();
       })
-  },[city])
+      .then((resp) => {
+        setData(resp);
+        console.log("data", data);
+      });
+  }, [city]);
 
   useEffect(() => {
     // no city is selected yet
@@ -184,8 +192,7 @@ function App() {
     if (
       results.weather[0].main === "Thunderstorm" ||
       results.weather[0].main === "Tornado" ||
-      results.weather[0].main === "Squall" ||
-      results.weather[0].main === "Snow"
+      results.weather[0].main === "Squall"
     ) {
       return setShowWarning(true);
     }
@@ -414,9 +421,10 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
-          {data!==undefined && data!==null && results!==undefined && results!== null &&
-            <ForecastCard data={data} results={results} />
-          }
+          {/* {data !== undefined &&
+            data !== null &&
+            results !== undefined &&
+            results !== null && <ForecastCard data={data} results={results} />} */}
         </span>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
