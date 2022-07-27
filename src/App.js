@@ -79,6 +79,7 @@ function App() {
     const [weatherIcon, setWeatherIcon] = useState(''); //hook for updating the weather icon
     const [background, setBackground] = useState(defaultBg); //default.jpg will be the default background picture in our assets
     const [inputValue,setInputValue] = useState("");
+    const [showWarning,setShowWarning] = useState(false);
     useEffect(() => {
       // no city is selected yet
       if (city === "" && countryCode === "") {
@@ -110,7 +111,7 @@ function App() {
       results.weather[0].main === "Tornado" ||
       results.weather[0].main === "Squall"
     ) {
-      return <Warning />
+      return setShowWarning(true);
     }
   }
 
@@ -214,8 +215,7 @@ function App() {
         </Helmet>
           <img className="logo" src={logo} alt="MLH Prep Logo"></img>
           <div>
-            {/* {extremeWeather(results) && <Warning />} */}
-            <Warning extremeWeather={extremeWeather} />
+          {showWarning ? <Warning /> : null}
             <h2>Enter a city below 👇</h2>
             <div
             style={{
