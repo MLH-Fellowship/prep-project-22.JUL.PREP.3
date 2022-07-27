@@ -57,6 +57,18 @@ input {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+/* Make a card class for the suggested activities */
+.Activities {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-top: 20px;
+  margin-left: 35%;
+  margin-right: 35%;
+  border-radius: 15px;
+  padding: 10px;
+  /* background-color: white; */
+  align-items: center;
+}
+
 .location-icon {
   width: 22px;
   margin-right: 3px;
@@ -137,6 +149,22 @@ input {
   align-items: center;
 }
 
+.warning {
+  background-color: white;
+  border-radius: 15px;
+  color: red;
+  margin-top: 20px;
+  padding: 25px;
+  display: inline-flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.exclaim {
+  width: 150px;
+  height: 150px;
+  max-width: 70%;
+}
+
 p {
   font-size: 1.2rem;
 }
@@ -151,6 +179,10 @@ h3 {
 
 h2 {
   font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.35rem;
 }
 
 @media (max-width: 750px) {
@@ -205,6 +237,10 @@ h2 {
   h1 {
     font-size: 3rem;
   }
+
+  h4 {
+    font-size: 2rem;
+  }
 }
 
 @media (min-width: 508px) {
@@ -253,5 +289,9 @@ h2 {
 
   h1 {
     font-size: 3rem;
+  }
+
+  h4 {
+    font-size: 2rem;
   }
 }
