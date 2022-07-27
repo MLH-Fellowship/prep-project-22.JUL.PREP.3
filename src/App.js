@@ -101,7 +101,7 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(()=> {
-    fetch("http://api.openweathermap.org/data/2.5/forecast/daily?q="+city+"&units=metric&cnt=7&appid=" + process.env.REACT_APP_APIKEY)
+    fetch("https://api.openweathermap.org/data/2.5/forecast/daily?q="+city+"&units=metric&cnt=7&appid=" + process.env.REACT_APP_APIKEY)
       .then((res)=>{ console.log(res); return res.json(); })
       .then((resp)=>{
         setData(resp)
