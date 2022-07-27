@@ -10,6 +10,7 @@ body {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
+  font-family:'Poppins', sans-serif; 
 }
 
 .fade {
@@ -48,12 +49,12 @@ input {
 
 .Results {
   background-color: white;
-  margin-left: 35%;
-  margin-right: 35%;
-  margin-top: 20px;
-  border-radius: 15px;
+  width: 75%;
+  max-width:300px;
+  padding: 1em;
+  border-radius: 5px;
+  margin:20px auto;
   color: black;
-  padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -73,6 +74,7 @@ input {
   width: 22px;
   margin-right: 3px;
 }
+
 
 .btn {
   border-radius: 18px;
@@ -186,10 +188,6 @@ h4 {
 }
 
 @media (max-width: 750px) {
-  .Results {
-    margin-left: 25%;
-    margin-right: 25%;
-  }
 
   input {
     width: 25%;
@@ -205,10 +203,7 @@ h4 {
 }
 
 @media (max-width: 508px) {
-  .Results {
-    margin-left: 7.5%;
-    margin-right: 7.5%;
-  }
+
 
   .logo {
     width: 50%;
@@ -268,10 +263,6 @@ h4 {
     width: 180px;
   }
 
-  .Results {
-    margin-left: 42%;
-    margin-right: 42%;
-  }
 }
 
 @media (min-width: 1400px) {
@@ -294,4 +285,25 @@ h4 {
   h4 {
     font-size: 2rem;
   }
+}
+
+.result_title{
+  font-size: 28px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result_description{
+ font-size: 14px;
+ color: #444;
+}
+
+.result_description span{
+ font-size: 20px;
+ font-weight: 700;
+ margin-left: 10px;
 }

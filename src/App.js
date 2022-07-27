@@ -11,6 +11,7 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
+import BookmarkIcon from './Components/BookmarkIcon/bookmarkIconComponent.jsx'
 import {
   ComposableMap,
   Geographies,
@@ -328,16 +329,14 @@ function App() {
               width: 300,
             }}
           >
-            <input
-              type="text"
+            <input type="text"
               value={inputValue}
               onChange={(event) => {
-                setInputValue(event.target.value);
-                setCity("");
-                setCountryCode("");
-                setIsUseCurrentLocation(false);
-              }}
-            />
+              setInputValue(event.target.value);
+              setCity("");
+              setCountryCode("");
+              setIsUseCurrentLocation(false);
+              }}/>
             {suggestions.results !== null && (
               <Cities
                 list={suggestions.results}
@@ -356,30 +355,22 @@ function App() {
             Current Location
           </button>
           <div className="Results">
-            {!isLoaded && <h2>Loading...</h2>}
-
-            {isLoaded && results && (
-              <>
-                <div>
-                  <h3>{results.weather[0].main}</h3>
-                  <p>Feels like {results.main.feels_like}°C</p>
-                  <i>
-                    <p>
-                      {results.name}, {results.sys.country}
-                    </p>
-                  </i>
-                </div>
-                {airQualityValue && (
+              {!isLoaded && <h2>Loading...</h2>}
+              {isLoaded && results && (
+                <>
+                  <h3 className="result_title">{results.weather[0].main} <BookmarkIcon/> </h3>
+                  <p className="result_description">Feels like <span>{results.main.feels_like}°C</span></p>
+                  <p className="result_description"><span className="result_country">{results.name},{results.sys.country}</span></p>
+                  {airQualityValue && (
                   <AQIPollution
                     airQualityIndex={airQualityIndex}
                     airQualityValue={airQualityValue}
                     airQualityDesc={airQualityDesc}
-                    barColor={barColor}
-                  />
-                )}
-              </>
-            )}
-          </div>
+                    barColor={barColor}/>)}
+                </>
+              )}
+            </div>
+          <br />  
         </div>
         {activities && (
           <div>
