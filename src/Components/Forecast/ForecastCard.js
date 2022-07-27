@@ -9,18 +9,9 @@ const ForecastCard = ({data, results}) => {
           
     },[]);
 
-    let days = new Date().getDay()
-
-    const [today, setToday] = useState("")
-    useEffect(()=> {
-        if(days === 4) {
-            setToday("Thursday")
-        }
-    },[])
-
-    const toCelsius = (el) => {
-        return el-273.15;
-    }
+    // const toCelsius = (el) => {
+    //     return el-273.15;
+    // }
 
     const getImage = (e) => {
         if(e === "Clear") {
@@ -34,9 +25,22 @@ const ForecastCard = ({data, results}) => {
         } else if(e==="Extreme") {
             return "https://img.icons8.com/clouds/344/storm.png"
         }
+    };
+
+    const weekDay = (e) => {
+        let unix_timestamp = e;
+        var date = new Date(unix_timestamp * 1000).toLocaleString('en-us', {weekday:'long'});
+        // var days = date.getDay();
+        return date;
+    };
+
+    const currentDate = (e) => {
+        let unix_timestamp = e;
+        var s = new Date(unix_timestamp * 1000).toLocaleDateString("en-UK");
+        return s;
     }
 
-    let allData = data.list;
+
     
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -44,14 +48,16 @@ const ForecastCard = ({data, results}) => {
 
     return <>
         <div  className="main-block">
-            <h3>Weekly Forecast for {results.name}</h3>
+            <h3 className="forecast-section-header">Weekly Forecast for {results.name}</h3>
             <div className="car-block">
               {
-                allData.map((e) =>(
+                data.list.map((e) =>(
                     <div className="card" key={e.dt}>
                         <div className="card-container">
                             <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
-                            <div className="temp">{Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C</div>
+                            <div>{weekDay(e.dt)}</div>
+                            <div>{currentDate(e.dt)}</div>
+                            <div className="temp">{Math.round(`${e.feels_like.day}`, -1)}°C</div>
                             <div className="desc">{`${e.weather[0].description}`.toUpperCase()}</div>
                             <ul className="details">
                                 <li>
@@ -64,10 +70,10 @@ const ForecastCard = ({data, results}) => {
                                     <div>Humidity {e.humidity}%</div>
                                 </li>
                                 <li className="min-max">
-                                    <div>Min temp {Math.round(`${toCelsius(`${e.temp.min}`)}`, -1)}°C</div>
+                                    <div>Min temp {Math.round(`${e.temp.min}`, -1)}°C</div>
                                 </li>
                                 <li>
-                                    <div>Max temp {Math.round(`${toCelsius(`${e.temp.max}`)}`, -1)}°C</div>
+                                    <div>Max temp {Math.round(`${e.temp.max}`, -1)}°C</div>
                                 </li>
                             </ul>
                         </div>
