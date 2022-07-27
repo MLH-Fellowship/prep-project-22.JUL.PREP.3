@@ -329,16 +329,14 @@ function App() {
               width: 300,
             }}
           >
-            <input
-              type="text"
+            <input type="text"
               value={inputValue}
               onChange={(event) => {
-                setInputValue(event.target.value);
-                setCity("");
-                setCountryCode("");
-                setIsUseCurrentLocation(false);
-              }}
-            />
+              setInputValue(event.target.value);
+              setCity("");
+              setCountryCode("");
+              setIsUseCurrentLocation(false);
+              }}/>
             {suggestions.results !== null && (
               <Cities
                 list={suggestions.results}
@@ -357,7 +355,6 @@ function App() {
             Current Location
           </button>
           <div className="Results">
-
               {!isLoaded && <h2>Loading...</h2>}
               {isLoaded && results && (
                 <>
@@ -369,7 +366,7 @@ function App() {
                     airQualityIndex={airQualityIndex}
                     airQualityValue={airQualityValue}
                     airQualityDesc={airQualityDesc}
-                    barColor={barColor}
+                    barColor={barColor}/>)}
                 </>
               )}
             </div>
