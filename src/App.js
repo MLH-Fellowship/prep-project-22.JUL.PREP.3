@@ -463,10 +463,7 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
-          {/* {data !== undefined &&
-            data !== null &&
-            results !== undefined &&
-            results !== null && <ForecastCard data={data} results={results} />} */}
+          <br />
         </span>
         {data !== undefined &&
           data !== null &&
@@ -564,6 +561,7 @@ function App() {
               );
             })}
         </div>
+        <Footer />
       </div>
     );
   }
