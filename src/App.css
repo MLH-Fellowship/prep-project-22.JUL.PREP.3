@@ -40,10 +40,11 @@ ul {
 }
 
 input {
-  border-radius: 4px;
+  border-radius: 15px;
   border: 10px;
   width: 12%;
   margin-bottom: 0.83em;
+  color: black;
 }
 
 .search-input{
@@ -52,24 +53,38 @@ input {
 }
 
 .Results {
-  background-color: white;
-  width: 75%;
-  max-width:300px;
+  width: 35%;
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 15px;
   margin:20px auto;
-  color: black;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  color: white;
+  background-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 1px 5px 25px 3px #444;
+  line-height:1.35rem;
+}
+
+.forecast-container {
+  width: 50%;
+  height: 30%;
+  padding: 1em;
+  border-radius: 15px;
+  margin:20px auto;
+  color: white;
+  background-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 1px 5px 25px 3px #444;
+  line-height:2rem;
 }
 
 .Activities {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin-top: 20px;
-  margin-left: 35%;
-  margin-right: 35%;
+  box-shadow: 1px 5px 25px 3px #444;
+  background-color: rgba(238, 237, 237, 0.22);
+  margin: 100px auto;
+  margin-left: 30%;
+  margin-right: 30%;
   border-radius: 15px;
   padding: 10px;
   align-items: center;
+  line-height:2rem;
 }
 
 .location-icon {
@@ -79,7 +94,7 @@ input {
 
 
 .btn {
-  border-radius: 18px;
+  border-radius: 15px;
   padding: 7px;
   width: 14%;
   align-items: center;
@@ -102,11 +117,11 @@ input {
 input {
   border: 1px solid #999;
   width: 300px;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 .no-suggestions {
@@ -185,7 +200,7 @@ h3 {
 }
 
 h2 {
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 
 h4 {
@@ -349,7 +364,7 @@ margin: 0 12px;
 #forecast-wrapper {
   background-color: rgba(238, 237, 237, 0.22);
   box-shadow: 1px 5px 25px 3px #444;
-  border-radius: 10px;
+  border-radius: 15px;
   margin: 100px auto;
   max-width: 720px;
   padding: 0px;

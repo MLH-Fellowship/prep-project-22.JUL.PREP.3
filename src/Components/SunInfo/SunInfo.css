@@ -5,7 +5,7 @@
   border-radius: 5px;
   margin: 20px auto;
   color: black;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 1px 5px 25px 3px #444;
 }
 
 .sun_description {
