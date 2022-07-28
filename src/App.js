@@ -12,7 +12,7 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
-import BookmarkIcon from './Components/BookmarkIcon/bookmarkIconComponent.jsx'
+import BookmarkIcon from "./Components/BookmarkIcon/bookmarkIconComponent.jsx";
 import {
   ComposableMap,
   Geographies,
@@ -35,6 +35,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 import ScrollToTop from "react-scroll-to-top";
+import SunInfo from "./Components/SunInfo/SunInfo";
 const markers = [
   {
     markerOffset: -15,
@@ -101,14 +102,22 @@ function App() {
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
 
-  useEffect(()=> {
-    fetch("https://api.openweathermap.org/data/2.5/forecast/daily?q="+city+"&units=metric&cnt=7&appid=" + process.env.REACT_APP_APIKEY)
-      .then((res)=>{ console.log(res); return res.json(); })
-      .then((resp)=>{
-        setData(resp)
-        console.log("data", data)
+  useEffect(() => {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
+        city +
+        "&units=metric&cnt=7&appid=" +
+        process.env.REACT_APP_APIKEY
+    )
+      .then((res) => {
+        console.log(res);
+        return res.json();
       })
-  },[city])
+      .then((resp) => {
+        setData(resp);
+        console.log("data", data);
+      });
+  }, [city]);
 
   useEffect(() => {
     // no city is selected yet
@@ -340,14 +349,16 @@ function App() {
               width: 300,
             }}
           >
-            <input type="text"
+            <input
+              type="text"
               value={inputValue}
               onChange={(event) => {
-              setInputValue(event.target.value);
-              setCity("");
-              setCountryCode("");
-              setIsUseCurrentLocation(false);
-              }}/>
+                setInputValue(event.target.value);
+                setCity("");
+                setCountryCode("");
+                setIsUseCurrentLocation(false);
+              }}
+            />
             {suggestions.results !== null && (
               <Cities
                 list={suggestions.results}
@@ -366,22 +377,34 @@ function App() {
             Current Location
           </button>
           <div className="Results">
-              {!isLoaded && <h2>Loading...</h2>}
-              {isLoaded && results && (
-                <>
-                  <h3 className="result_title">{results.weather[0].main} <BookmarkIcon/> </h3>
-                  <p className="result_description">Feels like <span>{results.main.feels_like}°C</span></p>
-                  <p className="result_description"><span className="result_country">{results.name},{results.sys.country}</span></p>
-                  {airQualityValue && (
+            {!isLoaded && <h2>Loading...</h2>}
+            {isLoaded && results && (
+              <>
+                <h3 className="result_title">
+                  {results.weather[0].main} <BookmarkIcon />{" "}
+                </h3>
+                <p className="result_description">
+                  Feels like <span>{results.main.feels_like}°C</span>
+                </p>
+                <p className="result_description">
+                  <span className="result_country">
+                    {results.name},{results.sys.country}
+                  </span>
+                </p>
+                {airQualityValue && (
                   <AQIPollution
                     airQualityIndex={airQualityIndex}
                     airQualityValue={airQualityValue}
                     airQualityDesc={airQualityDesc}
-                    barColor={barColor}/>)}
-                </>
-              )}
-            </div>
-          <br />  
+                    barColor={barColor}
+                  />
+                )}
+              </>
+            )}
+          </div>
+          <br />
+          <SunInfo results={results} />
+          <br />
         </div>
         {activities && (
           <div>
@@ -404,9 +427,10 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
-          {data!==undefined && data!==null && results!==undefined && results!== null &&
-            <ForecastCard data={data} results={results} />
-          }
+          {data !== undefined &&
+            data !== null &&
+            results !== undefined &&
+            results !== null && <ForecastCard data={data} results={results} />}
         </span>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
