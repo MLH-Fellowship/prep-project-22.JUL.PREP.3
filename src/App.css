@@ -99,8 +99,11 @@ input {
 input {
   border: 1px solid #999;
   width: 300px;
-  padding: 10px;
   border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
 
 .no-suggestions {
