@@ -21,9 +21,8 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from './utils/changeBackground';
-import Forecast from "./Components/Forecast/Forecast"
 
-// import ForecastCard from "./Components/Forecast/ForecastCard";
+import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
@@ -104,10 +103,12 @@ function App() {
   const [data, setData] = useState(null);
   const [filterInput, setFilterInput]=useState("");
    useEffect(() => {
+    console.log(city);
+    if(city !== ""){
     fetch(
-      "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
+      "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
         city +
-        "&units=metric&cnt=7&appid=" +
+        "&appid=" +
         process.env.REACT_APP_APIKEY
     )
       .then((res) => {
@@ -119,6 +120,7 @@ function App() {
         setData(resp);
         console.log("data", data);
       });
+    }
   }, [city]);
 
   useEffect(() => {
@@ -333,8 +335,10 @@ function App() {
   //useEffect hook for updating the city 
   //based on the member's location selected in the filter.
   useEffect(()=>{
+    if(filterInput !== ""){
     const filteredPlace = filterInput.value
     setCity(filteredPlace)
+    }
   },[filterInput])
 
 
@@ -424,10 +428,12 @@ function App() {
               </>
             )}
           </div>
-          <div className = "forecast-container" id = "forecast-wrapper">
+          {/* <div className = "forecast-container" id = "forecast-wrapper">
+           { 
             <Forecast results = {results}/>
-          </div>
-        
+           }
+            </div>
+         */}
         </div>
         {activities && (
           <div>
@@ -444,13 +450,17 @@ function App() {
         <div>
           <h1> Weather Globe </h1>
         </div>
-        <span style={{ display: "inline-block", padding: "0px 10px" }}>
+        <span style={{ display: "inline-block", padding: "0px 0px" , height:"20vh",width:"80%", justifyContent: "center" , alignContent:"center"}}>
           <MyGlobe
             setCountry={setCountryCode}
             setCity={setCity}
             setInput={setInputValue}
           />
         </span>
+        { (data !== undefined &&
+            data !== null &&
+            results !== undefined &&
+            results !== null) && (<> <ForecastCard data={data} results={results} /> </>)}
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>

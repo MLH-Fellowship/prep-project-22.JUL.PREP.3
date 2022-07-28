@@ -9,9 +9,11 @@ const ForecastCard = ({data, results}) => {
           
     },[]);
 
-    // const toCelsius = (el) => {
-    //     return el-273.15;
-    // }
+    const [more, setMore] = useState(7);
+    const showMore = (e) => {
+      e.preventDefault();
+      setMore(more+7);
+    };
 
     const getImage = (e) => {
         if(e === "Clear") {
@@ -27,6 +29,10 @@ const ForecastCard = ({data, results}) => {
         }
     };
 
+    const toCelsius = (el) => {
+        return el-273.15;
+    }    
+
     const weekDay = (e) => {
         let unix_timestamp = e;
         var date = new Date(unix_timestamp * 1000).toLocaleString('en-us', {weekday:'long'});
@@ -38,10 +44,8 @@ const ForecastCard = ({data, results}) => {
         let unix_timestamp = e;
         var s = new Date(unix_timestamp * 1000).toLocaleDateString("en-UK");
         return s;
-    }
+    };
 
-
-    
     if (error) {
         return <div>Error: {error.message}</div>;
       } else {
@@ -57,7 +61,7 @@ const ForecastCard = ({data, results}) => {
                             <img className="icon" src={getImage(e.weather[0].main)} alt="weather-icon"/>
                             <div>{weekDay(e.dt)}</div>
                             <div>{currentDate(e.dt)}</div>
-                            <div className="temp">{Math.round(`${e.feels_like.day}`, -1)}°C</div>
+                            <div className="temp">{Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C</div>
                             <div className="desc">{`${e.weather[0].description}`.toUpperCase()}</div>
                             <ul className="details">
                                 <li>
@@ -70,16 +74,21 @@ const ForecastCard = ({data, results}) => {
                                     <div>Humidity {e.humidity}%</div>
                                 </li>
                                 <li className="min-max">
-                                    <div>Min temp {Math.round(`${e.temp.min}`, -1)}°C</div>
+                                    <div>Min temp {Math.round(`${toCelsius(`${e.temp.min}`)}`, -1)}°C</div>
                                 </li>
                                 <li>
-                                    <div>Max temp {Math.round(`${e.temp.max}`, -1)}°C</div>
+                                    <div>Max temp {Math.round(`${toCelsius(`${e.temp.max}`)}`, -1)}°C</div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                ))
+                )).slice(0, more)
                 }
+            </div>
+            <div className="show-more-section">
+                <button onClick={showMore} className="show-more">
+                More days forecast
+                </button>
             </div>
         </div>
     </>
