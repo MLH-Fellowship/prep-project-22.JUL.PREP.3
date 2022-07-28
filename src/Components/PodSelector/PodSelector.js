@@ -14,7 +14,7 @@ const PodSelector = (props) =>{
         }),
         control:(provided,state)=>({
             ...provided,
-            padding:"10px",
+            padding:"0",
         })
     }
     return(
