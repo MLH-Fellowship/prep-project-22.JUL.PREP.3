@@ -106,9 +106,9 @@ function App() {
     console.log(city);
     if(city !== ""){
     fetch(
-      "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
+      "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
         city +
-        "&units=metric&cnt=7&appid=" +
+        "&appid=" +
         process.env.REACT_APP_APIKEY
     )
       .then((res) => {
