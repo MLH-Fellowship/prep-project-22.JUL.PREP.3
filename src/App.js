@@ -358,6 +358,7 @@ function App() {
             }}
           >
             <input
+              className={"search-input"}
               type="text"
               value={inputValue}
               onChange={(event) => {

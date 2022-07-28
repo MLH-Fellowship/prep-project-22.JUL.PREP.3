@@ -40,12 +40,15 @@ ul {
 }
 
 input {
-  padding: 10px;
   border-radius: 4px;
   border: 10px;
   width: 12%;
   margin-bottom: 0.83em;
   color: black;
+}
+
+.search-input{
+  padding: 6px;
 }
 
 .Results {
@@ -99,8 +102,11 @@ input {
 input {
   border: 1px solid #999;
   width: 300px;
-  padding: 10px;
   border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
 
 .no-suggestions {
