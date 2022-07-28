@@ -442,7 +442,7 @@ function App() {
           </div>
         )}
         <div>
-          <h1> Weather Globe </h1>
+          <h1 style={{fontSize: "5rem"}}><b>Weather Globe</b></h1>
         </div>
         <span style={{ display: "inline-block", padding: "0px 10px" }}>
           <MyGlobe
@@ -452,7 +452,7 @@ function App() {
           />
         </span>
         <div className="mapContainer">
-          <h1> Global Weather Map </h1>
+          <h1 style={{fontSize: "5rem"}}> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>
           <div style={{ width: "320%" }}>
             <ComposableMap data-tip="">
@@ -525,6 +525,7 @@ function App() {
           </div>
         </div>
         <div className="cards">
+          <h1 style={{fontSize: "3rem"}}>Don't forget these things!!</h1>
           {objects &&
             objects.map((object) => {
               let key = Object.keys(Objects).filter(function (key) {
@@ -538,6 +539,7 @@ function App() {
               );
             })}
         </div>
+        <Footer />
       </div>
     );
   }
