@@ -1,0 +1,99 @@
+.main-block {
+  padding-bottom: 20px;
+}
+
+.forecast-section-header {
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+
+.temp {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.desc {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.details {
+  margin-left: 10px;
+  list-style: none;
+  text-align: left;
+  font-size: 10px;
+}
+
+.min-max {
+    margin-top: 5px;
+}
+
+.icon {
+  align-self: flex-end;
+  margin-right: -2.5rem;
+  margin-top: -2rem;
+  z-index: 999;
+  height: 100px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(221, 221, 221, 0.2);
+  transition: 0.5s;
+  border-radius: 15px;
+  padding: 5px 3px 5px 3px;
+  margin: 0 5px 20px 5px;
+  background-color: rgba(238, 237, 237, 0.22);
+}
+
+.card:hover {
+  box-shadow: 5px 5px 25px 20px rgba(0, 0, 0, 0.2);
+}
+
+.car-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.car-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.car-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 0 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(218, 218, 218, 0.2);
+    transition: 0.5s;
+    width: 165px;
+    border-radius: 15px;
+    padding-bottom: 30px;
+  }
+
+  .card:hover {
+    box-shadow: 5px 5px 25px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .car-block {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    padding: 10px;
+  }
+
+  .car-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 0 20px;
+  }
+
+  .main-block {
+    display: flex;
+    flex-direction: column;
+  }
+}

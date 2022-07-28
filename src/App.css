@@ -1,4 +1,3 @@
-
 body {
   background-color: #133667;
   color: white;
@@ -11,23 +10,26 @@ body {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
+  font-family:'Poppins', sans-serif; 
 }
 
-.fade{
+.fade {
   opacity: 0;
   animation: fadein 1.5s forwards;
   animation-iteration-count: 1;
 }
-
-@keyframes fadein {
-   from{
-    opacity: 0;
-   }
-   to{
-    opacity: 1;
-   }
+ul {
+  list-style: none;
 }
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .logo {
   display: block;
@@ -41,30 +43,42 @@ input {
   padding: 10px;
   border-radius: 4px;
   border: 10px;
-  width: 200px;
+  width: 12%;
   margin-bottom: 0.83em;
+  color: black;
 }
 
 .Results {
   background-color: white;
-  margin-left: 150px;
-  margin-right: 150px;
-  margin-top: 20px;
-  border-radius: 8px;
+  width: 75%;
+  max-width:300px;
+  padding: 1em;
+  border-radius: 5px;
+  margin:20px auto;
   color: black;
-  padding: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+.Activities {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-top: 20px;
+  margin-left: 35%;
+  margin-right: 35%;
+  border-radius: 15px;
+  padding: 10px;
+  align-items: center;
+}
+
 .location-icon {
-  width: 12%;
+  width: 22px;
   margin-right: 3px;
 }
+
 
 .btn {
   border-radius: 18px;
   padding: 7px;
-  width: 150px;
+  width: 14%;
   align-items: center;
   display: inline-flex;
   justify-content: center;
@@ -82,11 +96,215 @@ input {
   background-color: #133667;
 }
 
+input {
+  border: 1px solid #999;
+  width: 300px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.no-suggestions {
+  color: #999;
+  padding: 0.5rem;
+}
+
+.suggestions {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: scroll;
+  padding-left: 0;
+  width: 320px;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+  background-color: #999;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
 .cards {
   margin-bottom: 30px;
 }
-.card {
+.card-wrapper {
   display: inline-block;
+  margin: 10px;
+}
+
+.mapContainer {
+  margin-left: 35%;
+  margin-right: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.warning {
+  background-color: white;
+  border-radius: 15px;
+  color: red;
+  margin-top: 20px;
+  padding: 25px;
+  display: inline-flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.exclaim {
+  width: 150px;
+  height: 150px;
+  max-width: 70%;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.35rem;
+}
+
+@media (max-width: 750px) {
+
+  input {
+    width: 25%;
+  }
+
+  .btn {
+    width: 25%;
+  }
+
+  .logo {
+    width: 40%;
+  }
+}
+
+@media (max-width: 508px) {
+
+
+  .logo {
+    width: 50%;
+  }
+
+  input {
+    width: 55%;
+  }
+
+  .btn {
+    width: 55%;
+  }
+
+  p {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h4 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 508px) {
+  .btn {
+    width: 40%;
+  }
+}
+
+@media (min-width: 751px) {
+  input {
+    width: 30%;
+  }
+
+  .btn {
+    width: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  input {
+    width: 250px;
+  }
+
+  .btn {
+    width: 180px;
+  }
+
+}
+
+@media (min-width: 1400px) {
+  p {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h4 {
+    font-size: 2rem;
+  }
+}
+
+.result_title{
+  font-size: 28px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result_description{
+ font-size: 14px;
+ color: #444;
+}
+
+.result_description span{
+ font-size: 20px;
+ font-weight: 700;
+ margin-left: 10px;
 }
 
 #forecast-wrapper {
