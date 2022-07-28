@@ -21,7 +21,6 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from './utils/changeBackground';
-import Forecast from "./Components/Forecast/Forecast"
 
 import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
@@ -104,6 +103,8 @@ function App() {
   const [data, setData] = useState(null);
   const [filterInput, setFilterInput]=useState("");
    useEffect(() => {
+    console.log(city);
+    if(city !== ""){
     fetch(
       "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
         city +
@@ -119,6 +120,7 @@ function App() {
         setData(resp);
         console.log("data", data);
       });
+    }
   }, [city]);
 
   useEffect(() => {
@@ -333,8 +335,10 @@ function App() {
   //useEffect hook for updating the city 
   //based on the member's location selected in the filter.
   useEffect(()=>{
+    if(filterInput !== ""){
     const filteredPlace = filterInput.value
     setCity(filteredPlace)
+    }
   },[filterInput])
 
 
@@ -424,10 +428,12 @@ function App() {
               </>
             )}
           </div>
-          <div className = "forecast-container" id = "forecast-wrapper">
+          {/* <div className = "forecast-container" id = "forecast-wrapper">
+           { 
             <Forecast results = {results}/>
-          </div>
-        
+           }
+            </div>
+         */}
         </div>
         {activities && (
           <div>
@@ -450,10 +456,10 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
-          {data !== undefined &&
+          { (data !== undefined &&
             data !== null &&
             results !== undefined &&
-            results !== null && <ForecastCard data={data} results={results} />}
+            results !== null) && (<> <ForecastCard data={data} results={results} /> </>)}
         </span>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
