@@ -20,7 +20,9 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import changeBackground from "./utils/changeBackground";
+import changeBackground from './utils/changeBackground';
+import Forecast from "./Components/Forecast/Forecast"
+
 //import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
@@ -34,6 +36,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 import ScrollToTop from "react-scroll-to-top";
+import PodSelector from "./Components/PodSelector/PodSelector";
 const markers = [
   {
     markerOffset: -15,
@@ -99,8 +102,8 @@ function App() {
   const [airQualityDesc, setAirQualityDesc] = useState("");
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
-
-  useEffect(() => {
+  const [filterInput, setFilterInput]=useState("");
+   useEffect(() => {
     fetch(
       "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
         city +
@@ -110,6 +113,7 @@ function App() {
       .then((res) => {
         console.log(res);
         return res.json();
+
       })
       .then((resp) => {
         setData(resp);
@@ -169,7 +173,6 @@ function App() {
     }
     console.log(airQualityIndex);
   }, [airQualityIndex]);
-
   const getCurrentPosition = () => {
     setIsUseCurrentLocation(true);
     setCity("");
@@ -327,9 +330,19 @@ function App() {
       });
   }, [city, countryCode, longitude, latitude, isUseCurrentLocation]);
 
+  //useEffect hook for updating the city 
+  //based on the member's location selected in the filter.
+  useEffect(()=>{
+    const filteredPlace = filterInput.value
+    setCity(filteredPlace)
+  },[filterInput])
+
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
+    
+    
     return (
       <div className="fade">
         <ScrollToTop smooth color="#6f00ff" />
@@ -340,14 +353,16 @@ function App() {
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
           {showWarning ? <Warning /> : null}
+            <div className="select-search-wrapper">
+            <div className="input-wrapper">
           <h2>Enter a city below 👇</h2>
           <div
             style={{
               margin: "auto",
-              width: 300,
             }}
           >
             <input
+              className={"search-input"}
               type="text"
               value={inputValue}
               onChange={(event) => {
@@ -364,8 +379,17 @@ function App() {
                 selectCountry={setCountryCode}
               />
             )}
-          </div>
-          <br />
+            </div>
+            </div>
+            <div className="select-wrapper">
+            <h2>Select pod's member location 👇</h2>
+              <PodSelector
+                filterInput={filterInput}
+                onChange={setFilterInput}
+              ></PodSelector>
+            </div>
+            </div>
+            <br />
           <button onClick={getCurrentPosition} className="btn">
             <img
               className="location-icon"
@@ -388,6 +412,7 @@ function App() {
                     </p>
                   </i>
                 </div>
+                
                 {airQualityValue && (
                   <AQIPollution
                     airQualityIndex={airQualityIndex}
@@ -399,6 +424,10 @@ function App() {
               </>
             )}
           </div>
+          <div className = "forecast-container" id = "forecast-wrapper">
+            <Forecast results = {results}/>
+          </div>
+        
         </div>
         {activities && (
           <div>
