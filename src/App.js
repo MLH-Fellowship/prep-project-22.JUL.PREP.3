@@ -450,7 +450,7 @@ function App() {
         <div>
           <h1> Weather Globe </h1>
         </div>
-        <span style={{ display: "inline-block", padding: "0px 10px" }}>
+        <span style={{ display: "inline-block", padding: "0px 0px" , height:"20vh",width:"80%", justifyContent: "center" , alignContent:"center"}}>
           <MyGlobe
             setCountry={setCountryCode}
             setCity={setCity}
