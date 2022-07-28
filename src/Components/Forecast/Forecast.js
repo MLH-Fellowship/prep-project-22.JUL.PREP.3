@@ -74,7 +74,7 @@ const Forecast = ({data, results}) => {
 
   function updateTemp(){
     if(results !== null){
-      if(results.sys.country === "US" || isFerenheit === true){ // set the default metric to Farenheit for US users
+      if(results.sys.country === "US" && !isFerenheit){ // set the default metric to Farenheit for US users
         var degrees = (results.main.feels_like * 1.8) + 32;
         var degrees_max = (results.main.temp_max * 1.8) + 32;
         var degrees_min = (results.main.temp_min * 1.8) + 32;
@@ -82,18 +82,29 @@ const Forecast = ({data, results}) => {
         setTempMax(Math.round(degrees_max));
         setTempMin(Math.round(degrees_min));
         setIsFerenheit(true);
+        console.log(isFerenheit);
+      }else if(isFerenheit){
+        var degrees = (results.main.feels_like * 1.8) + 32;
+        var degrees_max = (results.main.temp_max * 1.8) + 32;
+        var degrees_min = (results.main.temp_min * 1.8) + 32;
+        setTemp(Math.round(degrees));
+        setTempMax(Math.round(degrees_max));
+        setTempMin(Math.round(degrees_min));
       }else{
         setTemp(Math.round(results.main.feels_like));
         setTempMax(Math.round(results.main.temp_max));
         setTempMin(Math.round(results.main.temp_min));
+        setIsFerenheit(false);
       }
     }
       
   }
   useEffect(()=> {
-  setC( document.getElementById("celsius"));
-  setF(document.getElementById("ferenheit"));
-  updateTemp();
+    setIsFerenheit(false);
+    setC( document.getElementById("celsius"));
+    setF(document.getElementById("ferenheit"));
+    updateTemp();
+  
   
 },[results]);
   
