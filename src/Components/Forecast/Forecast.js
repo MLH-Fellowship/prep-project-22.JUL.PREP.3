@@ -29,28 +29,26 @@ var weatherIconsMap = {
 
 const Forecast = ({data, results}) => {
 
+  
+  function convertToFerenheit(){
+    var degrees = (results.main.feels_like * 1.8) + 32;
+        var degrees_max = (results.main.temp_max * 1.8) + 32;
+        var degrees_min = (results.main.temp_min * 1.8) + 32;
+        setTemp(Math.round(degrees));
+        setTempMax(Math.round(degrees_max));
+        setTempMin(Math.round(degrees_min));
+  }
 
-  let [c, setC] = useState();
-  let [f, setF] = useState();
   var [isFerenheit, setIsFerenheit] = useState(false);
   function toFerenheit(){
     if(!isFerenheit){
-      c.style.opacity = 0.5;
-      f.style.opacity = 1;
-      var degrees = (temp * 1.8) + 32;
-      var degrees_max = (temp_max * 1.8) + 32;
-      var degrees_min = (temp_min * 1.8) + 32;
-    setTemp(Math.round(degrees));
-    setTempMax(Math.round(degrees_max));
-    setTempMin(Math.round(degrees_min));
+    convertToFerenheit();
     setIsFerenheit(true);
     }
     
     
   }
   function toCelsius(){
-    f.style.opacity = 0.5;
-    c.style.opacity = 1;
     setIsFerenheit(false);
     setTemp(Math.round(results.main.feels_like));
     setTempMax(Math.round(results.main.temp_max));
@@ -72,37 +70,23 @@ const Forecast = ({data, results}) => {
   const [temp_max, setTempMax] = useState();
   const [temp_min, setTempMin] = useState();
 
+  
   function updateTemp(){
     if(results !== null){
-      if(results.sys.country === "US" && !isFerenheit){ // set the default metric to Farenheit for US users
-        var degrees = (results.main.feels_like * 1.8) + 32;
-        var degrees_max = (results.main.temp_max * 1.8) + 32;
-        var degrees_min = (results.main.temp_min * 1.8) + 32;
-        setTemp(Math.round(degrees));
-        setTempMax(Math.round(degrees_max));
-        setTempMin(Math.round(degrees_min));
-        setIsFerenheit(true);
-        console.log(isFerenheit);
-      }else if(isFerenheit){
-        var degrees = (results.main.feels_like * 1.8) + 32;
-        var degrees_max = (results.main.temp_max * 1.8) + 32;
-        var degrees_min = (results.main.temp_min * 1.8) + 32;
-        setTemp(Math.round(degrees));
-        setTempMax(Math.round(degrees_max));
-        setTempMin(Math.round(degrees_min));
+      if(results.sys.country === "US"){ 
+        convertToFerenheit();
+        ! isFerenheit && setIsFerenheit(true);
       }else{
         setTemp(Math.round(results.main.feels_like));
         setTempMax(Math.round(results.main.temp_max));
         setTempMin(Math.round(results.main.temp_min));
-        setIsFerenheit(false);
+        isFerenheit && setIsFerenheit(false);
       }
     }
       
   }
   useEffect(()=> {
     setIsFerenheit(false);
-    setC( document.getElementById("celsius"));
-    setF(document.getElementById("ferenheit"));
     updateTemp();
   
   
@@ -138,11 +122,11 @@ const Forecast = ({data, results}) => {
                   <p id="tempDescription">{results.weather[0].description}</p>
                 </div>
                 <p style={{ fontSize: "1.5rem" }}>{}
-                  <button id="celsius" onClick={toCelsius}>
+                  <button id="celsius" onClick={toCelsius} style={{opacity: isFerenheit ? 0.5 : 1}}>
                     °C
                   </button>{" "}
                   |{" "}
-                  <button id="ferenheit" onClick={toFerenheit}>
+                  <button id="ferenheit" onClick={toFerenheit} style={{opacity: !isFerenheit ? 0.5 : 1}}>
                     °F
                   </button>
                 </p>
