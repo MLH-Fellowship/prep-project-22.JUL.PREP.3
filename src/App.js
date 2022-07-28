@@ -437,7 +437,8 @@ function App() {
         {activities && (
           <div>
             <div className="Activities">
-              <h2>Activities to do in {results.name}</h2>
+              <h2 className={"Activities-header"}>Activities to do in {results.name}</h2>
+              <hr/>
               <ul>
                 {activities.split("\n").map((activity) => (
                   <li>{activity}</li>
@@ -447,7 +448,7 @@ function App() {
           </div>
         )}
         <div>
-          <h1 style={{fontSize: "5rem"}}><b>Weather Globe</b></h1>
+          <h2 style={{fontSize: "5rem", marginTop:"10px;"}}><b>Weather Globe</b></h2>
         </div>
         <span
           style={{
