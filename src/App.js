@@ -104,21 +104,20 @@ function App() {
   const [data, setData] = useState(null);
   const [filterInput, setFilterInput]=useState("");
    useEffect(() => {
-    fetch(
+    axios.get(
       "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
         city +
         "&units=metric&cnt=7&appid=" +
         process.env.REACT_APP_APIKEY
     )
-      .then((res) => {
-        console.log(res);
-        return res.json();
-
-      })
       .then((resp) => {
         setData(resp);
         console.log("data", data);
+      })
+      .catch((error) => {
+         console.log(error);
       });
+
   }, [city]);
 
   useEffect(() => {
