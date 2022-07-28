@@ -1,6 +1,6 @@
 # Weather Application
 
-> This is a React Application, which fetching data from [Open Weather API](https://openweathermap.org/api) and [Open AI API](https://openai.com/api/) then displaying it on UI. The displayed data is related to the weather condition, considering of selected city (or coordinates)
+> This is a React Application, which fetching data from [Open Weather API](https://openweathermap.org/api) & [Open AI API](https://openai.com/api/) then displaying it on UI. The displayed data is related to the weather condition, considering of selected city (or coordinates)
 
 ## Live version
 
