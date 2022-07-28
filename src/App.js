@@ -102,25 +102,21 @@ function App() {
   const [airQualityDesc, setAirQualityDesc] = useState("");
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
-  const [filterInput, setFilterInput] = useState("");
-  useEffect(() => {
-    console.log(city);
-    if (city !== "") {
-      fetch(
-        "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
-          city +
-          "&appid=" +
-          process.env.REACT_APP_APIKEY
-      )
-        .then((res) => {
-          console.log(res);
-          return res.json();
-        })
-        .then((resp) => {
-          setData(resp);
-          console.log("data", data);
-        });
-    }
+  const [filterInput, setFilterInput]=useState("");
+   useEffect(() => {
+    axios.get(
+      "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
+        city +
+        "&units=metric&cnt=7&appid=" +
+        process.env.REACT_APP_APIKEY
+    )
+      .then((resp) => {
+        setData(resp);
+        console.log("data", data);
+      })
+      .catch((error) => {
+         console.log(error);
+      });
   }, [city]);
 
   useEffect(() => {
@@ -451,7 +447,7 @@ function App() {
           </div>
         )}
         <div>
-          <h1> Weather Globe </h1>
+          <h1 style={{fontSize: "5rem"}}><b>Weather Globe</b></h1>
         </div>
         <span
           style={{
@@ -480,7 +476,7 @@ function App() {
             </>
           )}
         <div className="mapContainer">
-          <h1> Global Weather Map </h1>
+          <h1 style={{fontSize: "5rem"}}> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>
           <div style={{ width: "320%" }}>
             <ComposableMap data-tip="">
@@ -553,6 +549,7 @@ function App() {
           </div>
         </div>
         <div className="cards">
+          <h1 style={{fontSize: "3rem"}}>Don't forget these things!!</h1>
           {objects &&
             objects.map((object) => {
               let key = Object.keys(Objects).filter(function (key) {
