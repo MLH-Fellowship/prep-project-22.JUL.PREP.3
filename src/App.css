@@ -85,13 +85,13 @@ input {
   border-radius: 15px;
   padding: 10px;
   text-align: center;
-  line-height:3.5rem;
-  font-size: 25px;
+  line-height:3rem;
+  font-size: 1.5rem;
 }
 
 .Activities h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   margin-bottom: 1rem;
 }
 
