@@ -40,12 +40,15 @@ ul {
 }
 
 input {
-  padding: 6px !important;
   border-radius: 4px;
   border: 10px;
   width: 12%;
   margin-bottom: 0.83em;
   color: black;
+}
+
+.search-input{
+  padding: 6px;
 }
 
 .Results {
