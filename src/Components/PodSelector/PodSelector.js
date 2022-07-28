@@ -20,7 +20,6 @@ const PodSelector = (props) =>{
     return(
         <Select
         isSearchable
-        placeholder={"Select pod's member location"}
         styles={style}
         onChange={onChange}
         value={filterInput}
