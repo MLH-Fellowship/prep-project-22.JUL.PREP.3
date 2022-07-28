@@ -1,3 +1,17 @@
+.show-more-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.show-more {
+  border: none;
+  background-color: rgb(35, 35, 35);
+  color: white;
+  height: 50px;
+  width: 200px;
+  border-radius: 5px;
+}
+
 .main-block {
     display: flex;
     flex-direction: column;

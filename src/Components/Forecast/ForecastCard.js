@@ -87,7 +87,7 @@ const ForecastCard = ({data, results}) => {
             </div>
             <div className="show-more-section">
                 <button onClick={showMore} className="show-more">
-                Show more days
+                More days forecast
                 </button>
             </div>
         </div>
