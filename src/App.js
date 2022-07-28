@@ -406,7 +406,12 @@ function App() {
               <>
                 <div>
                   <h3>{results.weather[0].main}</h3>
-                  <p>Feels like {results.main.feels_like}°C</p>
+                  <p>
+                    Feels like {results.main.feels_like}°C
+                    <span>
+                      <img src={`http://openweathermap.org/img/wn/${weatherIcon}.png`} alt='Weather Icon'/>
+                    </span>
+                  </p>
                   <i>
                     <p>
                       {results.name}, {results.sys.country}
