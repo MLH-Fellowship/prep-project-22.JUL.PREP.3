@@ -20,9 +20,10 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import changeBackground from './utils/changeBackground';
+import changeBackground from "./utils/changeBackground";
 import Forecast from "./Components/Forecast/Forecast";
 import ForecastCard from "./Components/Forecast/ForecastCard";
+import SunInfo from "./Components/SunInfo/SunInfo";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
@@ -101,25 +102,24 @@ function App() {
   const [airQualityDesc, setAirQualityDesc] = useState("");
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
-  const [filterInput, setFilterInput]=useState("");
-   useEffect(() => {
+  const [filterInput, setFilterInput] = useState("");
+  useEffect(() => {
     console.log(city);
-    if(city !== ""){
-    fetch(
-      "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
-        city +
-        "&appid=" +
-        process.env.REACT_APP_APIKEY
-    )
-      .then((res) => {
-        console.log(res);
-        return res.json();
-
-      })
-      .then((resp) => {
-        setData(resp);
-        console.log("data", data);
-      });
+    if (city !== "") {
+      fetch(
+        "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
+          city +
+          "&appid=" +
+          process.env.REACT_APP_APIKEY
+      )
+        .then((res) => {
+          console.log(res);
+          return res.json();
+        })
+        .then((resp) => {
+          setData(resp);
+          console.log("data", data);
+        });
     }
   }, [city]);
 
@@ -332,21 +332,18 @@ function App() {
       });
   }, [city, countryCode, longitude, latitude, isUseCurrentLocation]);
 
-  //useEffect hook for updating the city 
+  //useEffect hook for updating the city
   //based on the member's location selected in the filter.
-  useEffect(()=>{
-    if(filterInput !== ""){
-    const filteredPlace = filterInput.value
-    setCity(filteredPlace)
+  useEffect(() => {
+    if (filterInput !== "") {
+      const filteredPlace = filterInput.value;
+      setCity(filteredPlace);
     }
-  },[filterInput])
-
+  }, [filterInput]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
-    
-    
     return (
       <div className="fade">
         <ScrollToTop smooth color="#6f00ff" />
@@ -357,43 +354,43 @@ function App() {
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
           {showWarning ? <Warning /> : null}
-            <div className="select-search-wrapper">
+          <div className="select-search-wrapper">
             <div className="input-wrapper">
-          <h2>Enter a city below 👇</h2>
-          <div
-            style={{
-              margin: "auto",
-            }}
-          >
-            <input
-              className={"search-input"}
-              type="text"
-              value={inputValue}
-              onChange={(event) => {
-                setInputValue(event.target.value);
-                setCity("");
-                setCountryCode("");
-                setIsUseCurrentLocation(false);
-              }}
-            />
-            {suggestions.results !== null && (
-              <Cities
-                list={suggestions.results}
-                selectCity={setCity}
-                selectCountry={setCountryCode}
-              />
-            )}
-            </div>
+              <h2>Enter a city below 👇</h2>
+              <div
+                style={{
+                  margin: "auto",
+                }}
+              >
+                <input
+                  className={"search-input"}
+                  type="text"
+                  value={inputValue}
+                  onChange={(event) => {
+                    setInputValue(event.target.value);
+                    setCity("");
+                    setCountryCode("");
+                    setIsUseCurrentLocation(false);
+                  }}
+                />
+                {suggestions.results !== null && (
+                  <Cities
+                    list={suggestions.results}
+                    selectCity={setCity}
+                    selectCountry={setCountryCode}
+                  />
+                )}
+              </div>
             </div>
             <div className="select-wrapper">
-            <h2>Select pod's member location 👇</h2>
+              <h2>Select pod's member location 👇</h2>
               <PodSelector
                 filterInput={filterInput}
                 onChange={setFilterInput}
               ></PodSelector>
             </div>
-            </div>
-            <br />
+          </div>
+          <br />
           <button onClick={getCurrentPosition} className="btn">
             <img
               className="location-icon"
@@ -416,7 +413,7 @@ function App() {
                     </p>
                   </i>
                 </div>
-                
+
                 {airQualityValue && (
                   <AQIPollution
                     airQualityIndex={airQualityIndex}
@@ -428,11 +425,13 @@ function App() {
               </>
             )}
           </div>
-          <div className = "forecast-container" id = "forecast-wrapper">
-           { 
-            <Forecast results = {results}/>
-           }
-            </div>
+          <div className="forecast-container" id="forecast-wrapper">
+            {<Forecast results={results} />}
+          </div>
+
+          <br />
+          <SunInfo results={results} />
+          <br />
         </div>
         {activities && (
           <div>
@@ -449,7 +448,16 @@ function App() {
         <div>
           <h1> Weather Globe </h1>
         </div>
-        <span style={{ display: "inline-block", padding: "0px 0px" , height:"20vh",width:"80%", justifyContent: "center" , alignContent:"center"}}>
+        <span
+          style={{
+            display: "inline-block",
+            padding: "0px 0px",
+            height: "20vh",
+            width: "80%",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
           <MyGlobe
             setCountry={setCountryCode}
             setCity={setCity}
@@ -460,10 +468,15 @@ function App() {
             results !== undefined &&
             results !== null && <ForecastCard data={data} results={results} />} */}
         </span>
-        { (data !== undefined &&
-            data !== null &&
-            results !== undefined &&
-            results !== null) && (<> <ForecastCard data={data} results={results} /> </>)}
+        {data !== undefined &&
+          data !== null &&
+          results !== undefined &&
+          results !== null && (
+            <>
+              {" "}
+              <ForecastCard data={data} results={results} />{" "}
+            </>
+          )}
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>
