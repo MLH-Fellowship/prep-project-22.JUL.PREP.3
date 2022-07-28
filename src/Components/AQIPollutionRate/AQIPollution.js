@@ -9,26 +9,35 @@ const AQIPollution = ({
   barColor,
 }) => {
   return (
-    <div className="aqi-display">
-      <div className="aqi-box">
-        <div className="aqi-text-group">
-          <h4 className="aqi-text">Air Quality: </h4>
-          <p className="aqi-text">{airQualityValue}</p>
+    <div className="container-fluid" id="current-weather">
+      <div className="row">
+        <div className="col-md-5 col-sm-5 aqi-bar-display">
+          <h4>
+            <b>Air Quality</b>
+          </h4>
+          <div className="circular-bar">
+            <CircularProgressbar
+              value={airQualityIndex}
+              text={airQualityIndex}
+              maxValue={500}
+              strokeWidth={10}
+              styles={buildStyles({
+                textColor: "white",
+                pathColor: `${barColor}`,
+              })}
+            />
+          </div>
         </div>
-        <div className="circular-bar">
-          <CircularProgressbar
-            value={airQualityIndex}
-            text={airQualityIndex}
-            maxValue={500}
-            strokeWidth={10}
-            styles={buildStyles({
-              textColor: "white",
-              pathColor: `${barColor}`,
-            })}
-          />
+
+        <div
+          className="col-md-6 col-sm-6"
+          id="aqi-text"
+          style={{ textAlign: "left" }}
+        >
+          <h4>{airQualityValue}</h4>
+          <h5 className="aqi-text-desc">{airQualityDesc}</h5>
         </div>
       </div>
-      <i>{airQualityDesc}</i>
     </div>
   );
 };
