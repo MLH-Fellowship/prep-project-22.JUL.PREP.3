@@ -22,7 +22,7 @@ const AQIPollution = ({
             maxValue={500}
             strokeWidth={10}
             styles={buildStyles({
-              textColor: "black",
+              textColor: "white",
               pathColor: `${barColor}`,
             })}
           />

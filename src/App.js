@@ -20,10 +20,10 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import changeBackground from './utils/changeBackground';
-import Forecast from "./Components/Forecast/Forecast"
-
-// import ForecastCard from "./Components/Forecast/ForecastCard";
+import changeBackground from "./utils/changeBackground";
+import Forecast from "./Components/Forecast/Forecast";
+import ForecastCard from "./Components/Forecast/ForecastCard";
+import SunInfo from "./Components/SunInfo/SunInfo";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
@@ -117,7 +117,6 @@ function App() {
       .catch((error) => {
          console.log(error);
       });
-
   }, [city]);
 
   useEffect(() => {
@@ -329,19 +328,18 @@ function App() {
       });
   }, [city, countryCode, longitude, latitude, isUseCurrentLocation]);
 
-  //useEffect hook for updating the city 
+  //useEffect hook for updating the city
   //based on the member's location selected in the filter.
-  useEffect(()=>{
-    const filteredPlace = filterInput.value
-    setCity(filteredPlace)
-  },[filterInput])
-
+  useEffect(() => {
+    if (filterInput !== "") {
+      const filteredPlace = filterInput.value;
+      setCity(filteredPlace);
+    }
+  }, [filterInput]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
-    
-    
     return (
       <div className="fade">
         <ScrollToTop smooth color="#6f00ff" />
@@ -352,43 +350,43 @@ function App() {
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
           {showWarning ? <Warning /> : null}
-            <div className="select-search-wrapper">
+          <div className="select-search-wrapper">
             <div className="input-wrapper">
-          <h2>Enter a city below 👇</h2>
-          <div
-            style={{
-              margin: "auto",
-            }}
-          >
-            <input
-              className={"search-input"}
-              type="text"
-              value={inputValue}
-              onChange={(event) => {
-                setInputValue(event.target.value);
-                setCity("");
-                setCountryCode("");
-                setIsUseCurrentLocation(false);
-              }}
-            />
-            {suggestions.results !== null && (
-              <Cities
-                list={suggestions.results}
-                selectCity={setCity}
-                selectCountry={setCountryCode}
-              />
-            )}
-            </div>
+              <h2>Enter a city below 👇</h2>
+              <div
+                style={{
+                  margin: "auto",
+                }}
+              >
+                <input
+                  className={"search-input"}
+                  type="text"
+                  value={inputValue}
+                  onChange={(event) => {
+                    setInputValue(event.target.value);
+                    setCity("");
+                    setCountryCode("");
+                    setIsUseCurrentLocation(false);
+                  }}
+                />
+                {suggestions.results !== null && (
+                  <Cities
+                    list={suggestions.results}
+                    selectCity={setCity}
+                    selectCountry={setCountryCode}
+                  />
+                )}
+              </div>
             </div>
             <div className="select-wrapper">
-            <h2>Select pod's member location 👇</h2>
+              <h2>Select pod's member location 👇</h2>
               <PodSelector
                 filterInput={filterInput}
                 onChange={setFilterInput}
               ></PodSelector>
             </div>
-            </div>
-            <br />
+          </div>
+          <br />
           <button onClick={getCurrentPosition} className="btn">
             <img
               className="location-icon"
@@ -404,14 +402,19 @@ function App() {
               <>
                 <div>
                   <h3>{results.weather[0].main}</h3>
-                  <p>Feels like {results.main.feels_like}°C</p>
+                  <p>
+                    Feels like {results.main.feels_like}°C
+                    <span>
+                      <img src={`http://openweathermap.org/img/wn/${weatherIcon}.png`} alt='Weather Icon'/>
+                    </span>
+                  </p>
                   <i>
                     <p>
                       {results.name}, {results.sys.country}
                     </p>
                   </i>
                 </div>
-                
+
                 {airQualityValue && (
                   <AQIPollution
                     airQualityIndex={airQualityIndex}
@@ -423,10 +426,13 @@ function App() {
               </>
             )}
           </div>
-          <div className = "forecast-container" id = "forecast-wrapper">
-            <Forecast results = {results}/>
+          <div className="forecast-container" id="forecast-wrapper">
+            {<Forecast results={results} />}
           </div>
-        
+
+          <br />
+          <SunInfo results={results} />
+          <br />
         </div>
         {activities && (
           <div>
@@ -443,13 +449,32 @@ function App() {
         <div>
           <h1 style={{fontSize: "5rem"}}><b>Weather Globe</b></h1>
         </div>
-        <span style={{ display: "inline-block", padding: "0px 10px" }}>
+        <span
+          style={{
+            display: "inline-block",
+            padding: "0px 0px",
+            height: "20vh",
+            width: "80%",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
           <MyGlobe
             setCountry={setCountryCode}
             setCity={setCity}
             setInput={setInputValue}
           />
+          <br />
         </span>
+        {data !== undefined &&
+          data !== null &&
+          results !== undefined &&
+          results !== null && (
+            <>
+              {" "}
+              <ForecastCard data={data} results={results} />{" "}
+            </>
+          )}
         <div className="mapContainer">
           <h1 style={{fontSize: "5rem"}}> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>

@@ -77,7 +77,7 @@ export default function MyGlobe({setCountry,setCity,setInput}) {
         height="70vh"
         markers={markers}
         options={options}
-        width="30vw"
+        width="100%"
         onClickMarker={onClickMarker}
         onDefocus={onDefocus}
       />
