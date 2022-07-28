@@ -40,7 +40,7 @@ ul {
 }
 
 input {
-  padding: 6px;
+  padding: 6px !important;
   border-radius: 4px;
   border: 10px;
   width: 12%;
