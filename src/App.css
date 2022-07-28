@@ -70,7 +70,7 @@ input {
 }
 
 .forecast-container {
-  width: 50%;
+  width: fit-content;
   height: 30%;
   padding: 1em;
   border-radius: 15px;
@@ -366,7 +366,7 @@ h4 {
   background-color: rgba(238, 237, 237, 0.22);
   box-shadow: 1px 5px 25px 3px #444;
   border-radius: 15px;
-  margin: 100px auto;
+  margin: 70px auto;
   max-width: 720px;
   padding: 0px;
   color: white;
