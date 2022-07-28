@@ -91,13 +91,13 @@ input {
   border-radius: 15px;
   padding: 10px;
   text-align: center;
-  line-height:2.5rem;
-  font-size: 1.25rem;
+  line-height:2rem;
+  font-size: 1rem;
 }
 
 .Activities h2 {
   text-align: center;
-  font-size: 2.75rem;
+  font-size: 2.25rem;
   margin-bottom: 1rem;
 }
 
