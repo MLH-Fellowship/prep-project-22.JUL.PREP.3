@@ -450,10 +450,10 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
-          {/* {data !== undefined &&
+          {data !== undefined &&
             data !== null &&
             results !== undefined &&
-            results !== null && <ForecastCard data={data} results={results} />} */}
+            results !== null && <ForecastCard data={data} results={results} />}
         </span>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
