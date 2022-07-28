@@ -74,7 +74,7 @@ const Forecast = ({data, results}) => {
 
   function updateTemp(){
     if(results !== null){
-      if(results.sys.country === "US"){ // set the default metric to Farenheit for US users
+      if(results.sys.country === "US" || isFerenheit === true){ // set the default metric to Farenheit for US users
         var degrees = (results.main.feels_like * 1.8) + 32;
         var degrees_max = (results.main.temp_max * 1.8) + 32;
         var degrees_min = (results.main.temp_min * 1.8) + 32;
