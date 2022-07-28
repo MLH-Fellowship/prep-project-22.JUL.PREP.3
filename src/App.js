@@ -20,7 +20,9 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import changeBackground from "./utils/changeBackground";
+import changeBackground from './utils/changeBackground';
+import Forecast from "./Components/Forecast/Forecast"
+
 //import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
@@ -330,6 +332,8 @@ function App() {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
+    
+    
     return (
       <div className="fade">
         <ScrollToTop smooth color="#6f00ff" />
@@ -388,6 +392,7 @@ function App() {
                     </p>
                   </i>
                 </div>
+                
                 {airQualityValue && (
                   <AQIPollution
                     airQualityIndex={airQualityIndex}
@@ -399,6 +404,10 @@ function App() {
               </>
             )}
           </div>
+          <div className = "forecast-container" id = "forecast-wrapper">
+            <Forecast results = {results}/>
+          </div>
+        
         </div>
         {activities && (
           <div>
