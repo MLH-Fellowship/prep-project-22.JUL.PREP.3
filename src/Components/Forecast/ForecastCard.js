@@ -59,7 +59,7 @@ const ForecastCard = ({ data, results }) => {
           <div className="car-block">
             {data.list
               ?.map((e) => (
-                <div className="card" key={e.dt}>
+                <div className="dailycard" key={e.dt}>
                   <div className="card-container">
                     <img
                       className="icon"
