@@ -8,7 +8,7 @@ const Footer = () => {
       <footer class="footer-distributed">
         <div class="footer-left">
           <h3>
-            Weather<span>App</span>
+            Wheather<span>App</span>
           </h3>
 
           <p class="footer-company-name">MLH Pod.js © 2022</p>
