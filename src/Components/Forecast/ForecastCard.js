@@ -15,8 +15,6 @@ const ForecastCard = ({data, results}) => {
       setMore(more+7);
     };
 
-    const [isShown, setIsShown] = useState(false);
-
     const getImage = (e) => {
         if(e === "Clear") {
             return "https://img.icons8.com/emoji/96/000000/sun-emoji.png"
@@ -53,10 +51,7 @@ const ForecastCard = ({data, results}) => {
       } else {
 
     return <>
-        <div  className="main-block"
-         onMouseEnter={() => setIsShown(true)}
-         onMouseLeave={() => setIsShown(false)}
-         >
+        <div  className="main-block">
             <h3 className="forecast-section-header">Weekly Forecast for {results.name}</h3>
             <div className="car-block">
               {
@@ -68,7 +63,6 @@ const ForecastCard = ({data, results}) => {
                             <div>{currentDate(e.dt)}</div>
                             <div className="temp">{Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C</div>
                             <div className="desc">{`${e.weather[0].description}`.toUpperCase()}</div>
-                            {isShown && e.dt &&(
                             <ul className="details">
                                 <li>
                                     <div>Cloudiness {e.clouds}%</div>
@@ -86,7 +80,6 @@ const ForecastCard = ({data, results}) => {
                                     <div>Max temp {Math.round(`${toCelsius(`${e.temp.max}`)}`, -1)}°C</div>
                                 </li>
                             </ul>
-                            )}
                         </div>
                     </div>
                 )).slice(0, more)
