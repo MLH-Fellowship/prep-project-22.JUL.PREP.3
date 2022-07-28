@@ -71,7 +71,9 @@ input {
   padding: 10px;
   align-items: center;
 }
-
+.Activities-header{
+  -webkit-text-stroke: 1px black;
+}
 .location-icon {
   width: 22px;
   margin-right: 3px;
