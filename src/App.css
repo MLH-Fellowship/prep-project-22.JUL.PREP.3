@@ -10,7 +10,7 @@ body {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  font-family:'Poppins', sans-serif; 
+  font-family:'Poppins', sans-serif;
 }
 
 .fade {
@@ -51,7 +51,7 @@ input {
   padding: 6px;
   color: black !important;
 }
-
+/*
 .Results {
   width: 35%;
   padding: 1em;
@@ -61,10 +61,10 @@ input {
   background-color: rgba(238, 237, 237, 0.22);
   box-shadow: 1px 5px 25px 3px #444;
   line-height:1.35rem;
-}
+} */
 
 .forecast-container {
-  width: 50%;
+  width: fit-content;
   height: 30%;
   padding: 1em;
   border-radius: 15px;
@@ -341,7 +341,7 @@ h4 {
     flex-direction: column;
   }
   .select-wrapper{
-    width:auto !important; 
+    width:auto !important;
   }
 }
 @media (min-width: 768px) {
@@ -350,7 +350,7 @@ h4 {
 
   }
   .select-wrapper{
-    width:300px; 
+    width:300px;
   }
 }
 .select-wrapper{
@@ -365,8 +365,8 @@ margin: 0 12px;
   background-color: rgba(238, 237, 237, 0.22);
   box-shadow: 1px 5px 25px 3px #444;
   border-radius: 15px;
-  margin: 100px auto;
+  margin: 70px auto;
   max-width: 720px;
   padding: 0px;
-  color: white;  
+  color: white;
 }
