@@ -103,20 +103,25 @@ function App() {
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
   const [filterInput, setFilterInput]=useState("");
-   useEffect(() => {
-    axios.get(
-      "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
+  useEffect(() => {
+    console.log(city);
+    if(city !== ""){
+    fetch(
+      "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
         city +
-        "&units=metric&cnt=7&appid=" +
+        "&appid=" +
         process.env.REACT_APP_APIKEY
     )
+      .then((res) => {
+        console.log(res);
+        return res.json();
+
+      })
       .then((resp) => {
         setData(resp);
         console.log("data", data);
-      })
-      .catch((error) => {
-         console.log(error);
       });
+    }
   }, [city]);
 
   useEffect(() => {
