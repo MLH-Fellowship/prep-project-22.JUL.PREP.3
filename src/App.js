@@ -21,9 +21,9 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from './utils/changeBackground';
-// import Forecast from "./Components/Forecast/Forecast"
+import Forecast from "./Components/Forecast/Forecast"
 
-import ForecastCard from "./Components/Forecast/ForecastCard";
+// import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
 
