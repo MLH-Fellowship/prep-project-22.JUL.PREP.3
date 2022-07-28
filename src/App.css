@@ -10,11 +10,7 @@ body {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-<<<<<<< HEAD
-  font-family:'Poppins', sans-serif;
-=======
   font-family: "Poppins", sans-serif;
->>>>>>> main
 }
 
 .fade {
@@ -55,9 +51,6 @@ input {
   padding: 6px;
   color: black !important;
 }
-<<<<<<< HEAD
-/*
-=======
 
 .scroll-top {
   display: flex;
@@ -65,7 +58,6 @@ input {
   align-items: center;
 }
 
->>>>>>> main
 .Results {
   width: 35%;
   padding: 1em;
@@ -74,13 +66,8 @@ input {
   color: white;
   background-color: rgba(238, 237, 237, 0.22);
   box-shadow: 1px 5px 25px 3px #444;
-<<<<<<< HEAD
-  line-height:1.35rem;
-} */
-=======
   line-height: 1.35rem;
 }
->>>>>>> main
 
 .forecast-container {
   width: fit-content;
@@ -355,26 +342,16 @@ h4 {
   .select-search-wrapper {
     flex-direction: column;
   }
-<<<<<<< HEAD
-  .select-wrapper{
-    width:auto !important;
-=======
   .select-wrapper {
     width: auto !important;
->>>>>>> main
   }
 }
 @media (min-width: 768px) {
   .select-search-wrapper {
     flex-direction: row;
   }
-<<<<<<< HEAD
-  .select-wrapper{
-    width:300px;
-=======
   .select-wrapper {
     width: 300px;
->>>>>>> main
   }
 }
 .select-wrapper {
