@@ -452,7 +452,7 @@ function App() {
           </div>
         )}
         <div>
-          <h1> Weather Globe </h1>
+          <h2 style={{marginTop:"10px;"}}> Weather Globe </h2>
         </div>
         <span
           style={{
