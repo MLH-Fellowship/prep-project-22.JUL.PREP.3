@@ -469,6 +469,7 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
+          <br />
         </span>
         {data !== undefined &&
           data !== null &&
@@ -566,6 +567,7 @@ function App() {
               );
             })}
         </div>
+        <Footer />
       </div>
     );
   }
