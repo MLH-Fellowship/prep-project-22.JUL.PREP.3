@@ -21,7 +21,7 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from './utils/changeBackground';
-import Forecast from "./Components/Forecast/Forecast"
+// import Forecast from "./Components/Forecast/Forecast"
 
 import ForecastCard from "./Components/Forecast/ForecastCard";
 import Footer from "./Components/Footer/Footer";
@@ -450,10 +450,6 @@ function App() {
             setCity={setCity}
             setInput={setInputValue}
           />
-          {data !== undefined &&
-            data !== null &&
-            results !== undefined &&
-            results !== null && <ForecastCard data={data} results={results} />}
         </span>
         <div className="mapContainer">
           <h1> Global Weather Map </h1>
