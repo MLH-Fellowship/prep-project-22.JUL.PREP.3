@@ -92,7 +92,9 @@ input {
   align-items: center;
   line-height: 2rem;
 }
-
+.Activities-header{
+  -webkit-text-stroke: 1px black;
+}
 .location-icon {
   width: 22px;
   margin-right: 3px;
