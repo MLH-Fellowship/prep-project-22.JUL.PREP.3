@@ -1,7 +1,7 @@
 .card {
   border-radius: 15px;
   height: 300px;
-  width: 250px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +13,11 @@
   backdrop-filter: blur(5px);
 }
 
-.icon {
+.card:hover {
+  box-shadow: 5px 5px 25px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card .icon {
   width: 110px;
   height: 110px;
   margin-left: auto;

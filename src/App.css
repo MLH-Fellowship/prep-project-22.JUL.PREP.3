@@ -1,3 +1,4 @@
+
 body {
   background-color: #133667;
   color: white;
@@ -89,12 +90,17 @@ input {
   margin-right: 30%;
   border-radius: 15px;
   padding: 10px;
-  align-items: center;
-  line-height: 2rem;
+  text-align: center;
+  line-height:2.5rem;
+  font-size: 1.25rem;
 }
-.Activities-header{
-  -webkit-text-stroke: 1px black;
+
+.Activities h2 {
+  text-align: center;
+  font-size: 2.75rem;
+  margin-bottom: 1rem;
 }
+
 .location-icon {
   width: 22px;
   margin-right: 3px;
