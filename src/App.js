@@ -21,7 +21,7 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
-
+import Forecast from "./Components/Forecast/Forecast";
 import ForecastCard from "./Components/Forecast/ForecastCard";
 import SunInfo from "./Components/SunInfo/SunInfo";
 import Footer from "./Components/Footer/Footer";
@@ -425,12 +425,10 @@ function App() {
               </>
             )}
           </div>
-          {/* <div className = "forecast-container" id = "forecast-wrapper">
-           { 
-            <Forecast results = {results}/>
-           }
-            </div>
-         */}
+          <div className="forecast-container" id="forecast-wrapper">
+            {<Forecast results={results} />}
+          </div>
+
           <br />
           <SunInfo results={results} />
           <br />
