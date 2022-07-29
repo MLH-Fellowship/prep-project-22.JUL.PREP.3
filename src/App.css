@@ -37,7 +37,7 @@ ul {
   margin-left: auto;
   margin-right: auto;
   width: 20%;
-  margin-top: 20px;
+  margin-top: 100px;
 }
 
 input {
@@ -195,8 +195,8 @@ input {
 }
 
 .exclaim {
-  width: 150px;
-  height: 150px;
+  width: 70px;
+  height: 70px;
   max-width: 70%;
 }
 

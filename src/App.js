@@ -12,6 +12,7 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
+import Header from "./Components/Nav/Nav";
 import {
   ComposableMap,
   Geographies,
@@ -220,6 +221,20 @@ function App() {
       results.weather[0].main === "Squall"
     ) {
       return setShowWarning(true);
+    } else if (
+      results.weather[0].main === "Drizzle" ||
+      results.weather[0].main === "Rain" ||
+      results.weather[0].main === "Snow" ||
+      results.weather[0].main === "Mist" ||
+      results.weather[0].main === "Haze" ||
+      results.weather[0].main === "Fog" ||
+      results.weather[0].main === "Sand" ||
+      results.weather[0].main === "Dust" ||
+      results.weather[0].main === "Ash" ||
+      results.weather[0].main === "Clear" ||
+      results.weather[0].main === "Clouds"
+    ) {
+      return setShowWarning(false);
     }
   }
 
@@ -366,6 +381,7 @@ function App() {
   } else {
     return (
       <div className="fade">
+        <Header />
         <ScrollToTop smooth color="#6f00ff" className="scroll-top" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
@@ -373,7 +389,7 @@ function App() {
         </Helmet>
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
-          {showWarning ? <Warning /> : null}
+          {showWarning ? <Warning /> : false}
           <div className="select-search-wrapper">
             <div className="input-wrapper">
               <h2>Enter a city below 👇</h2>
