@@ -1,5 +1,7 @@
-.aqi-display {
-    margin-bottom: 20px;
+#aqi-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .aqi-display i{
@@ -42,6 +44,21 @@
 .aqi-display i{
     font-size: 14px;
     padding: .5em;
+=======
+.aqi-bar-display {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.circular-bar {
+  width: 140px;
+  margin-top: 20px;
+}
+
+.aqi-text-desc {
+    line-height: 1.3;
+    margin-top: 15px;
 }
 
 }

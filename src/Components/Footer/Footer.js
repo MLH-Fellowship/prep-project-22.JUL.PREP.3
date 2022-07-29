@@ -8,7 +8,7 @@ const Footer = () => {
       <footer class="footer-distributed">
         <div class="footer-left">
           <h3>
-            Wheather<span>App</span>
+            Weather<span>App</span>
           </h3>
 
           <p class="footer-company-name">MLH Pod.js © 2022</p>
@@ -41,10 +41,38 @@ const Footer = () => {
 
         <div class="footer-right">
           <p class="footer-company-about">
-            <span>Team Members</span>
-            Sanjay Singh Rajpoot, Liuba, Himanshu Thakur, Chidera Innocent,
-            Shehab Adel, A.S.L.Manasa, Somaditya Singh, Saswat Samal, Indira,
-            Julian Willis,Sadiq Babalola, Elmar, Vy Nguyen, Di Wu
+            <span>
+              <h3>Team Members</h3>
+            </span>
+            <table>
+              <tr>
+                <td>Sanjay Singh Rajpoot</td>
+                <td>Liuba</td>
+              </tr>
+              <tr>
+                <td>Himanshu Thakur</td>
+                <td>Chidera Innocent</td>
+              </tr>
+              <tr>
+                <td>Elmar</td>
+                <td>Shehab Adel</td>
+              </tr>
+              <tr>
+                <td>Somaditya Singh</td>
+                <td>Vy Nguyen</td>
+              </tr>
+              <tr>
+                <td>Indira Sowy</td>
+                <td>Julian Willis</td>
+              </tr>
+              <tr>
+                <td>Di Wu</td>
+                <td>A.S.L.Manasa</td>
+              </tr>
+              <tr>
+                <td>Sadiq Babalola</td>
+              </tr>
+            </table>
           </p>
         </div>
       </footer>

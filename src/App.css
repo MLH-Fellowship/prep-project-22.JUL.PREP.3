@@ -1,3 +1,4 @@
+
 body {
   background-color: #133667;
   color: white;
@@ -10,7 +11,7 @@ body {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  font-family:'Poppins', sans-serif; 
+  font-family: "Poppins", sans-serif;
 }
 
 ul {
@@ -35,8 +36,7 @@ ul {
 }
 
 input {
-  padding: 10px;
-  border-radius: 4px;
+  border-radius: 15px;
   border: 10px;
   width: 12%;
   margin-bottom: 0.83em;
@@ -45,27 +45,57 @@ input {
 
 }
 
-.Results {
-  background-color: white;
-  width: 75%;
-  max-width:300px;
-  padding: 1em;
-  border-radius: 5px;
-  margin:20px auto;
-  color: black;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+.search-input {
+  padding: 6px;
+  color: black !important;
 }
 
-/* Make a card class for the suggested activities */
+.scroll-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Results {
+  width: 35%;
+  padding: 1em;
+  border-radius: 15px;
+  margin: 20px auto;
+  color: white;
+  background-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 1px 5px 25px 3px #444;
+  line-height: 1.35rem;
+}
+
+.forecast-container {
+  width: fit-content;
+  height: 30%;
+  padding: 1em;
+  border-radius: 15px;
+  margin: 20px auto;
+  color: white;
+  background-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 1px 5px 25px 3px #444;
+  line-height: 2rem;
+}
+
 .Activities {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin-top: 20px;
-  margin-left: 35%;
-  margin-right: 35%;
+  box-shadow: 1px 5px 25px 3px #444;
+  background-color: rgba(238, 237, 237, 0.22);
+  margin: 100px auto;
+  margin-left: 30%;
+  margin-right: 30%;
   border-radius: 15px;
   padding: 10px;
-  /* background-color: white; */
-  align-items: center;
+  text-align: center;
+  line-height:2rem;
+  font-size: 1rem;
+}
+
+.Activities h2 {
+  text-align: center;
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
 }
 
 .location-icon {
@@ -73,9 +103,8 @@ input {
   margin-right: 3px;
 }
 
-
 .btn {
-  border-radius: 18px;
+  border-radius: 15px;
   padding: 7px;
   width: 14%;
   align-items: center;
@@ -98,8 +127,11 @@ input {
 input {
   border: 1px solid #999;
   width: 300px;
-  padding: 10px;
-  border-radius: 4px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 .no-suggestions {
@@ -178,7 +210,7 @@ h3 {
 }
 
 h2 {
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 
 h4 {
@@ -189,6 +221,7 @@ h4 {
 .Results{
   padding: .5em;
 }
+
   input {
     width: 25%;
   }
@@ -203,8 +236,6 @@ h4 {
 }
 
 @media (max-width: 508px) {
-
-
   .logo {
     width: 50%;
   }
@@ -262,7 +293,6 @@ h4 {
   .btn {
     width: 180px;
   }
-
 }
 
 @media (min-width: 1400px) {
@@ -287,3 +317,65 @@ h4 {
   }
 }
 
+
+.result_title {
+  font-size: 28px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result_description {
+  font-size: 14px;
+  color: #444;
+}
+
+.result_description span {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.select-search-wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .select-search-wrapper {
+    flex-direction: column;
+  }
+  .select-wrapper {
+    width: auto !important;
+  }
+}
+@media (min-width: 768px) {
+  .select-search-wrapper {
+    flex-direction: row;
+  }
+  .select-wrapper {
+    width: 300px;
+  }
+}
+.select-wrapper {
+  width: 300px;
+  margin: 0 12px;
+}
+.search-wrapper {
+  margin: 0 12px;
+}
+
+#forecast-wrapper {
+  background-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 1px 5px 25px 3px #444;
+  border-radius: 15px;
+  margin: 70px auto;
+  max-width: 720px;
+  padding: 0px;
+  color: white;
+}

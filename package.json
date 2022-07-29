@@ -19,6 +19,7 @@
     "react-icons": "^4.4.0",
     "react-scripts": "^4.0.3",
     "react-scroll-to-top": "^3.0.0",
+    "react-select": "^5.4.0",
     "react-simple-maps": "^2.3.0",
     "react-tilt": "^0.1.4",
     "react-tooltip": "^4.2.21",

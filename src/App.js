@@ -22,7 +22,9 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import changeBackground from "./utils/changeBackground";
+import Forecast from "./Components/Forecast/Forecast";
 import ForecastCard from "./Components/Forecast/ForecastCard";
+import SunInfo from "./Components/SunInfo/SunInfo";
 import Footer from "./Components/Footer/Footer";
 
 
@@ -35,8 +37,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 import ScrollToTop from "react-scroll-to-top";
+
 import Result from "./Components/Result/ResultComponent";
 import BookmarkDropdownIcon from "./Components/bookmarkDropdownIcon/bookmarkDropdown";
+import PodSelector from "./Components/PodSelector/PodSelector";
+
 const markers = [
   {
     markerOffset: -15,
@@ -103,6 +108,7 @@ function App() {
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
 
+
   useEffect(()=> {
     fetch("https://api.openweathermap.org/data/2.5/forecast/daily?q="+city+"&units=metric&cnt=7&appid=" + process.env.REACT_APP_APIKEY)
       .then((res)=>{ console.log(res); return res.json(); })
@@ -112,6 +118,28 @@ function App() {
       })
   },[city])
   const [dropDownClicked, setDropDownClicked] = useState(false);
+
+
+  const [filterInput, setFilterInput] = useState("");
+  useEffect(() => {
+    // console.log(city);
+    if (city !== "") {
+      fetch(
+        "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
+          city +
+          "&appid=" +
+          process.env.REACT_APP_APIKEY
+      )
+        .then((res) => {
+          // console.log(res);
+          return res.json();
+        })
+        .then((resp) => {
+          setData(resp);
+          // console.log("data", data);
+        });
+    }
+  }, [city]);
 
 
   useEffect(() => {
@@ -164,9 +192,7 @@ function App() {
       );
       setBarColor("brown");
     }
-    console.log(airQualityIndex);
   }, [airQualityIndex]);
-
   const getCurrentPosition = () => {
     setIsUseCurrentLocation(true);
     setCity("");
@@ -235,9 +261,9 @@ function App() {
         setSuggestions({ ...suggestions, results: null });
 
         // OpenAI API
-        console.log(
-          `Top 5 activities to do in ${city} when its ${result.weather[0].main}`
-        );
+        // console.log(
+        //   `Top 5 activities to do in ${city} when its ${result.weather[0].main}`
+        // );
         openai
           .createCompletion({
             model: "text-davinci-002",
@@ -324,12 +350,25 @@ function App() {
       });
   }, [city, countryCode, longitude, latitude, isUseCurrentLocation]);
 
+  //useEffect hook for updating the city
+  //based on the member's location selected in the filter.
+  useEffect(() => {
+    if (filterInput !== "") {
+      const filteredPlace = filterInput.value;
+      setCity(filteredPlace);
+    }
+  }, [filterInput]);
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
     return (
+
       <><BookmarkDropdownIcon/>
         <ScrollToTop smooth color="#6f00ff" />
+
+      <div className="fade">
+        <ScrollToTop smooth color="#6f00ff" className="scroll-top" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
   background-size: cover; }`}</style>
@@ -337,28 +376,41 @@ function App() {
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
           {showWarning ? <Warning /> : null}
-          <h2>Enter a city below 👇</h2>
-          <div
-            style={{
-              margin: "auto",
-              width: 300,
-            }}
-          >
-            <input type="text"
-              value={inputValue}
-              onChange={(event) => {
-              setInputValue(event.target.value);
-              setCity("");
-              setCountryCode("");
-              setIsUseCurrentLocation(false);
-              }}/>
-            {suggestions.results !== null && (
-              <Cities
-                list={suggestions.results}
-                selectCity={setCity}
-                selectCountry={setCountryCode}
-              />
-            )}
+          <div className="select-search-wrapper">
+            <div className="input-wrapper">
+              <h2>Enter a city below 👇</h2>
+              <div
+                style={{
+                  margin: "auto",
+                }}
+              >
+                <input
+                  className={"search-input"}
+                  type="text"
+                  value={inputValue}
+                  onChange={(event) => {
+                    setInputValue(event.target.value);
+                    setCity("");
+                    setCountryCode("");
+                    setIsUseCurrentLocation(false);
+                  }}
+                />
+                {suggestions.results !== null && (
+                  <Cities
+                    list={suggestions.results}
+                    selectCity={setCity}
+                    selectCountry={setCountryCode}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="select-wrapper">
+              <h2>Select pod's member location 👇</h2>
+              <PodSelector
+                filterInput={filterInput}
+                onChange={setFilterInput}
+              ></PodSelector>
+            </div>
           </div>
           <br />
           <button onClick={getCurrentPosition} className="btn">
@@ -369,6 +421,7 @@ function App() {
             ></img>{" "}
             Current Location
           </button>
+
           <div className="Results">
               {!isLoaded && <h4>Loading...</h4>}
               {isLoaded && results && (
@@ -379,13 +432,27 @@ function App() {
                    barColor={barColor}/>
 
               )}
+
+          {!isLoaded && <h2>Loading...</h2>}
+          {isLoaded && results && (
+            <div className="forecast-container" id="forecast-wrapper">
+              <Forecast results={results} />
+
             </div>
-          <br />  
+          )}
+ 
+
+          <br />
+          <SunInfo results={results} />
+          <br />
         </div>
         {activities && (
           <div>
             <div className="Activities">
-              <h2>Activities</h2>
+              <h2 className={"Activities-header"}>
+                Activities to do in {results.name}
+              </h2>
+              <hr />
               <ul>
                 {activities.split("\n").map((activity) => (
                   <li>{activity}</li>
@@ -395,20 +462,43 @@ function App() {
           </div>
         )}
         <div>
-          <h1> Weather Globe </h1>
+          <h2 style={{ fontSize: "5rem", marginTop: "10px;" }}>
+            <b>Weather Globe</b>
+          </h2>
         </div>
-        <span style={{ display: "inline-block", padding: "0px 10px" }}>
+        <span
+          style={{
+            display: "inline-block",
+            padding: "0px 0px",
+            height: "20vh",
+            width: "80%",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
           <MyGlobe
             setCountry={setCountryCode}
             setCity={setCity}
             setInput={setInputValue}
           />
+
           {data!==undefined && data!==null && results!==undefined && results!== null &&
             <ForecastCard data={data} results={results} /> 
           }
+          <br />
+
         </span>
+        {data !== undefined &&
+          data !== null &&
+          results !== undefined &&
+          results !== null && (
+            <>
+              {" "}
+              <ForecastCard data={data} results={results} />{" "}
+            </>
+          )}
         <div className="mapContainer">
-          <h1> Global Weather Map </h1>
+          <h1 style={{ fontSize: "5rem" }}> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>
           <div style={{ width: "320%" }}>
             <ComposableMap data-tip="">
@@ -426,6 +516,23 @@ function App() {
                           setCity("");
                           setCountryCode(`${name}`);
                           setInputValue(`${name}`);
+                          // console.log(
+                          //   `Top 5 activities to do in ${name} when its ${results.weather[0].main}:`
+                          // );
+                          openai
+                            .createCompletion({
+                              model: "text-davinci-002",
+                              prompt: `Top 5 activities to do in ${name} when its ${results.weather[0].main}:`,
+                              temperature: 0.86,
+                              max_tokens: 256,
+                              top_p: 1,
+                              frequency_penalty: 0,
+                              presence_penalty: 0,
+                            })
+                            .then((response) => {
+                              // console.log(response.data.choices[0].text);
+                              setActivities(response.data.choices[0].text);
+                            });
                         }}
                         onMouseLeave={() => {
                           setcontent("");
@@ -464,6 +571,7 @@ function App() {
           </div>
         </div>
         <div className="cards">
+          <h1 style={{ fontSize: "3rem" }}>Don't forget these things!!</h1>
           {objects &&
             objects.map((object) => {
               let key = Object.keys(Objects).filter(function (key) {

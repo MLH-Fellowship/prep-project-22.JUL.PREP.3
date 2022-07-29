@@ -7,6 +7,7 @@ import 'tippy.js/animations/scale.css';
 import countriesCords from './markers/countriesCoords.json';
 import markerColors from "./markers/markers_colors.json";
 
+const countryInfoURL = "https://restcountries.com/v3.1/alpha/"
 
 const options = {
   cameraRotateSpeed: 0.5,
@@ -41,8 +42,15 @@ export default function MyGlobe({setCountry,setCity,setInput}) {
       pointerEventPosition: { x: event.clientX, y: event.clientY }
     });
     setCountry(marker.country);
-    setCity("");
-    setInput("");
+    fetch(`${countryInfoURL}${marker.alpha3}`)
+    .then((res)=>res.json())
+    .then((info)=>{
+      const country = info[0];
+      const capital = (country.capital === undefined || country.capital.length === 0) ? "" : country.capital[0];
+      setCity(capital);
+      setInput(capital);
+
+    })
   }
   function onDefocus(previousFocus) {
     setEvent({
@@ -77,7 +85,7 @@ export default function MyGlobe({setCountry,setCity,setInput}) {
         height="70vh"
         markers={markers}
         options={options}
-        width="30vw"
+        width="100%"
         onClickMarker={onClickMarker}
         onDefocus={onDefocus}
       />
