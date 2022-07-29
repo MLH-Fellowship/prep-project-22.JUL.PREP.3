@@ -346,10 +346,7 @@ function App() {
   } else {
     return (
       <div className="fade">
-<<<<<<< HEAD
-=======
         <Header />
->>>>>>> main
         <ScrollToTop smooth color="#6f00ff" className="scroll-top" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
