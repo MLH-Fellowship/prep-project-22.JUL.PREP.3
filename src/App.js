@@ -12,6 +12,7 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
+import Header from "./Components/Nav/Nav";
 import {
   ComposableMap,
   Geographies,
@@ -102,25 +103,24 @@ function App() {
   const [airQualityDesc, setAirQualityDesc] = useState("");
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
-  const [filterInput, setFilterInput]=useState("");
+  const [filterInput, setFilterInput] = useState("");
   useEffect(() => {
-    console.log(city);
-    if(city !== ""){
-    fetch(
-      "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
-        city +
-        "&appid=" +
-        process.env.REACT_APP_APIKEY
-    )
-      .then((res) => {
-        console.log(res);
-        return res.json();
-
-      })
-      .then((resp) => {
-        setData(resp);
-        console.log("data", data);
-      });
+    // console.log(city);
+    if (city !== "") {
+      fetch(
+        "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
+          city +
+          "&appid=" +
+          process.env.REACT_APP_APIKEY
+      )
+        .then((res) => {
+          // console.log(res);
+          return res.json();
+        })
+        .then((resp) => {
+          setData(resp);
+          // console.log("data", data);
+        });
     }
   }, [city]);
 
@@ -174,7 +174,6 @@ function App() {
       );
       setBarColor("brown");
     }
-    console.log(airQualityIndex);
   }, [airQualityIndex]);
   const getCurrentPosition = () => {
     setIsUseCurrentLocation(true);
@@ -244,9 +243,9 @@ function App() {
         setSuggestions({ ...suggestions, results: null });
 
         // OpenAI API
-        console.log(
-          `Top 5 activities to do in ${city} when its ${result.weather[0].main}`
-        );
+        // console.log(
+        //   `Top 5 activities to do in ${city} when its ${result.weather[0].main}`
+        // );
         openai
           .createCompletion({
             model: "text-davinci-002",
@@ -347,6 +346,7 @@ function App() {
   } else {
     return (
       <div className="fade">
+        <Header />
         <ScrollToTop smooth color="#6f00ff" className="scroll-top" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
@@ -427,8 +427,10 @@ function App() {
         {activities && (
           <div>
             <div className="Activities">
-              <h2 className={"Activities-header"}>Activities to do in {results.name}</h2>
-              <hr/>
+              <h2 className={"Activities-header"}>
+                Activities to do in {results.name}
+              </h2>
+              <hr />
               <ul>
                 {activities.split("\n").map((activity) => (
                   <li>{activity}</li>
@@ -438,7 +440,9 @@ function App() {
           </div>
         )}
         <div>
-          <h2 style={{fontSize: "5rem", marginTop:"10px;"}}><b>Weather Globe</b></h2>
+          <h2 style={{ fontSize: "5rem", marginTop: "10px;" }}>
+            <b>Weather Globe</b>
+          </h2>
         </div>
         <span
           style={{
@@ -457,12 +461,17 @@ function App() {
           />
           <br />
         </span>
-{ (data !== undefined &&
-            data !== null &&
-            results !== undefined &&
-            results !== null) && (<> <ForecastCard data={data} results={results} /> </>)}
+        {data !== undefined &&
+          data !== null &&
+          results !== undefined &&
+          results !== null && (
+            <>
+              {" "}
+              <ForecastCard data={data} results={results} />{" "}
+            </>
+          )}
         <div className="mapContainer">
-          <h1 style={{fontSize: "5rem"}}> Global Weather Map </h1>
+          <h1 style={{ fontSize: "5rem" }}> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>
           <div style={{ width: "320%" }}>
             <ComposableMap data-tip="">
@@ -480,9 +489,9 @@ function App() {
                           setCity("");
                           setCountryCode(`${name}`);
                           setInputValue(`${name}`);
-                          console.log(
-                            `Top 5 activities to do in ${name} when its ${results.weather[0].main}:`
-                          );
+                          // console.log(
+                          //   `Top 5 activities to do in ${name} when its ${results.weather[0].main}:`
+                          // );
                           openai
                             .createCompletion({
                               model: "text-davinci-002",
@@ -494,7 +503,7 @@ function App() {
                               presence_penalty: 0,
                             })
                             .then((response) => {
-                              console.log(response.data.choices[0].text);
+                              // console.log(response.data.choices[0].text);
                               setActivities(response.data.choices[0].text);
                             });
                         }}
@@ -535,7 +544,7 @@ function App() {
           </div>
         </div>
         <div className="cards">
-          <h1 style={{fontSize: "3rem"}}>Don't forget these things!!</h1>
+          <h1 style={{ fontSize: "3rem" }}>Don't forget these things!!</h1>
           {objects &&
             objects.map((object) => {
               let key = Object.keys(Objects).filter(function (key) {
