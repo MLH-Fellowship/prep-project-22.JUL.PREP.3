@@ -105,3 +105,7 @@ a:hover, a:active, a:focus{
   color: #F4F6F7;
   cursor: pointer;
 }
+
+#tempDescription {
+  font-size: 14px;
+}

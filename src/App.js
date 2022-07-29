@@ -27,6 +27,7 @@ import ForecastCard from "./Components/Forecast/ForecastCard";
 import SunInfo from "./Components/SunInfo/SunInfo";
 import Footer from "./Components/Footer/Footer";
 import AQIPollution from "./Components/AQIPollutionRate/AQIPollution";
+import ForecastChart from "./Components/Forecast/ForecastChart";
 
 // OpenAI API
 const { Configuration, OpenAIApi } = require("openai");
@@ -104,6 +105,7 @@ function App() {
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
   const [filterInput, setFilterInput] = useState("");
+  const [forecast, setForecast] = useState(null);
   useEffect(() => {
     // console.log(city);
     if (city !== "") {
@@ -123,6 +125,25 @@ function App() {
         });
     }
   }, [city]);
+
+  useEffect(() => {
+    if(city !== ""){
+      fetch(
+        "https://pro.openweathermap.org/data/2.5/forecast/hourly?q=" +
+          city + "&units=metric" +
+          "&appid=" +
+          process.env.REACT_APP_APIKEY
+      )
+        .then((res) => {
+          console.log(res);
+          return res.json();
+        })
+        .then((resp) => {
+          setForecast(resp);
+          console.log("forecast", forecast);
+        });
+    }
+  }, [city])
 
   useEffect(() => {
     // no city is selected yet
@@ -453,6 +474,17 @@ function App() {
             </div>
           </div>
         )}
+
+        {forecast !== undefined &&
+          forecast !== null  && (
+            <>
+              {" "}
+              <div>
+                <ForecastChart forecast = {forecast}/>
+              </div>
+            </>
+          )}
+          
         <div>
           <h2 style={{ fontSize: "5rem", marginTop: "10px;" }}>
             <b>Weather Globe</b>
