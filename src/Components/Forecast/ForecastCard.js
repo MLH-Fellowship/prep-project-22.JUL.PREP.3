@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./ForecastCard.css";
 
 const ForecastCard = ({ data, results }) => {
-  console.log("data", data);
   const [error, setError] = useState(null);
   useEffect(() => {
     setError(error);
