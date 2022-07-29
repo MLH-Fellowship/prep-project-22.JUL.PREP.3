@@ -1,0 +1,63 @@
+@keyframes fadeinsmooth {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.bookmark-container{
+    background-color: #fff;
+    color: #444;
+    width:90%;
+    max-width: 500px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    position: absolute;
+    top: calc(1% + 60px);
+    right:4%;
+    z-index: 10000000;
+}
+
+.bookmark-description{
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em 0;
+}
+.bookmark-field:nth-child(2n){
+    background-color: #eee;
+}
+.bookmark-location{
+    text-transform: uppercase;
+    flex: 1;
+}
+.bookmark-temperature{
+    font-size: 20px;
+    font-weight: 700;
+    flex: 1;
+    color: #666;
+}
+.bookmark-condition{
+    flex: 1;
+}
+
+.empty-bookmarks{
+    font-size: 24px;
+    padding: 1em .5em;
+}
+
+@media (max-width: 768px){
+    .empty-bookmarks{
+        font-size: 14px;
+    }
+    .bookmark-description{
+        font-size: 12px;
+    }
+
+    .bookmark-container{
+        top:7vh;
+        right:2vw;
+    }
+}

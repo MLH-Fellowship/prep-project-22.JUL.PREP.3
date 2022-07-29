@@ -11,6 +11,7 @@ const PodSelector = (props) => {
         backgroundColor: "#133667",
         border: "15px",
         color: "white",
+    
       },
     }),
     control: (provided, state) => ({
@@ -19,7 +20,7 @@ const PodSelector = (props) => {
     }),
   };
   return (
-    <Select
+    <Select 
       isSearchable
       styles={style}
       onChange={onChange}
