@@ -19,7 +19,6 @@ const getFormattedTime = (timestamp) => {
 };
 
 function SunInfo({ results }) {
-  console.log(results);
   const currentTimestamp = new Date().getTime() / 1000 + results?.timezone;
   const sunriseTimestamp = results?.sys.sunrise + results?.timezone;
   const sunsetTimestamp = results?.sys.sunset + results?.timezone;
