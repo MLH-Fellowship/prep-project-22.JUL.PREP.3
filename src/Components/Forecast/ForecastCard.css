@@ -8,25 +8,35 @@ border-radius: 5px;
 .show-more-section {
   text-align: center;
   padding: 20px;
+  margin-bottom: 80px;
 }
 
 .show-more {
   border: none;
-  background-color: rgb(35, 35, 35);
+  background-color: rgb(15, 40, 233);
   color: white;
   height: 50px;
   width: 200px;
   border-radius: 5px;
+  width: 350px;
+  font-size: 25px;
 }
 
 .main-block {
     display: flex;
     flex-direction: column;
+    margin-top: 50px;
   }
 
 .forecast-section-header {
   margin-top: 15px;
   margin-bottom: 40px;
+}
+
+.city-name-span {
+  background-color: rgba(74, 74, 233, 0.467);
+  border-radius: 5px;
+  padding: 0 15px 0 15px;
 }
 
 .temp {
@@ -118,5 +128,6 @@ border-radius: 5px;
   .main-block {
     display: flex;
     flex-direction: column;
+    margin-top: 50px;
   }
 }

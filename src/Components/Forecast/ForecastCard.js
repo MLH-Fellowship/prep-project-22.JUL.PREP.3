@@ -53,7 +53,7 @@ const ForecastCard = ({ data, results }) => {
       <>
         <div className="main-block">
           <h3 className="forecast-section-header">
-            Weekly Forecast for {results.name}
+            30 Days Forecast for <span className="city-name-span">{results.name}</span>
           </h3>
           <div className="car-block">
             {data.list
@@ -109,7 +109,7 @@ const ForecastCard = ({ data, results }) => {
           </div>
           <div className="show-more-section">
             <button onClick={showMore} className="show-more">
-              CLICK for more days
+              Click for more days
             </button>
           </div>
         </div>
