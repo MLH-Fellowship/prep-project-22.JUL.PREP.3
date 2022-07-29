@@ -65,7 +65,13 @@ const ForecastCard = ({ data, results }) => {
                       src={getImage(e.weather[0].main)}
                       alt="weather-icon"
                     />
-                    <div>{weekDay(e.dt)}</div>
+                    {
+                      weekDay(e.dt)==="Saturday" || weekDay(e.dt)==="Sunday" ? 
+                      <div className="week-end">{weekDay(e.dt)}</div>
+                      :
+                      <div>{weekDay(e.dt)}</div>
+                    }
+                    
                     <div>{currentDate(e.dt)}</div>
                     <div className="temp">
                       {Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C
