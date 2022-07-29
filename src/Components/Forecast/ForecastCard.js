@@ -61,7 +61,7 @@ const ForecastCard = ({ data, results }) => {
                 <div className="dailycard" key={e.dt}>
                   <div className="card-container">
                     <img
-                      className="icon"
+                      className="forecast-icon"
                       src={getImage(e.weather[0].main)}
                       alt="weather-icon"
                     />
@@ -70,7 +70,7 @@ const ForecastCard = ({ data, results }) => {
                     <div className="temp">
                       {Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C
                     </div>
-                    <div className="desc">
+                    <div className="forecast-desc">
                       {`${e.weather[0].description}`.toUpperCase()}
                     </div>
                     <ul className="details">
