@@ -27,7 +27,7 @@
     margin-bottom: 20px;
 }
 
-.desc {
+.forecast-desc {
     font-weight: 700;
     margin-bottom: 20px;
     color: aliceblue;
@@ -44,7 +44,7 @@
     margin-top: 5px;
 }
 
-.icon {
+.forecast-icon {
   align-self: flex-end;
   margin-right: -2.5rem;
   margin-top: -2rem;
