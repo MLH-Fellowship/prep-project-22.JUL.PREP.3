@@ -475,15 +475,10 @@ function App() {
           />
           <br />
         </span>
-        {data !== undefined &&
-          data !== null &&
-          results !== undefined &&
-          results !== null && (
-            <>
-              {" "}
-              <ForecastCard data={data} results={results} />{" "}
-            </>
-          )}
+{ (data !== undefined &&
+            data !== null &&
+            results !== undefined &&
+            results !== null) && (<> <ForecastCard data={data} results={results} /> </>)}
         <div className="mapContainer">
           <h1 style={{ fontSize: "5rem" }}> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "enzyme": "^3.11.0",
     "mdb-react-ui-kit": "^4.1.0",
     "openai": "^3.0.0",
     "react": "^17.0.2",
@@ -22,6 +23,7 @@
     "react-scroll-to-top": "^3.0.0",
     "react-select": "^5.4.0",
     "react-simple-maps": "^2.3.0",
+    "react-test-renderer": "^17.0.2",
     "react-tilt": "^0.1.4",
     "react-tooltip": "^4.2.21",
     "three": "^0.118.3",
@@ -44,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7"
   }
 }
