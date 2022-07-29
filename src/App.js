@@ -202,6 +202,20 @@ function App() {
       results.weather[0].main === "Squall"
     ) {
       return setShowWarning(true);
+    } else if (
+      results.weather[0].main === "Drizzle" ||
+      results.weather[0].main === "Rain" ||
+      results.weather[0].main === "Snow" ||
+      results.weather[0].main === "Mist" ||
+      results.weather[0].main === "Haze" ||
+      results.weather[0].main === "Fog" ||
+      results.weather[0].main === "Sand" ||
+      results.weather[0].main === "Dust" ||
+      results.weather[0].main === "Ash" ||
+      results.weather[0].main === "Clear" ||
+      results.weather[0].main === "Clouds"
+    ) {
+      return setShowWarning(false);
     }
   }
 
@@ -356,7 +370,7 @@ function App() {
         </Helmet>
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
-          {showWarning ? <Warning /> : null}
+          {showWarning ? <Warning /> : false}
           <div className="select-search-wrapper">
             <div className="input-wrapper">
               <h2>Enter a city below 👇</h2>
