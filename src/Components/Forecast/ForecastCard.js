@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./ForecastCard.css";
 
 const ForecastCard = ({ data, results }) => {
-  console.log("data", data);
   const [error, setError] = useState(null);
   useEffect(() => {
     setError(error);
@@ -62,16 +61,22 @@ const ForecastCard = ({ data, results }) => {
                 <div className="dailycard" key={e.dt}>
                   <div className="card-container">
                     <img
-                      className="icon"
+                      className="forecast-icon"
                       src={getImage(e.weather[0].main)}
                       alt="weather-icon"
                     />
-                    <div>{weekDay(e.dt)}</div>
+                    {
+                      weekDay(e.dt)==="Saturday" || weekDay(e.dt)==="Sunday" ? 
+                      <div className="week-end">{weekDay(e.dt)}</div>
+                      :
+                      <div>{weekDay(e.dt)}</div>
+                    }
+                    
                     <div>{currentDate(e.dt)}</div>
                     <div className="temp">
                       {Math.round(`${toCelsius(`${e.feels_like.day}`)}`, -1)}°C
                     </div>
-                    <div className="desc">
+                    <div className="forecast-desc">
                       {`${e.weather[0].description}`.toUpperCase()}
                     </div>
                     <ul className="details">
@@ -104,7 +109,7 @@ const ForecastCard = ({ data, results }) => {
           </div>
           <div className="show-more-section">
             <button onClick={showMore} className="show-more">
-              More days forecast
+              CLICK for more days
             </button>
           </div>
         </div>
