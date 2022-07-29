@@ -103,20 +103,25 @@ function App() {
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
   const [filterInput, setFilterInput]=useState("");
-   useEffect(() => {
-    axios.get(
-      "https://api.openweathermap.org/data/2.5/forecast/daily?q=" +
+  useEffect(() => {
+    console.log(city);
+    if(city !== ""){
+    fetch(
+      "https://pro.openweathermap.org/data/2.5/forecast/climate?q=" +
         city +
-        "&units=metric&cnt=7&appid=" +
+        "&appid=" +
         process.env.REACT_APP_APIKEY
     )
+      .then((res) => {
+        console.log(res);
+        return res.json();
+
+      })
       .then((resp) => {
         setData(resp);
         console.log("data", data);
-      })
-      .catch((error) => {
-         console.log(error);
       });
+    }
   }, [city]);
 
   useEffect(() => {
@@ -342,7 +347,7 @@ function App() {
   } else {
     return (
       <div className="fade">
-        <ScrollToTop smooth color="#6f00ff" />
+        <ScrollToTop smooth color="#6f00ff" className="scroll-top" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
   background-size: cover; }`}</style>
@@ -395,40 +400,25 @@ function App() {
             ></img>{" "}
             Current Location
           </button>
-          <div className="Results">
-            {!isLoaded && <h2>Loading...</h2>}
 
-            {isLoaded && results && (
-              <>
-                <div>
-                  <h3>{results.weather[0].main}</h3>
-                  <p>
-                    Feels like {results.main.feels_like}°C
-                    <span>
-                      <img src={`http://openweathermap.org/img/wn/${weatherIcon}.png`} alt='Weather Icon'/>
-                    </span>
-                  </p>
-                  <i>
-                    <p>
-                      {results.name}, {results.sys.country}
-                    </p>
-                  </i>
-                </div>
-
-                {airQualityValue && (
-                  <AQIPollution
-                    airQualityIndex={airQualityIndex}
-                    airQualityValue={airQualityValue}
-                    airQualityDesc={airQualityDesc}
-                    barColor={barColor}
-                  />
-                )}
-              </>
-            )}
-          </div>
-          <div className="forecast-container" id="forecast-wrapper">
-            {<Forecast results={results} />}
-          </div>
+          {!isLoaded && <h2>Loading...</h2>}
+          {isLoaded && results && (
+            <div className="forecast-container" id="forecast-wrapper">
+              <Forecast results={results} />
+            </div>
+          )}
+          {airQualityValue && (
+            <div className="forecast-container" id="forecast-wrapper">
+              {
+                <AQIPollution
+                  airQualityIndex={airQualityIndex}
+                  airQualityValue={airQualityValue}
+                  airQualityDesc={airQualityDesc}
+                  barColor={barColor}
+                />
+              }
+            </div>
+          )}
 
           <br />
           <SunInfo results={results} />
@@ -437,7 +427,8 @@ function App() {
         {activities && (
           <div>
             <div className="Activities">
-              <h2>Activities to do in {results.name}</h2>
+              <h2 className={"Activities-header"}>Activities to do in {results.name}</h2>
+              <hr/>
               <ul>
                 {activities.split("\n").map((activity) => (
                   <li>{activity}</li>
@@ -447,7 +438,7 @@ function App() {
           </div>
         )}
         <div>
-          <h1 style={{fontSize: "5rem"}}><b>Weather Globe</b></h1>
+          <h2 style={{fontSize: "5rem", marginTop:"10px;"}}><b>Weather Globe</b></h2>
         </div>
         <span
           style={{
@@ -466,15 +457,10 @@ function App() {
           />
           <br />
         </span>
-        {data !== undefined &&
-          data !== null &&
-          results !== undefined &&
-          results !== null && (
-            <>
-              {" "}
-              <ForecastCard data={data} results={results} />{" "}
-            </>
-          )}
+{ (data !== undefined &&
+            data !== null &&
+            results !== undefined &&
+            results !== null) && (<> <ForecastCard data={data} results={results} /> </>)}
         <div className="mapContainer">
           <h1 style={{fontSize: "5rem"}}> Global Weather Map </h1>
           <ReactTooltip>{content}</ReactTooltip>

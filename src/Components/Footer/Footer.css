@@ -137,6 +137,13 @@ section {
   width: 20%;
 }
 
+.footer-right table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 .footer-distributed .footer-company-about {
   line-height: 20px;
   color: white;

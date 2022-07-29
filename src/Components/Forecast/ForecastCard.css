@@ -37,7 +37,7 @@
   margin-left: 10px;
   list-style: none;
   text-align: left;
-  font-size: 10px;
+  font-size: 0.85rem;
 }
 
 .min-max {
@@ -52,7 +52,7 @@
   height: 100px;
 }
 
-.card {
+.dailycard {
   box-shadow: 0 4px 8px 0 rgba(221, 221, 221, 0.2);
   transition: 0.5s;
   border-radius: 15px;
@@ -61,7 +61,7 @@
   background-color: rgba(238, 237, 237, 0.22);
 }
 
-.card:hover {
+.dailycard:hover {
   box-shadow: 5px 5px 25px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -83,15 +83,15 @@
 }
 
 @media screen and (min-width: 768px) {
-  .card {
+  .dailycard {
     box-shadow: 0 4px 8px 0 rgba(218, 218, 218, 0.2);
     transition: 0.5s;
-    width: 165px;
+    width: 85%;
     border-radius: 15px;
     padding-bottom: 30px;
   }
 
-  .card:hover {
+  .dailycard:hover {
     box-shadow: 5px 5px 25px 20px rgba(0, 0, 0, 0.2);
   }
 
