@@ -12,6 +12,7 @@ import React from "react";
 import MyGlobe from "./Components/globe_model.js";
 import { Helmet } from "react-helmet";
 import defaultBg from "./assets/default.jpg";
+import Header from "./Components/Nav/Nav";
 import {
   ComposableMap,
   Geographies,
@@ -345,6 +346,10 @@ function App() {
   } else {
     return (
       <div className="fade">
+<<<<<<< HEAD
+=======
+        <Header />
+>>>>>>> main
         <ScrollToTop smooth color="#6f00ff" className="scroll-top" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
