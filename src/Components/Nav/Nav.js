@@ -38,7 +38,7 @@ export default function Header() {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink href='https://github.com/MLH-Fellowship/prep-project-22.JUL.PREP.3'>
-                  Course code</MDBNavbarLink>
+                Source code</MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
           </MDBCollapse>
