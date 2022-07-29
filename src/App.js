@@ -104,6 +104,8 @@ function App() {
   const [barColor, setBarColor] = useState("transparent");
   const [data, setData] = useState(null);
   const [filterInput, setFilterInput] = useState("");
+  const [isGlobeVisible, setIsGlobeVisible] = useState(false);
+
   useEffect(() => {
     // console.log(city);
     if (city !== "") {
@@ -401,6 +403,13 @@ function App() {
             Current Location
           </button>
 
+          <button 
+            onClick={() => setIsGlobeVisible(!isGlobeVisible)} 
+            className="btn">
+              {!isGlobeVisible && 'Show Globe'}
+              {isGlobeVisible && 'Hide Globe'}
+          </button>
+
           {!isLoaded && <h2>Loading...</h2>}
           {isLoaded && results && (
             <div className="forecast-container" id="forecast-wrapper">
@@ -439,6 +448,9 @@ function App() {
             </div>
           </div>
         )}
+                {isGlobeVisible && (
+          <>
+
         <div>
           <h2 style={{ fontSize: "5rem", marginTop: "10px;" }}>
             <b>Weather Globe</b>
@@ -461,6 +473,9 @@ function App() {
           />
           <br />
         </span>
+        </>
+        )}
+
         {data !== undefined &&
           data !== null &&
           results !== undefined &&
