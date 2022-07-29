@@ -364,10 +364,8 @@ function App() {
   } else {
     return (
 
-      <><BookmarkDropdownIcon/>
+      <> <BookmarkDropdownIcon/>
         <ScrollToTop smooth color="#6f00ff" />
-
-      <div className="fade">
         <ScrollToTop smooth color="#6f00ff" className="scroll-top" />
         <Helmet>
           <style>{`body { background-image: url('${background}'); background-repeat: no-repeat;
@@ -376,7 +374,7 @@ function App() {
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
           {showWarning ? <Warning /> : null}
-          <div className="select-search-wrapper">
+          <div className="select-search-wrapper" style={{position:'relative',zIndex:'10'}}>
             <div className="input-wrapper">
               <h2>Enter a city below 👇</h2>
               <div
@@ -586,6 +584,7 @@ function App() {
             })}
         </div>
         <Footer />
+        </div>
       </>
     );
   }

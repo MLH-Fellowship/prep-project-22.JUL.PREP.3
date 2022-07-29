@@ -16,6 +16,7 @@
     position: absolute;
     top: calc(1% + 60px);
     right:4%;
+    z-index: 10000000;
 }
 
 .bookmark-description{
